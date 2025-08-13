@@ -1,22 +1,23 @@
 from collections import defaultdict
 import pandas as pd
 import random
-
+import json
 import asyncio
 import logging
+import time
 from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from spade.template import Template
-from _openfire_API import create_user
-from _utils import log_message,a_star, SystemTime ,SystemState
-import time
-
-import pandas as pd
+from utils import log_message,a_star, SystemTime ,SystemState
+from db_manager import DatabaseManager
 from pathlib import Path
 
 
 Path("data/state").mkdir(parents=True, exist_ok=True)
+
+
+db_manager = DatabaseManager()
 
 
 
@@ -188,13 +189,10 @@ class BusAgent(Agent):
                 'distance_to_next': distance_matrix[self.route[self.current_station_idx]][self.route[self.current_station_idx + 1]] if self.route and self.current_station_idx < len(self.route) - 1 else 0,
                 'status': "Active" if self.is_active else "Waiting",
                 'timestamp': time.time(),
-                'route': str(self.route) if self.route else "[]"  } # Convert route to string
+                'route': json.dumps(self.route) if self.route else "[]"  } # Convert route to JSON string
             
-            try:
-                df = pd.DataFrame([state])
-                df.to_csv('data/state/bus_states.csv', mode='a',  header=not Path('data/state/bus_states.csv').exists(), index=False)
-            except Exception as e:
-                print(f"Error writing bus state: {e}")
+            # Save state to database asynchronously
+            await db_manager.save_bus_state(self.bus_id, state)
 
 
             state = {
@@ -207,7 +205,7 @@ class BusAgent(Agent):
 
             state_manager.update_bus_state(self.bus_id, state)
             print(f"[DEBUG] Updated bus {self.bus_id} state: {state}")  # Add debug print
-            time.sleep(1)
+            await asyncio.sleep(1)  # Use async sleep instead of blocking sleep
 
             if self.waiting_for_route:
 
@@ -220,7 +218,7 @@ class BusAgent(Agent):
                     
                     try:
                         _, route_data_str = msg.body.split(":", 1)
-                        self.route = eval(route_data_str)
+                        self.route = json.loads(route_data_str)  # Use JSON instead of eval
                         self.waiting_for_route = False
                         
                         ack = Message(to="control@laptop-ko0jtu4m")
@@ -311,13 +309,15 @@ class BusAgent(Agent):
             if msg and isinstance(msg, Message):  # Check for valid message
                 if "ROUTE_ASSIGNMENT" in msg.body:
                     await self.handle_route_assignment(msg)
+                elif "ROUTE_UPDATE" in msg.body:
+                    await self.handle_route_update(msg)
 
         #--------------------------------------------
 
         async def handle_route_assignment(self, msg):
             try:
                 _, route_data_str = msg.body.split(":", 1)
-                route_data = eval(route_data_str)   
+                route_data = json.loads(route_data_str)  # Use JSON instead of eval
 
                 ack = Message(to="control@laptop-ko0jtu4m") # Send acknowledgment
                 ack.set_metadata("performative", "confirm")
@@ -329,6 +329,18 @@ class BusAgent(Agent):
                 
             except Exception as e:
                 bus_logger.error(f"Error handling route assignment: {e}")
+
+        async def handle_route_update(self, msg):
+            try:
+                _, route_data_str = msg.body.split(":", 1)
+                route_data = json.loads(route_data_str)  # Use JSON instead of eval
+
+                # Update the agent's route
+                self.agent.route = route_data
+                print(MESSAGE_FORMATS['bus'].format(self.agent.bus_id, system_time.get_current_time(), f"Route updated: {route_data}"))
+                
+            except Exception as e:
+                bus_logger.error(f"Error handling route update: {e}")
 
 
 
@@ -415,13 +427,8 @@ class StationAgent(Agent):
                 'timestamp': time.time(),
                 'status': 'active'  } 
             
-            try:
-                df = pd.DataFrame([state])
-                df['waiting_passengers'] = df['waiting_passengers'].apply(str)
-                df['next_arrivals'] = df['next_arrivals'].apply(str)
-                df.to_csv('data/state/station_states.csv', mode='a', header=not Path('data/state/station_states.csv').exists(), index=False)
-            except Exception as e:
-                print(f"Error writing station state: {e}")
+            # Save state to database asynchronously
+            await db_manager.save_station_state(self.station_id, state)
 
             state = {
                 'waiting_passengers': self.waiting_passengers.copy(),
@@ -703,7 +710,7 @@ class ControlAgent(Agent):
                 if new_path: # Send the new route to the bus
                     msg = Message(to=f"bus_{route_id}@laptop-ko0jtu4m")
                     msg.set_metadata("performative", "inform")
-                    msg.body = f"ROUTE_ASSIGNMENT:{new_path}"
+                    msg.body = f"ROUTE_ASSIGNMENT:{json.dumps(new_path)}"  # Use JSON serialization
                     await self.send(msg)
                     control_logger.info(f"New route sent to bus {route_id}: {new_path}")
                 else:
@@ -741,7 +748,7 @@ class ControlAgent(Agent):
                 try:
                     msg = Message(to=f"bus_{bus_id}@laptop-ko0jtu4m")  # Fixed message creation
                     msg.set_metadata("performative", "inform")
-                    msg.body = f"ROUTE_ASSIGNMENT:{route_data}"
+                    msg.body = f"ROUTE_ASSIGNMENT:{json.dumps(route_data)}"  # Use JSON serialization
                     await self.send(msg)
 
                     template = Template()
@@ -809,7 +816,7 @@ class ControlAgent(Agent):
                         self.active_buses[route_id] = new_path
                         msg = Message(to=f"bus_{route_id}@laptop-ko0jtu4m")
                         msg.set_metadata("performative", "inform")
-                        msg.body = f"ROUTE_UPDATE:{new_path}"
+                        msg.body = f"ROUTE_UPDATE:{json.dumps(new_path)}"  # Use JSON serialization
                         await self.send(msg)
                         control_logger.info(f"New route sent to bus {route_id}: {new_path}")
                 except Exception as e:
