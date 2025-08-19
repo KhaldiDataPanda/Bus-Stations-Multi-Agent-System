@@ -1,0 +1,60 @@
+{
+  "lines": {
+    "0": {
+      "id": 0,
+      "name": "Blida_Line1",
+      "stations": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "reserve_buses": 5
+    }
+  },
+  "stations": {
+    "0": {
+      "id": 0,
+      "name": "Blida_Line1_Station_1",
+      "lat": 36.48522421329735,
+      "lon": 2.81404771709359,
+      "line_id": 0,
+      "is_terminal": true
+    },
+    "1": {
+      "id": 1,
+      "name": "Blida_Line1_Station_2",
+      "lat": 36.47886952507317,
+      "lon": 2.8036855564631993,
+      "line_id": 0,
+      "is_terminal": false
+    },
+    "2": {
+      "id": 2,
+      "name": "Blida_Line1_Station_3",
+      "lat": 36.468352268602594,
+      "lon": 2.795520031451339,
+      "line_id": 0,
+      "is_terminal": false
+    },
+    "3": {
+      "id": 3,
+      "name": "Blida_Line1_Station_4",
+      "lat": 36.473446261585266,
+      "lon": 2.8232211151297864,
+      "line_id": 0,
+      "is_terminal": false
+    },
+    "4": {
+      "id": 4,
+      "name": "Blida_Line1_Station_5",
+      "lat": 36.4762123748686,
+      "lon": 2.8334600460811106,
+      "line_id": 0,
+      "is_terminal": true
+    }
+  },
+  "next_line_id": 1,
+  "next_station_id": 5
+}

@@ -1,21 +1,30 @@
+"""
+Enhanced API Server for RL-based Traffic Routing Dashboard
+Provides endpoints for simulation control, bus tracking, and metrics
+"""
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 import asyncio
 import json
 import pandas as pd
-from typing import Dict, List, Optional
-from utils import SystemTime, SystemState
-from db_manager import DatabaseManager
-from metrics_exporter import MetricsExporter, get_exportable_metrics
-from simulation_manager import sim_manager
+from typing import Dict, List, Optional, Any
 import threading
 import time
+import subprocess
+import sys
+import os
+from pathlib import Path
 
-app = FastAPI(title="Traffic Routing Dashboard API")
+# Import custom modules
+from utils import SystemTime, SystemState
+from db_manager import DatabaseManager
+from bus_lines_manager import BusLinesManager
 
-# Enable CORS for Streamlit
+app = FastAPI(title="Enhanced Traffic Routing Dashboard API")
+
+# Enable CORS for dashboard
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -25,324 +34,386 @@ app.add_middleware(
 )
 
 # Global instances
-system_time = None
-state_manager = None
-db_manager = None
-simulation_control = {"running": False, "speed": 1.0}
+system_time = SystemTime()
+state_manager = SystemState()
+db_manager = DatabaseManager()
+bus_lines_manager = BusLinesManager()
+bus_lines_manager.load_from_file('data/bus_lines.json')
+
+# Simulation state
+simulation_state = {
+    "running": False,
+    "process": None,
+    "start_time": None,
+    "bus_data": {},
+    "incident_data": {},
+    "metrics": {},
+    "rl_metrics": {}
+}
+
+# Request/Response models
+class BusLineCreate(BaseModel):
+    name: str
+    coordinates: List[List[float]]  # [[lat, lon], [lat, lon], ...]
 
 class IncidentCreate(BaseModel):
     city_a: int
     city_b: int
     incident_type: str
+    duration: Optional[float] = 2.0
 
 class SimulationControl(BaseModel):
-    action: str  # "start", "pause", "stop"
-    speed: Optional[float] = 1.0
+    action: str  # "start", "stop"
+    parameters: Optional[Dict[str, Any]] = {}
 
 @app.on_event("startup")
 async def startup_event():
-    global system_time, state_manager, db_manager
-    system_time = SystemTime()
-    state_manager = SystemState()
-    db_manager = DatabaseManager()
+    """Initialize API server"""
+    print("🚀 Enhanced Traffic Routing API Server starting...")
+    
+    # Create necessary directories
+    Path("data/state").mkdir(parents=True, exist_ok=True)
+    Path("data/models").mkdir(parents=True, exist_ok=True)
+    
+    print("✅ API Server ready")
 
 @app.get("/")
 async def root():
-    return {"message": "Traffic Routing Dashboard API"}
-
-@app.get("/api/system/status")
-async def get_system_status():
-    """Get current system status and time"""
+    """API root endpoint"""
     return {
-        "current_time": system_time.get_current_time() if system_time else 0,
-        "simulation_running": simulation_control["running"],
-        "simulation_speed": simulation_control["speed"],
-        "active_incidents": len(system_time.incidents) if system_time else 0
+        "message": "Enhanced Traffic Routing API with RL",
+        "status": "running",
+        "simulation_running": simulation_state["running"],
+        "version": "2.0.0"
     }
 
-@app.get("/api/metrics/export")
-async def export_metrics():
-    """Export current metrics to CSV and return file"""
+# Bus Lines Management Endpoints
+@app.get("/bus_lines")
+async def get_bus_lines():
+    """Get all bus lines"""
     try:
-        exporter = MetricsExporter()
-        filepath = exporter.export_to_csv()
-        return FileResponse(
-            path=str(filepath),
-            filename=filepath.name,
-            media_type='text/csv'
-        )
+        lines = bus_lines_manager.get_all_lines()
+        stations = bus_lines_manager.get_all_stations()
+        
+        result = {
+            "lines": {},
+            "stations": {}
+        }
+        
+        for line_id, line in lines.items():
+            result["lines"][line_id] = {
+                "id": line.id,
+                "name": line.name,
+                "stations": [
+                    {
+                        "id": station.id,
+                        "name": station.name,
+                        "lat": station.lat,
+                        "lon": station.lon,
+                        "is_terminal": station.is_terminal
+                    }
+                    for station in line.stations
+                ],
+                "reserve_buses": line.reserve_buses
+            }
+        
+        for station_id, station in stations.items():
+            result["stations"][station_id] = {
+                "id": station.id,
+                "name": station.name,
+                "lat": station.lat,
+                "lon": station.lon,
+                "line_id": station.line_id,
+                "is_terminal": station.is_terminal
+            }
+        
+        return result
+        
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Export failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error getting bus lines: {str(e)}")
 
-@app.get("/api/metrics/detailed-export")
-async def export_detailed_states():
-    """Export detailed bus and station states to CSV"""
+@app.post("/bus_lines")
+async def create_bus_line(line_data: BusLineCreate):
+    """Create a new bus line"""
     try:
-        exporter = MetricsExporter()
-        filepath = exporter.export_detailed_states()
-        return FileResponse(
-            path=str(filepath),
-            filename=filepath.name,
-            media_type='text/csv'
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Export failed: {str(e)}")
-
-@app.get("/api/metrics/summary")
-async def get_metrics_summary():
-    """Get performance summary for dashboard"""
-    try:
-        summary = get_exportable_metrics()
-        return {"summary": summary}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get summary: {str(e)}")
-
-@app.get("/api/system/status")
-async def get_system_status():
-    """Get current system status and time"""
-    return {
-        "current_time": system_time.get_current_time() if system_time else 0,
-        "simulation_running": simulation_control["running"],
-        "simulation_speed": simulation_control["speed"],
-        "active_incidents": len(system_time.incidents) if system_time else 0
-    }
-
-@app.get("/api/buses")
-async def get_buses():
-    """Get all bus states with enhanced information"""
-    if not state_manager:
-        return {"buses": []}
-    
-    bus_states = state_manager.get_bus_states()
-    buses = []
-    
-    for bus_id, state in bus_states.items():
-        # Calculate progress and additional metrics
-        current_city = state.get("current_city")
-        next_city = state.get("next_city")
-        distance_to_next = state.get("distance_to_next", 0)
+        # Convert coordinates to tuples
+        coordinates = [(coord[0], coord[1]) for coord in line_data.coordinates]
         
-        # Estimate progress (0-1) based on remaining distance
-        # Assuming average route distance of 100km for calculation
-        total_distance = 100  # This should come from distance matrix
-        progress = max(0, min(1, (total_distance - distance_to_next) / total_distance)) if total_distance > 0 else 0
+        # Create the line
+        line_id = bus_lines_manager.create_line(line_data.name, coordinates)
         
-        # Generate realistic passenger data
-        import random
-        random.seed(int(bus_id) if bus_id.isdigit() else hash(bus_id))
-        passengers = random.randint(15, 50)
-        capacity = 60
-        speed = random.randint(45, 70)
-        eta = random.randint(5, 30)
-        
-        buses.append({
-            "id": bus_id,
-            "active": state.get("active", False),
-            "current_city": current_city,
-            "next_city": next_city,
-            "distance_to_next": distance_to_next,
-            "progress": progress,
-            "passengers": passengers,
-            "capacity": capacity,
-            "speed": speed,
-            "eta": eta,
-            "status": state.get("status", "Unknown"),
-            "route": state.get("route", [])
-        })
-    
-    return {"buses": buses}
-
-@app.get("/api/stations")
-async def get_stations():
-    """Get all station states with enhanced passenger information"""
-    if not state_manager:
-        return {"stations": []}
-    
-    station_states = state_manager.get_station_states()
-    stations = []
-    
-    # Load city names
-    try:
-        import pandas as pd
-        df = pd.read_csv('data/cities.csv')
-        cities = df['Origin'].unique().tolist()
-    except:
-        cities = ["Mumbai", "Pune", "Ahmedabad", "Hyderabad", "Bengaluru", "Jaipur", "Delhi", "Chennai"]
-    
-    for station_id, state in station_states.items():
-        waiting_passengers = state.get("waiting_passengers", {})
-        
-        # Enhanced passenger destination breakdown
-        if isinstance(waiting_passengers, dict):
-            # Convert numeric destinations to city names
-            passenger_destinations = {}
-            total_waiting = 0
-            
-            for dest, count in waiting_passengers.items():
-                try:
-                    if str(dest).isdigit() and int(dest) < len(cities):
-                        city_name = cities[int(dest)]
-                    else:
-                        city_name = str(dest)
-                    passenger_destinations[city_name] = int(count)
-                    total_waiting += int(count)
-                except:
-                    passenger_destinations[str(dest)] = int(count) if isinstance(count, (int, float)) else 0
-                    total_waiting += int(count) if isinstance(count, (int, float)) else 0
-        else:
-            passenger_destinations = {}
-            total_waiting = 0
-        
-        # Get station name
-        try:
-            station_name = cities[int(station_id)] if str(station_id).isdigit() and int(station_id) < len(cities) else f"Station {station_id}"
-        except:
-            station_name = f"Station {station_id}"
-        
-        # Generate additional realistic data
-        import random
-        random.seed(int(station_id) if str(station_id).isdigit() else hash(str(station_id)))
-        buses_at_station = random.randint(0, 2)
-        last_arrival = random.randint(1, 10) if random.random() > 0.3 else None
-        
-        stations.append({
-            "id": station_id,
-            "name": station_name,
-            "waiting_passengers": passenger_destinations,
-            "total_waiting": total_waiting,
-            "buses_at_station": buses_at_station,
-            "last_arrival": last_arrival,
-            "next_arrivals": state.get("next_arrivals", {})
-        })
-    
-    return {"stations": stations}
-
-@app.get("/api/incidents")
-async def get_incidents():
-    """Get all active incidents"""
-    if not system_time:
-        return {"incidents": []}
-    
-    incidents = []
-    current_time = system_time.get_current_time()
-    
-    for (city_a, city_b), incident in system_time.incidents.items():
-        time_remaining = incident['duration'] - (current_time - incident['start_time'])
-        if time_remaining > 0:
-            incidents.append({
-                "city_a": city_a,
-                "city_b": city_b,
-                "type": incident['type'],
-                "start_time": incident['start_time'],
-                "time_remaining": time_remaining
-            })
-    
-    return {"incidents": incidents}
-
-@app.post("/api/incidents")
-async def create_incident(incident: IncidentCreate):
-    """Create a new incident"""
-    try:
-        # Use simulation manager for demo incidents
-        success = sim_manager.create_incident(incident.city_a, incident.city_b, incident.incident_type)
-        
-        # Also try to add to system_time if available
-        if system_time:
-            system_time.add_incident(incident.city_a, incident.city_b, incident.incident_type)
-        
-        if success:
-            return {"message": f"Incident created between cities {incident.city_a} and {incident.city_b}"}
-        else:
-            raise HTTPException(status_code=500, detail="Failed to create incident")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error creating incident: {str(e)}")
-
-@app.post("/api/simulation/control")
-async def control_simulation(control: SimulationControl):
-    """Control simulation (start/pause/stop/speed)"""
-    global simulation_control
-    
-    if control.action == "start":
-        simulation_control["running"] = True
-        sim_manager.start_simulation(control.speed or 1.0)
-    elif control.action == "pause":
-        simulation_control["running"] = False
-        sim_manager.pause_simulation()
-    elif control.action == "stop":
-        simulation_control["running"] = False
-        sim_manager.stop_simulation()
-    
-    if control.speed:
-        simulation_control["speed"] = control.speed
-        sim_manager.set_speed(control.speed)
-        if system_time:
-            system_time.time_multiplier = 60 * control.speed
-    
-    return {"message": f"Simulation {control.action}", "status": simulation_control}
-
-@app.get("/api/metrics")
-async def get_metrics():
-    """Get system KPIs and metrics"""
-    if not db_manager:
-        return {"metrics": {}}
-    
-    # Get recent data from database
-    bus_states = db_manager.get_recent_bus_states(100)
-    station_states = db_manager.get_recent_station_states(100)
-    
-    # Calculate basic metrics
-    total_buses = len(set([state[1] for state in bus_states])) if bus_states else 0
-    active_buses = len([state for state in bus_states if state[2]]) if bus_states else 0
-    
-    # Calculate average waiting passengers
-    total_waiting = 0
-    station_count = 0
-    if station_states:
-        for state in station_states[-20:]:  # Last 20 station updates
-            try:
-                waiting_data = json.loads(state[2]) if state[2] else {}
-                if isinstance(waiting_data, dict):
-                    total_waiting += sum(waiting_data.values())
-                    station_count += 1
-            except:
-                continue
-    
-    avg_waiting = total_waiting / station_count if station_count > 0 else 0
-    
-    metrics = {
-        "total_buses": total_buses,
-        "active_buses": active_buses,
-        "utilization_rate": (active_buses / total_buses * 100) if total_buses > 0 else 0,
-        "average_waiting_passengers": avg_waiting,
-        "total_incidents": len(system_time.incidents) if system_time else 0,
-        "system_uptime": system_time.get_current_time() if system_time else 0
-    }
-    
-    return {"metrics": metrics}
-
-@app.get("/api/cities")
-async def get_cities():
-    """Get city information and connections"""
-    try:
-        # Read cities data
-        df = pd.read_csv('data/cities.csv')
-        cities = df['Origin'].unique().tolist()
-        
-        connections = []
-        for _, row in df.iterrows():
-            connections.append({
-                "origin": row['Origin'],
-                "destination": row['Destination'],
-                "distance": row['Distance']
-            })
+        # Save to file
+        bus_lines_manager.save_to_file('data/bus_lines.json')
         
         return {
-            "cities": cities,
-            "connections": connections
+            "message": f"Bus line '{line_data.name}' created successfully",
+            "line_id": line_id,
+            "stations_count": len(coordinates)
         }
+        
     except Exception as e:
-        return {"cities": [], "connections": [], "error": str(e)}
+        raise HTTPException(status_code=400, detail=f"Error creating bus line: {str(e)}")
+
+@app.delete("/bus_lines/{line_id}")
+async def delete_bus_line(line_id: int):
+    """Delete a bus line"""
+    try:
+        success = bus_lines_manager.remove_line(line_id)
+        if success:
+            bus_lines_manager.save_to_file('data/bus_lines.json')
+            return {"message": f"Bus line {line_id} deleted successfully"}
+        else:
+            raise HTTPException(status_code=404, detail="Bus line not found")
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deleting bus line: {str(e)}")
+
+# Simulation Control Endpoints
+@app.post("/start_simulation")
+async def start_simulation():
+    """Start the main simulation"""
+    try:
+        if simulation_state["running"]:
+            return {"message": "Simulation is already running"}
+        
+        # Check if bus lines exist
+        lines = bus_lines_manager.get_all_lines()
+        if not lines:
+            raise HTTPException(status_code=400, detail="No bus lines available. Create bus lines first.")
+        
+        # Start the simulation as a subprocess
+        simulation_process = subprocess.Popen([
+            sys.executable, "main.py"
+        ], cwd=os.getcwd())
+        
+        simulation_state["running"] = True
+        simulation_state["process"] = simulation_process
+        simulation_state["start_time"] = time.time()
+        
+        return {
+            "message": "Simulation started successfully",
+            "process_id": simulation_process.pid,
+            "lines_count": len(lines)
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error starting simulation: {str(e)}")
+
+@app.post("/stop_simulation")
+async def stop_simulation():
+    """Stop the simulation"""
+    try:
+        if not simulation_state["running"]:
+            return {"message": "Simulation is not running"}
+        
+        # Stop the simulation process
+        if simulation_state["process"]:
+            simulation_state["process"].terminate()
+            simulation_state["process"].wait(timeout=10)
+        
+        simulation_state["running"] = False
+        simulation_state["process"] = None
+        
+        return {"message": "Simulation stopped successfully"}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error stopping simulation: {str(e)}")
+
+@app.get("/simulation_status")
+async def get_simulation_status():
+    """Get current simulation status"""
+    status = {
+        "running": simulation_state["running"],
+        "start_time": simulation_state["start_time"],
+        "uptime": time.time() - simulation_state["start_time"] if simulation_state["start_time"] else 0,
+        "process_id": simulation_state["process"].pid if simulation_state["process"] else None
+    }
+    
+    # Check if process is actually running
+    if simulation_state["process"]:
+        poll_result = simulation_state["process"].poll()
+        if poll_result is not None:
+            simulation_state["running"] = False
+            simulation_state["process"] = None
+    
+    return status
+
+# Real-time Data Endpoints
+@app.get("/buses")
+async def get_buses():
+    """Get current bus positions and status"""
+    try:
+        # Get bus data from state manager or database
+        bus_states = state_manager.get_all_bus_states()
+        
+        buses = []
+        for bus_id, state in bus_states.items():
+            bus_data = {
+                "id": bus_id,
+                "lat": state.get("lat", 0),
+                "lon": state.get("lon", 0),
+                "passenger_count": state.get("passenger_count", 0),
+                "destination": state.get("destination", "Unknown"),
+                "status": state.get("status", "Unknown"),
+                "current_location": state.get("current_location", "Unknown"),
+                "using_rl": state.get("using_rl", True),
+                "path": json.loads(state.get("path", "[]")) if isinstance(state.get("path"), str) else state.get("path", [])
+            }
+            buses.append(bus_data)
+        
+        return buses
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting bus data: {str(e)}")
+
+@app.get("/incidents")
+async def get_incidents():
+    """Get current traffic incidents"""
+    try:
+        # This would come from the simulation state in a real implementation
+        # For now, return empty list or simulated data
+        incidents = []
+        
+        # If we had access to the simulation state, we would do:
+        # incidents = simulation_state.get("active_incidents", {})
+        
+        return incidents
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting incident data: {str(e)}")
+
+@app.get("/metrics")
+async def get_metrics():
+    """Get current performance metrics"""
+    try:
+        # Get metrics from database or state manager
+        bus_states = state_manager.get_all_bus_states()
+        
+        metrics = {
+            "active_buses": len([b for b in bus_states.values() if b.get("active", False)]),
+            "total_passengers": sum(b.get("passenger_count", 0) for b in bus_states.values()),
+            "avg_travel_time": 0.0,  # Would be calculated from trip data
+            "active_incidents": 0,   # Would come from incident manager
+            "buses_delta": 0,
+            "passengers_delta": 0,
+            "travel_time_delta": 0.0,
+            "incidents_delta": 0,
+            "bus_utilization_history": [],
+            "passenger_flow_history": []
+        }
+        
+        return metrics
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting metrics: {str(e)}")
+
+@app.get("/rl_metrics")
+async def get_rl_metrics():
+    """Get RL agent performance metrics"""
+    try:
+        # In a real implementation, this would come from the RL agent
+        rl_metrics = {
+            "avg_reward": 0.0,
+            "success_rate": 0.0,
+            "total_episodes": 0,
+            "reward_delta": 0.0,
+            "success_delta": 0.0,
+            "episodes_delta": 0,
+            "reward_history": [],
+            "loss_history": [],
+            "recent_episodes": [],
+            "model_params": "N/A",
+            "training_steps": 0,
+            "exploration_rate": 0.1
+        }
+        
+        return rl_metrics
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting RL metrics: {str(e)}")
+
+@app.get("/traffic_metrics")
+async def get_traffic_metrics():
+    """Get traffic and network performance metrics"""
+    try:
+        traffic_metrics = {
+            "avg_speed": 45.0,  # km/h
+            "efficiency": 75.0,  # percentage
+            "congestion_level": "Medium",  # Low, Medium, High
+            "total_distance_traveled": 0.0,
+            "avg_trip_duration": 0.0,
+            "network_utilization": 0.0
+        }
+        
+        return traffic_metrics
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting traffic metrics: {str(e)}")
+
+# Data Export Endpoints
+@app.get("/export/buses")
+async def export_bus_data():
+    """Export bus data as CSV"""
+    try:
+        bus_states = state_manager.get_all_bus_states()
+        
+        # Convert to DataFrame
+        data = []
+        for bus_id, state in bus_states.items():
+            data.append({
+                "bus_id": bus_id,
+                "timestamp": state.get("timestamp", time.time()),
+                "lat": state.get("lat", 0),
+                "lon": state.get("lon", 0),
+                "passenger_count": state.get("passenger_count", 0),
+                "status": state.get("status", "Unknown"),
+                "using_rl": state.get("using_rl", True)
+            })
+        
+        df = pd.DataFrame(data)
+        
+        # Save to file
+        filename = f"data/exports/bus_export_{int(time.time())}.csv"
+        Path("data/exports").mkdir(parents=True, exist_ok=True)
+        df.to_csv(filename, index=False)
+        
+        return FileResponse(filename, filename=f"bus_data_{int(time.time())}.csv")
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error exporting bus data: {str(e)}")
+
+@app.get("/export/metrics")
+async def export_metrics():
+    """Export performance metrics as CSV"""
+    try:
+        metrics = await get_metrics()
+        
+        # Convert metrics to exportable format
+        df = pd.DataFrame([metrics])
+        df['timestamp'] = time.time()
+        
+        # Save to file
+        filename = f"data/exports/metrics_export_{int(time.time())}.csv"
+        Path("data/exports").mkdir(parents=True, exist_ok=True)
+        df.to_csv(filename, index=False)
+        
+        return FileResponse(filename, filename=f"metrics_{int(time.time())}.csv")
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error exporting metrics: {str(e)}")
+
+# Health Check
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "simulation_running": simulation_state["running"],
+        "api_version": "2.0.0"
+    }
 
 if __name__ == "__main__":
     import uvicorn
+    print("🚀 Starting Enhanced Traffic Routing API Server...")
     uvicorn.run(app, host="0.0.0.0", port=8000)

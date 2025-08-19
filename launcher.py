@@ -1,6 +1,6 @@
 """
-Launcher script for the Traffic Routing Dashboard System
-Starts the simulation, API server, and Streamlit dashboard
+Enhanced Launcher for Traffic Routing Dashboard System with RL
+Starts the API server and Streamlit dashboard (simulation started from dashboard)
 """
 import subprocess
 import sys
@@ -36,8 +36,8 @@ def run_command(command, name, cwd=None):
         return None
 
 def main():
-    print("🚌 Traffic Routing Dashboard System Launcher")
-    print("=" * 50)
+    print("🚌 Enhanced Traffic Routing Dashboard System Launcher")
+    print("=" * 60)
     
     # Check if we're in the right directory
     if not Path("main.py").exists():
@@ -48,67 +48,85 @@ def main():
     
     try:
         # Start API server
-        print("\n1. Starting FastAPI server...")
-        api_process = run_command(
-            "python -m uvicorn api_server:app --host 0.0.0.0 --port 8000 --reload",
-            "FastAPI Server"
-        )
+        print("\n🔧 Starting API server...")
+        api_process = run_command("python api_server.py", "API Server")
         if api_process:
-            processes.append(("FastAPI Server", api_process))
-            time.sleep(3)  # Give the API server time to start
+            processes.append(("API Server", api_process))
+            print("✅ API Server started on http://localhost:8000")
+        else:
+            print("❌ Failed to start API server")
+            return
+        
+        # Wait a moment for API server to start
+        time.sleep(3)
         
         # Start Streamlit dashboard
-        print("\n2. Starting Streamlit dashboard...")
-        dashboard_process = run_command(
-            "streamlit run dashboard.py --server.port 8501 --server.address 0.0.0.0",
-            "Streamlit Dashboard"
-        )
+        print("\n🖥️  Starting Streamlit dashboard...")
+        dashboard_process = run_command("streamlit run dashboard.py --server.port 8501", "Dashboard")
         if dashboard_process:
-            processes.append(("Streamlit Dashboard", dashboard_process))
-            time.sleep(2)
+            processes.append(("Dashboard", dashboard_process))
+            print("✅ Dashboard started on http://localhost:8501")
+        else:
+            print("❌ Failed to start dashboard")
+            return
         
-        print("\n" + "=" * 50)
-        print("🎉 System Started Successfully!")
+        print("\n" + "=" * 60)
+        print("🎉 SYSTEM READY!")
+        print("=" * 60)
         print("📊 Dashboard: http://localhost:8501")
-        print("🔌 API Docs: http://localhost:8000/docs")
-        print("=" * 50)
-        print("\nTo start the simulation, use the dashboard controls or run:")
-        print("python main.py")
-        print("\nPress Ctrl+C to stop all services")
+        print("🔗 API Docs: http://localhost:8000/docs")
+        print("\n📝 INSTRUCTIONS:")
+        print("1. Open the dashboard at http://localhost:8501")
+        print("2. Go to 'Line Creation' page to create bus lines")
+        print("3. Click on the map to add stations (minimum 2 stations per line)")
+        print("4. Create multiple lines as needed")
+        print("5. Go to 'Simulation Control' to start the RL-enhanced simulation")
+        print("6. Monitor real-time progress and RL performance on various dashboard pages")
+        print("\n⚠️  The simulation uses online RL training - performance improves over time!")
+        print("\n🛑 Press Ctrl+C to stop all services")
+        print("=" * 60)
         
-        # Wait for processes and monitor them
+        # Monitor processes
         while True:
-            time.sleep(1)
-            # Check if any process has died
+            time.sleep(5)
+            
+            # Check if any process died
             for name, process in processes:
                 if process.poll() is not None:
-                    print(f"\n⚠️  {name} has stopped unexpectedly")
-                    break
+                    print(f"\n⚠️  {name} stopped unexpectedly")
+                    # Try to restart
+                    if name == "API Server":
+                        new_process = run_command("python api_server.py", "API Server")
+                        if new_process:
+                            processes = [(n, p) for n, p in processes if n != name]
+                            processes.append((name, new_process))
+                            print(f"✅ {name} restarted")
+                    elif name == "Dashboard":
+                        new_process = run_command("streamlit run dashboard.py --server.port 8501", "Dashboard")
+                        if new_process:
+                            processes = [(n, p) for n, p in processes if n != name]
+                            processes.append((name, new_process))
+                            print(f"✅ {name} restarted")
     
     except KeyboardInterrupt:
-        print("\n\n🛑 Shutting down services...")
+        print("\n\n🛑 Shutting down system...")
         
-        # Terminate all processes
+    finally:
+        # Clean shutdown
         for name, process in processes:
             print(f"Stopping {name}...")
             try:
                 process.terminate()
                 process.wait(timeout=5)
+                print(f"✅ {name} stopped")
             except subprocess.TimeoutExpired:
+                print(f"⚠️  Force killing {name}...")
                 process.kill()
             except Exception as e:
-                print(f"Error stopping {name}: {e}")
+                print(f"❌ Error stopping {name}: {e}")
         
-        print("✅ All services stopped")
-    
-    except Exception as e:
-        print(f"\n❌ Error: {e}")
-        # Clean up processes
-        for name, process in processes:
-            try:
-                process.terminate()
-            except:
-                pass
+        print("\n✅ System shutdown complete")
+        print("Thank you for using the Enhanced Traffic Routing System! 🚌")
 
 if __name__ == "__main__":
     main()

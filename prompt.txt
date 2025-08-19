@@ -1,0 +1,122 @@
+The current RL implementation is taking many steps without reaching from a single station to another one (with A* algorithm taking avg of 7-15 steps per route between stations, the RL agents strugle after thousands of steps)
+
+## Tasks 1 : RL Agent  ##
+Remake the RL learning logic, based on this logic : 
+-  big reward for reaching a terget station
+-  penalty related to the number of steps taking (the lower the steps the better)
+- penalty for time taking from a station to another (the less time the better)
+- reward related for the cumulative distance taking for a route between 2 stations (we calculate the distance took using the A* algorithm and the more the RL route is closer to the A* route the better the reward)
+
+## Task 2 : Descriptive Loggins ##
+- at the initialization of assigning bus to go from a station ot another  , add a loggin that shows the number of steps the A* would take to reach from the current to next station, and the calculated distance of this route
+- in the RL-STEP loggin , the steps should represent only the number of steps taking to go from a station to anotehr and not all teh steps the bus is taking, and add a the curent distance walked throw this route (only between the 2 stations not overall )
+- for each [MOVEMENT] loggin ,add to the message the state if the edge that's' being walked during this movement is included in the A* route between the 2 stations or not
+
+
+
+
+
+
+
+
+Intro:
+I inspected the PPO implementation (rl_agent.py) and how it’s used in the simulation (main.py). Below is a prioritized, concrete list of problems, explanations, and practical fixes/experiments you can try. Each item includes a short rationale and points to exact places in the code to help you jump straight to the affected lines.
+
+Highest-priority (likely biggest wins)
+1) Fix advantage / GAE and value bootstrapping (bug / mismatch)
+- What I found:
+  compute_gae expects next-state values, but when you call update_policy you pass next_values_np = [0] * len(values_np) (i.e. zeros) rather than the actual next-state value estimates. That makes advantages / returns incorrect and unstable.
+- Why it matters:
+  Bad advantages => wrong surrogate objective => poor learning, unstable / noisy updates.
+- What to do (concrete):
+  - Instead of zeros, compute value(s) of next states (or bootstrap with value(s_last) when episode not done).
+  - Two options:
+    1. Collect full trajectories per episode: for each trajectory compute values and next_values properly (value(s_{t+1}) is available). Use those to compute GAE.
+    2. If you must batch arbitrary steps, at least compute the network value for next_global_state when storing experience or when preparing the batch.
+  - Also store done per time-step and make sure when done=True you bootstrap with 0.
+- Where to change:
+  update_policy & compute_gae in rl_agent.py.
+
+2) Group experiences by episode (or at least by route) before PPO update
+- What I found:
+  You append experiences per step across buses and later batch them without grouping by episode/route. You call update_policy periodically (in main's RLTrainingBehaviour) but memory is a flat list containing mixed partial trajectories.
+- Why it matters:
+  GAE and PPO assume coherent trajectories. Mixing steps from different episodes (different horizons) breaks advantage computation and increases variance.
+- What to do:
+  - Collect experiences into episode-level lists (per route) and run update_policy over complete episodes or mini-batches of full episodes.
+  - If you want continual online updates, use N-step returns with correct bootstrapping and keep per-trajectory bookkeeping.
+- Where:
+  The experience collection logic and the call-site for update_policy (main.py / RLTrainingBehaviour) and rl_agent.py.
+
+3) Mask padded actions when batching variable action counts
+- What I found:
+  You pad action-state arrays to the same max_actions length but then compute softmax over logits for padded actions as well — padded actions will get non-zero probability and corrupt training.
+- Why it matters:
+  If the batch includes examples with fewer actions, the padded slots are treated as real choices and punish/benefit the policy incorrectly.
+- What to do:
+  - Keep an action_mask per experience (1 for real actions, 0 for padding).
+  - When computing softmax for policy logits, apply a large negative mask to padded logits before softmax (e.g. logits = logits + (mask-1)*1e9), or use PyTorch masked softmax.
+  - When calculating old_log_probs and gathering log-probs, use the mask to ensure indices are valid.
+- Where:
+  In update_policy — prepare action_masks and pass them to the network / softmax stage.
+
+Model / architecture fixes
+4) Value head should not use processed[:,0,:] as the state embedding
+- What I found:
+  Your value head uses processed[:, 0, :] (the processed features of the first action) as the representation for the critic. That is arbitrary and can bias value estimates when the “first action” varies across batches.
+- What to do:
+  - Use a pooled representation: e.g., average or max pooling across actions (or use the global_features) and feed that to the value head.
+  - Using the global encoder's output for the critic is often simplest and stable.
+- Where:
+  PPONetwork.forward() in rl_agent.py.
+
+5) Normalize / change state representation: use relative coordinates & normalized features
+- What I found:
+  Global state uses absolute lat/lon for both current and destination; action state contains absolute edge distances etc. global_state = [current_lat, current_lon, dest_lat, dest_lon, passenger_count, time_in_system]. These raw scales are awkward for NN learning.
+- What to do:
+  - Replace absolute coords with relative vector to goal [delta_lat, delta_lon] and/or distance-to-goal scalar normalized to map scale.
+  - Standardize (mean/std) or min-max normalize per feature. Passenger_count/time scaling should be consistent and motivated by real maxima.
+  - Consider augmenting the state with heuristic (A* heuristic distance) and edge features normalized.
+
+Reward shaping & scaling (very important)
+6) Use potential-based reward shaping (stable, principled)
+- What I found:
+  Your reward mixes a large terminal reward (200), a per-step step_penalty = -2.0, distance penalty -edge_distance / 2000.0, cumulative A* similarity reward based on rl_distance/astar_distance, and time_penalty proportional to elapsed time. This combination is fragile and scale-sensitive.
+- Problems:
+  - astar_similarity_reward depends on cumulative rl_distance (global tracking) which makes single-step credit noisy.
+  - time_penalty uses absolute elapsed time and can quickly dominate the reward depending on time units.
+- Better approach (concrete):
+  - Use potential-based shaping: define potential φ(s) = −heuristic_distance_to_goal(s) (or normalized), and add shaping = gamma * phi(s') - phi(s) to the per-step reward. This gives dense directional feedback while preserving optimal policies (Ng et al. 1999).
+  - Per-step immediate reward = -edge_distance_normalized + shaping + astar_edge_bonus (where astar_edge_bonus is small).
+  - Keep terminal reward moderate (or use success indicator + small shaping).
+- Example pseudocode:
+  phi(s) = - (euclidean_distance(s, goal) / max_map_distance)
+  shaping = gamma * phi(s_next) - phi(s)
+  r_step = - (edge_distance / max_edge_distance) + shaping + (edge_in_astar ? 0.5 : 0)
+- Where:
+  Replace or augment calculate_enhanced_reward in rl_agent.py.
+
+7) Avoid mixing cumulative rl_distance in single-step reward
+- What I found:
+  astar_similarity_reward uses tracking['rl_distance'] / tracking['astar_distance'] which is the cumulative RL distance up to now; computing reward for a single step using cumulative ratio introduces non-local noisy signals.
+- What to do:
+  - Replace with a delta-based measure (e.g., change in distance-to-goal or delta between your step length and A* step length).
+  - Or compute cumulative metrics only at episode termination and use a final shaping reward — but don't mix cumulative into immediate step reward.
+
+Action masking & feasibility
+8) Mask impossible/closed actions and handle env_effect==0
+- What I found:
+  Edge with env_effect = 0.0 (closed road) is still included in action_states; agent can sample it and then move_to_node has to handle very low speeds.
+- What to do:
+  - Filter actions with env_effect <= small_threshold out of action list (or set their logits to -inf) so they are never selected.
+  - Also give a strong negative reward (or treat as invalid action) if the agent attempts a closed edge.
+
+Learning stability & training procedure
+9) Store old log_probs / values at action time (or re-evaluate carefully)
+- What I found:
+  You compute old_log_probs later by forwarding the whole batch through the current network. That can be OK if update is immediate (on-policy), but if training happens after many steps / network has changed due to other updates, mismatch occurs.
+- What to do:
+  - When the agent samples an action, store the action's log_prob and value estimate in the experience tuple. Then use those stored old_log_probs for PPO ratio computation. This reduces bias and avoids recomputing inconsistent old policy outputs.
+- Where:
+  get_action should return log_prob and value (or you can compute and store them at action time).
+

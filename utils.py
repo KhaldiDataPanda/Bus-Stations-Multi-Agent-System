@@ -101,6 +101,8 @@ class SystemState:
             cls._instance = super(SystemState, cls).__new__(cls)
             cls._instance.bus_states = {}
             cls._instance.station_states = {}
+            # Track buses logged as inactive to avoid repeated debug prints
+            cls._instance._inactive_logged = set()
         return cls._instance
 
     def update_bus_state(self, bus_id, state):
@@ -117,8 +119,18 @@ class SystemState:
 
         }
         
-        self.bus_states[str(bus_id)] = processed_state
-        print(f"[DEBUG] Updated bus {bus_id} state in manager: {processed_state}")
+        bus_key = str(bus_id)
+        self.bus_states[bus_key] = processed_state
+        # Only log inactive buses once until they become active
+        if not processed_state['active']:
+            if bus_key not in self._inactive_logged:
+                print(f"[DEBUG] Updated bus {bus_id + 1} state in manager: {processed_state}")
+                self._inactive_logged.add(bus_key)
+        else:
+            # Bus is active: always log and clear any inactive flag
+            if bus_key in self._inactive_logged:
+                self._inactive_logged.remove(bus_key)
+            print(f"[DEBUG] Updated bus {bus_id + 1} state in manager: {processed_state}")
 
     def update_station_state(self, station_id, state):
         if not isinstance(station_id, (int, str)):
@@ -137,10 +149,96 @@ class SystemState:
         }
         
         self.station_states[str(station_id)] = processed_state
-        print(f"[DEBUG] Updated station {station_id} state in manager: {processed_state}")
+        print(f"[DEBUG] Updated station {station_id + 1} state in manager: {processed_state}")
 
     def get_bus_states(self):
         return self.bus_states
 
     def get_station_states(self):
         return self.station_states
+    
+    def get_all_bus_states(self):
+        """Get all bus states for API access"""
+        return self.bus_states.copy()
+    
+    def get_all_station_states(self):
+        """Get all station states for API access"""
+        return self.station_states.copy()
+    
+    def clear_states(self):
+        """Clear all states (useful for simulation restart)"""
+        self.bus_states.clear()
+        self.station_states.clear()
+        print("[DEBUG] Cleared all states")
+
+
+
+
+
+
+
+
+
+
+
+"""
+Logging configuration utility for Traffic Routing System
+Provides separate logging configurations for dashboard and local simulations
+"""
+import logging
+import sys
+from pathlib import Path
+from datetime import datetime
+
+def setup_logging(simulation_type="local", log_level=logging.INFO):
+    """
+    Setup logging configuration for different simulation types
+    
+    Args:
+        simulation_type (str): Type of simulation - "dashboard" or "local"
+        log_level: Logging level (default: INFO)
+    """
+    
+    # Create logs directory if it doesn't exist
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
+    
+    # Generate timestamp for log files
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Define log file based on simulation type
+    if simulation_type == "dashboard":
+        log_file = log_dir / f"dashboard_simulation_{timestamp}.txt"
+        log_format = '[DASHBOARD] - [%(name)s] - %(message)s'
+    elif simulation_type == "local":
+        log_file = log_dir / f"local_simulation_{timestamp}.txt"
+        log_format = '[%(name)s] - %(message)s'
+    else:
+        # Fallback to default logging
+        log_file = log_dir / f"simulation_{timestamp}.txt"
+        log_format = '[%(name)s] - %(message)s'
+    
+    # Clear any existing handlers
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    
+    # Configure logging with both file and console output
+    logging.basicConfig(
+        level=log_level,
+        format=log_format,
+        handlers=[
+            logging.FileHandler(log_file, mode='w', encoding='utf-8'),
+            logging.StreamHandler(sys.stdout)
+        ]
+    )
+    
+    # Create a logger for this module
+    logger = logging.getLogger('logging_config')
+    logger.info(f"Logging configured for {simulation_type} simulation")
+    logger.info(f"Log file: {log_file}")
+    
+    return str(log_file)
+
+def get_logger(name):
+    """Get a logger with the specified name"""
+    return logging.getLogger(name)
