@@ -1,12 +1,12 @@
 {
     "simulation": {
-        "time_speed_multiplier": 50.0,
+        "time_speed_multiplier": 1.0,
         "comment_time_speed": "Real world seconds per simulation hour (3600/10 = 360 seconds = 6 minutes real time per sim hour)"
     },
     "buses": {
         "initial_buses_per_line": 3,
         "reserve_buses_per_line": 2,
-        "launch_interval_hours": 0.5,
+        "launch_interval_hours": 1,
         "comment_launch_interval": "Time between bus launches in simulation hours (0.333 = 20 minutes)"
     },
     "plotting": {

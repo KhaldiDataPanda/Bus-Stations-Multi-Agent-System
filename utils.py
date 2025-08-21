@@ -4,6 +4,7 @@ import asyncio
 
 
 
+
 def log_message(direction, sender, receiver, message,system_time ,expected_response=None,DEBUG_MESSAGING=True):
     if DEBUG_MESSAGING:
         base_msg = f"[{system_time.get_current_time():.2f}h] {direction} | From: {sender} | To: {receiver} | Message: {message}"
@@ -92,7 +93,6 @@ class SystemTime:
     
     
     
-    
 class SystemState:
     _instance = None
 
@@ -110,13 +110,24 @@ class SystemState:
             print(f"[WARNING] Invalid bus_id type: {type(bus_id)}")
             return
         
+        # Preserve core fields plus coordinates and analytics-related fields
         processed_state = {
             'active': bool(state.get('active', False)),
             'current_city': state.get('current_city'),
             'next_city': state.get('next_city'),
             'distance_to_next': float(state.get('distance_to_next', 0)),
             'status': state.get('status', 'Unknown'),
-
+            'lat': state.get('lat', 0.0),
+            'lon': state.get('lon', 0.0),
+            'passenger_count': state.get('passenger_count', 0),
+            'current_location': state.get('current_location'),
+            'destination': state.get('destination'),
+            'path': state.get('path', []),
+            'current_station_id': state.get('current_station_id'),
+            'target_station_id': state.get('target_station_id'),
+            'assigned_line_id': state.get('assigned_line_id'),
+            'steps_taken': state.get('steps_taken', 0),
+            'timestamp': state.get('timestamp', 0)
         }
         
         bus_key = str(bus_id)
@@ -124,13 +135,13 @@ class SystemState:
         # Only log inactive buses once until they become active
         if not processed_state['active']:
             if bus_key not in self._inactive_logged:
-                print(f"[DEBUG] Updated bus {bus_id + 1} state in manager: {processed_state}")
+                print(f"[DEBUG] Updated bus {int(bus_id) + 1 if str(bus_id).isdigit() else bus_id} state in manager: {processed_state}")
                 self._inactive_logged.add(bus_key)
         else:
             # Bus is active: always log and clear any inactive flag
             if bus_key in self._inactive_logged:
                 self._inactive_logged.remove(bus_key)
-            print(f"[DEBUG] Updated bus {bus_id + 1} state in manager: {processed_state}")
+            print(f"[DEBUG] Updated bus {int(bus_id) + 1 if str(bus_id).isdigit() else bus_id} state in manager: {processed_state}")
 
     def update_station_state(self, station_id, state):
         if not isinstance(station_id, (int, str)):
@@ -170,6 +181,7 @@ class SystemState:
         self.bus_states.clear()
         self.station_states.clear()
         print("[DEBUG] Cleared all states")
+
 
 
 

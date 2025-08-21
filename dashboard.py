@@ -209,7 +209,8 @@ def create_simulation_map():
     if bus_data:
         for i, bus in enumerate(bus_data):
             # Skip buses with invalid coordinates
-            if bus['lat'] == 0 and bus['lon'] == 0:
+            if (bus.get('lat') is None or bus.get('lon') is None or 
+                bus.get('lat') == 0 and bus.get('lon') == 0):
                 continue
                 
             # Assign unique color to each bus
@@ -223,12 +224,27 @@ def create_simulation_map():
             </div>
             '''
             
+            # Robust bus label
+            raw_id = bus.get('id')
+            try:
+                bus_label = str(int(raw_id) + 1)
+            except Exception:
+                bus_label = str(raw_id)
+            
+            # Additional safety check for coordinates
+            try:
+                lat = float(bus.get('lat', 0))
+                lon = float(bus.get('lon', 0))
+            except (TypeError, ValueError):
+                # If coordinates can't be converted to float, skip this bus
+                continue
+            
             # Add bus as X marker
             folium.Marker(
-                location=[bus['lat'], bus['lon']],
-                popup=f"<b>Bus {bus['id'] + 1}</b><br>"
-                      f"Passengers: {bus['passenger_count']}<br>"
-                      f"Status: {bus['status']}<br>"
+                location=[lat, lon],
+                popup=f"<b>Bus {bus_label}</b><br>"
+                      f"Passengers: {bus.get('passenger_count', 0)}<br>"
+                      f"Status: {bus.get('status', 'Unknown')}<br>"
                       f"Current: {bus.get('current_location', 'Unknown')}<br>"
                       f"Destination: {bus.get('destination', 'Unknown')}<br>"
                       f"Routing: A* Algorithm",
@@ -256,7 +272,7 @@ def create_simulation_map():
                         color=bus_color,
                         weight=4,
                         opacity=0.8,
-                        popup=f"Bus {bus['id'] + 1} Route"
+                        popup=f"Bus {bus_label} Route"
                     ).add_to(m)
     
     # Add incidents
@@ -628,10 +644,15 @@ def simulation_control_page():
             st.subheader("🐛 Debug: Active Buses")
             with st.expander("View bus data", expanded=False):
                 for i, bus in enumerate(bus_data):
-                    st.write(f"**Bus {bus['id'] + 1}:**")
-                    st.write(f"- Position: ({bus['lat']:.6f}, {bus['lon']:.6f})")
-                    st.write(f"- Status: {bus['status']}")
-                    st.write(f"- Passengers: {bus['passenger_count']}")
+                    raw_id = bus.get('id')
+                    try:
+                        bus_label = str(int(raw_id) + 1)
+                    except Exception:
+                        bus_label = str(raw_id)
+                    st.write(f"**Bus {bus_label}:**")
+                    st.write(f"- Position: ({bus.get('lat', 0):.6f}, {bus.get('lon', 0):.6f})")
+                    st.write(f"- Status: {bus.get('status', 'Unknown')}")
+                    st.write(f"- Passengers: {bus.get('passenger_count', 0)}")
                     st.write(f"- Current Location: {bus.get('current_location', 'Unknown')}")
                     st.write(f"- Destination: {bus.get('destination', 'Unknown')}")
                     if 'path' in bus and bus['path']:
@@ -692,21 +713,29 @@ def system_metrics_page():
         
         with col1:
             # Bus utilization over time
-            if 'bus_utilization_history' in metrics_data:
-                df_util = pd.DataFrame(metrics_data['bus_utilization_history'])
-                fig = px.line(df_util, x='time', y='utilization',
-                            title='Bus Utilization Over Time')
-                st.plotly_chart(fig, use_container_width=True)
+            util_hist = metrics_data.get('bus_utilization_history', []) or []
+            if isinstance(util_hist, list) and len(util_hist) > 0:
+                df_util = pd.DataFrame(util_hist)
+                if {'time', 'utilization'}.issubset(df_util.columns):
+                    fig = px.line(df_util, x='time', y='utilization',
+                                title='Bus Utilization Over Time')
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("Bus utilization data not available")
             else:
                 st.info("Bus utilization data not available")
         
         with col2:
             # Passenger flow
-            if 'passenger_flow_history' in metrics_data:
-                df_flow = pd.DataFrame(metrics_data['passenger_flow_history'])
-                fig = px.line(df_flow, x='time', y='passengers',
-                            title='Passenger Flow Over Time')
-                st.plotly_chart(fig, use_container_width=True)
+            flow_hist = metrics_data.get('passenger_flow_history', []) or []
+            if isinstance(flow_hist, list) and len(flow_hist) > 0:
+                df_flow = pd.DataFrame(flow_hist)
+                if {'time', 'passengers'}.issubset(df_flow.columns):
+                    fig = px.line(df_flow, x='time', y='passengers',
+                                title='Passenger Flow Over Time')
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("Passenger flow data not available")
             else:
                 st.info("Passenger flow data not available")
     else:
@@ -716,44 +745,63 @@ def system_metrics_page():
     time.sleep(20)
     st.rerun()
 
+
 def astar_metrics_page():
     """A* Algorithm performance metrics with 20s refresh"""
     st.title("🎯 A* Algorithm Performance")
     
+    # Use metrics combined endpoint
     metrics = get_api_data("metrics")
+    buses = get_api_data("buses")
     
-    if metrics:
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.metric(
-                "Average Steps",
-                f"{metrics.get('avg_steps', 0):.1f}",
-                delta=f"{metrics.get('steps_delta', 0):.1f}"
-            )
-        
-        with col2:
-            st.metric(
-                "Success Rate",
-                f"{metrics.get('success_rate', 100):.1f}%",
-                delta=f"{metrics.get('success_delta', 0):.1f}%"
-            )
-        
-        with col3:
-            st.metric(
-                "Total Routes",
-                metrics.get('total_routes', 0),
-                delta=metrics.get('routes_delta', 0)
-            )
-        
-        st.info("📊 A* algorithm provides optimal pathfinding based on distance, ensuring efficient routing.")
-        
-    else:
+    if metrics is None and buses is None:
         st.warning("Performance metrics not available")
+        time.sleep(20)
+        st.rerun()
+        return
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric(
+            "Average Steps",
+            f"{(metrics or {}).get('avg_steps', 0):.1f}",
+            delta=f"{(metrics or {}).get('steps_delta', 0):.1f}"
+        )
+    with col2:
+        st.metric(
+            "Success Rate",
+            f"{(metrics or {}).get('success_rate', 100):.1f}%",
+            delta=f"{(metrics or {}).get('success_delta', 0):.1f}%"
+        )
+    with col3:
+        total_routes = (metrics or {}).get('total_routes')
+        if total_routes is None and isinstance(buses, list):
+            total_routes = len(buses)
+        st.metric(
+            "Total Routes",
+            total_routes or 0,
+            delta=(metrics or {}).get('routes_delta', 0)
+        )
+    
+    # Optional detail table of current routes
+    if isinstance(buses, list) and len(buses) > 0:
+        st.subheader("Current Bus Routes (Sample)")
+        table_rows = []
+        for b in buses[:20]:
+            table_rows.append({
+                'bus_id': b.get('id'),
+                'status': b.get('status'),
+                'passengers': b.get('passenger_count'),
+                'current': b.get('current_location'),
+                'destination': b.get('destination'),
+                'steps_taken': b.get('steps_taken', 0)
+            })
+        st.dataframe(pd.DataFrame(table_rows), use_container_width=True)
     
     # Auto refresh after 20 seconds
     time.sleep(20)
     st.rerun()
+
 
 def traffic_metrics_page():
     """Traffic and incident metrics with 20s refresh"""
@@ -761,8 +809,17 @@ def traffic_metrics_page():
     
     traffic_data = get_api_data("traffic_metrics")
     incident_data = get_api_data("incidents")
+    buses = get_api_data("buses")
     
-    if traffic_data or incident_data:
+    # Derive simple traffic indicators from current buses if available
+    derived_avg_speed = None
+    derived_network_util = None
+    if isinstance(buses, list) and len(buses) > 0:
+        # Placeholder derivations; real logic can use distances and timestamps
+        active_buses = len(buses)
+        derived_network_util = min(100.0, active_buses * 5.0)
+    
+    if traffic_data or incident_data or buses:
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
@@ -772,25 +829,22 @@ def traffic_metrics_page():
             )
         
         with col2:
-            if traffic_data:
-                st.metric(
-                    "Average Speed",
-                    f"{traffic_data.get('avg_speed', 0):.1f} km/h"
-                )
+            st.metric(
+                "Average Speed",
+                f"{(traffic_data or {}).get('avg_speed', derived_avg_speed or 0):.1f} km/h"
+            )
         
         with col3:
-            if traffic_data:
-                st.metric(
-                    "Network Efficiency",
-                    f"{traffic_data.get('efficiency', 0):.1f}%"
-                )
+            st.metric(
+                "Network Efficiency",
+                f"{(traffic_data or {}).get('efficiency', 0):.1f}%"
+            )
         
         with col4:
-            if traffic_data:
-                st.metric(
-                    "Congestion Level",
-                    traffic_data.get('congestion_level', 'Low')
-                )
+            st.metric(
+                "Congestion Level",
+                (traffic_data or {}).get('congestion_level', 'Low')
+            )
         
         # Incident breakdown
         if incident_data:

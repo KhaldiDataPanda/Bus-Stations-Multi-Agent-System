@@ -47,7 +47,10 @@ simulation_state = {
     "start_time": None,
     "bus_data": {},
     "incident_data": {},
-    "metrics": {}
+    "metrics": {
+        "bus_utilization_history": [],
+        "passenger_flow_history": []
+    }
 }
 
 # Request/Response models
@@ -69,10 +72,6 @@ class SimulationControl(BaseModel):
 async def startup_event():
     """Initialize API server"""
     print("🚀 Enhanced Traffic Routing API Server starting...")
-    
-    # Create necessary directories
-    Path("data/state").mkdir(parents=True, exist_ok=True)
-    Path("data/models").mkdir(parents=True, exist_ok=True)
     
     print("✅ API Server ready")
 
@@ -242,21 +241,43 @@ async def get_simulation_status():
 async def get_buses():
     """Get current bus positions and status"""
     try:
-        # Get bus data from state manager or database
+        # Prefer in-memory state; if empty, fallback to latest states from DB (simulation runs in separate process)
         bus_states = state_manager.get_all_bus_states()
+        if not bus_states:
+            latest_rows = db_manager.get_latest_bus_states_map()
+            buses: List[Dict[str, Any]] = []
+            for row in latest_rows:
+                buses.append({
+                    "id": row.get("bus_id"),
+                    "lat": float(row.get("lat") or 0.0),
+                    "lon": float(row.get("lon") or 0.0),
+                    "passenger_count": row.get("passenger_count", 0),
+                    "destination": row.get("destination", "Unknown"),
+                    "status": row.get("status", "Unknown"),
+                    "current_location": row.get("current_location", "Unknown"),
+                    "using_astar": True,
+                    "path": row.get("path", []),
+                    "steps_taken": row.get("steps_taken", 0),
+                    "current_station_id": row.get("current_station_id"),
+                    "target_station_id": row.get("target_station_id"),
+                })
+            return buses
         
         buses = []
         for bus_id, state in bus_states.items():
             bus_data = {
                 "id": bus_id,
-                "lat": state.get("lat", 0),
-                "lon": state.get("lon", 0),
+                "lat": float(state.get("lat") or 0),
+                "lon": float(state.get("lon") or 0),
                 "passenger_count": state.get("passenger_count", 0),
                 "destination": state.get("destination", "Unknown"),
                 "status": state.get("status", "Unknown"),
                 "current_location": state.get("current_location", "Unknown"),
                 "using_astar": True,
-                "path": json.loads(state.get("path", "[]")) if isinstance(state.get("path"), str) else state.get("path", [])
+                "path": json.loads(state.get("path", "[]")) if isinstance(state.get("path"), str) else state.get("path", []),
+                "steps_taken": state.get("steps_taken", 0),
+                "current_station_id": state.get("current_station_id"),
+                "target_station_id": state.get("target_station_id"),
             }
             buses.append(bus_data)
         
@@ -283,41 +304,38 @@ async def get_incidents():
 
 @app.get("/metrics")
 async def get_metrics():
-    """Get current performance metrics"""
+    """Get current performance metrics (system + A* + histories)"""
     try:
-        # Get metrics from database or state manager
+        # Pull bus state (fallback to DB for counts)
         bus_states = state_manager.get_all_bus_states()
+        if not bus_states:
+            latest_rows = db_manager.get_latest_bus_states_map()
+            active_buses_count = len(latest_rows)
+            total_passengers = sum(int(r.get("passenger_count", 0)) for r in latest_rows)
+        else:
+            active_buses_count = len([b for b in bus_states.values() if b.get("active", False)])
+            total_passengers = sum(b.get("passenger_count", 0) for b in bus_states.values())
         
+        # Compose metrics
         metrics = {
-            "active_buses": len([b for b in bus_states.values() if b.get("active", False)]),
-            "total_passengers": sum(b.get("passenger_count", 0) for b in bus_states.values()),
-            "avg_travel_time": 0.0,  # Would be calculated from trip data
-            "active_incidents": 0,   # Would come from incident manager
+            "active_buses": active_buses_count,
+            "total_passengers": total_passengers,
+            "avg_travel_time": 0.0,
+            "active_incidents": 0,
             "buses_delta": 0,
             "passengers_delta": 0,
             "travel_time_delta": 0.0,
             "incidents_delta": 0,
-            "bus_utilization_history": [],
-            "passenger_flow_history": []
-        }
-        
-        return metrics
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error getting metrics: {str(e)}")
-
-@app.get("/metrics")
-async def get_metrics():
-    """Get A* algorithm performance metrics"""
-    try:
-        # Simple A* performance metrics
-        metrics = {
+            # Histories could be built from DB in future; leaving empty ensures charts guard properly
+            "bus_utilization_history": simulation_state["metrics"].get("bus_utilization_history", []),
+            "passenger_flow_history": simulation_state["metrics"].get("passenger_flow_history", []),
+            # A* metrics
             "avg_steps": 12.5,
             "steps_delta": 0.8,
             "success_rate": 100.0,
             "success_delta": 0.0,
-            "total_routes": len(simulation_state.get("bus_states", {})),
-            "routes_delta": 1,
+            "total_routes": active_buses_count,
+            "routes_delta": 0,
             "algorithm": "A* Pathfinding",
             "efficiency": "Optimal"
         }
@@ -350,22 +368,9 @@ async def get_traffic_metrics():
 async def export_bus_data():
     """Export bus data as CSV"""
     try:
-        bus_states = state_manager.get_all_bus_states()
-        
-        # Convert to DataFrame
-        data = []
-        for bus_id, state in bus_states.items():
-            data.append({
-                "bus_id": bus_id,
-                "timestamp": state.get("timestamp", time.time()),
-                "lat": state.get("lat", 0),
-                "lon": state.get("lon", 0),
-                "passenger_count": state.get("passenger_count", 0),
-                "status": state.get("status", "Unknown"),
-                "using_astar": True
-            })
-        
-        df = pd.DataFrame(data)
+        # Use latest per-bus rows for export
+        rows = db_manager.get_latest_bus_states_map()
+        df = pd.DataFrame(rows)
         
         # Save to file
         filename = f"data/exports/bus_export_{int(time.time())}.csv"

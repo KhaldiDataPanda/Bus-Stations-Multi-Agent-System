@@ -47,8 +47,8 @@ import json
 with open('config.json', 'r') as f:
     CONFIG = json.load(f)
 
-# Create necessary directories
-Path("data/state").mkdir(parents=True, exist_ok=True)
+
+
 Path(CONFIG['plotting']['plot_folder']).mkdir(parents=True, exist_ok=True)
 
 # Initialize managers
