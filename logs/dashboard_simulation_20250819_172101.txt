@@ -1,6 +1,0 @@
-[DASHBOARD] - [logging_config] - Logging configured for dashboard simulation
-[DASHBOARD] - [logging_config] - Log file: logs\dashboard_simulation_20250819_172101.txt
-[DASHBOARD] - [MAIN] - 🚌 Enhanced Traffic Routing System with RL and Line-Based Routing
-[DASHBOARD] - [MAIN] - ======================================================================
-[DASHBOARD] - [MAIN] - ⚠️  No bus lines found. Please create bus lines using the dashboard first.
-[DASHBOARD] - [MAIN] -    Run the dashboard to create lines before starting simulation.

@@ -1,6 +1,6 @@
 """
-Enhanced Traffic Routing System with Online Reinforcement Learning
-Main simulation file with PPO RL integration for edge-by-edge decision making
+Traffic Routing System with A* Pathfinding
+Main simulation file with A* routing for bus navigation
 """
 from collections import defaultdict
 import pandas as pd
@@ -10,6 +10,7 @@ import asyncio
 import logging
 import time
 import numpy as np
+import networkx as nx
 from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
@@ -19,7 +20,6 @@ from typing import List, Dict, Tuple, Optional
 import heapq
 import socket
 import threading
-import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
@@ -39,30 +39,35 @@ def get_station_jid(station_id: int) -> str:
 # Import custom modules
 from utils import log_message, a_star, SystemTime, SystemState
 from db_manager import DatabaseManager
-from rl_agent import PPOAgent
 from bus_lines_manager import BusLinesManager, Station, BusLine
+from plotting_utils import initialize_plotter, get_plotter
+
+# Load configuration
+import json
+with open('config.json', 'r') as f:
+    CONFIG = json.load(f)
 
 # Create necessary directories
 Path("data/state").mkdir(parents=True, exist_ok=True)
-Path("data/models").mkdir(parents=True, exist_ok=True)
+Path(CONFIG['plotting']['plot_folder']).mkdir(parents=True, exist_ok=True)
 
 # Initialize managers
 db_manager = DatabaseManager()
 bus_lines_manager = BusLinesManager()
 bus_lines_manager.load_from_file('data/bus_lines.json')
 
-# Initialize RL agent with updated state sizes for enhanced features
-rl_agent = PPOAgent(
-    global_state_size=2,  # [distance_to_dest, angle_to_dest]
-    action_state_size=3   # [node_id, distance_to_dest, angle_to_dest]
-)
+# Load graph data from Blida map
+from graph_loader import GraphLoader
+from full_graph_manager import FullGraphManager
 
-# Try to load existing model
-try:
-    rl_agent.load_model('data/models/ppo_model.pth')
-    print("Loaded existing RL model")
-except:
-    print("Starting with new RL model")
+graph_loader = GraphLoader('data/Blida_map.graphml')
+# Initialize full_graph_manager only if not already set (allows external initialization)
+full_graph_manager = None
+if full_graph_manager is None:
+    full_graph_manager = FullGraphManager('data/Blida_map.graphml')
+
+# Initialize plotting (after graph manager is created)
+plotter = initialize_plotter('config.json', full_graph_manager)
 
 # Global simulation state
 simulation_running = False
@@ -81,7 +86,7 @@ LOGGING_FORMAT = {
     'bus': '[BUS-%(bus_id)s ] - %(levelname)s - %(message)s',
     'station': '[STATION-%(station_id)s ] - %(levelname)s - %(message)s',
     'control': '[CONTROL ] - %(levelname)s - %(message)s',
-    'rl': '[RL-AGENT ] - %(levelname)s - %(message)s'
+    'astar': '[A*-ROUTING ] - %(levelname)s - %(message)s'
 }
 
 DEBUG_MESSAGING = False  # Set to True for detailed message logging
@@ -90,26 +95,15 @@ DEBUG_MESSAGING = False  # Set to True for detailed message logging
 bus_logger = logging.getLogger('bus')
 station_logger = logging.getLogger('station')
 control_logger = logging.getLogger('control')
-rl_logger = logging.getLogger('rl')
-action_logger = logging.getLogger('rl_actions')
+astar_logger = logging.getLogger('astar')
 
 # Note: Logging handlers are now configured in utils.py
 # Individual logger levels can still be adjusted if needed
-for logger in [bus_logger, station_logger, control_logger, rl_logger, action_logger]:
+for logger in [bus_logger, station_logger, control_logger, astar_logger]:
     logger.setLevel(logging.INFO)
 
-# Load graph data from Blida map
-from graph_loader import GraphLoader
-from full_graph_manager import FullGraphManager
-
-graph_loader = GraphLoader('data/Blida_map.graphml')
-# Initialize full_graph_manager only if not already set (allows external initialization)
-full_graph_manager = None
-if full_graph_manager is None:
-    full_graph_manager = FullGraphManager('data/Blida_map.graphml')
-
 # System managers
-system_time = SystemTime()
+system_time = SystemTime(time_multiplier=CONFIG['simulation']['time_speed_multiplier'])
 state_manager = SystemState()
 
 # Global simulation state
@@ -118,7 +112,6 @@ simulation_state = {
     'passenger_requests': [],
     'active_incidents': {},
     'bus_performance_metrics': defaultdict(list),
-    'rl_training_metrics': defaultdict(list),
     'buses_by_line': defaultdict(list),  # Track buses per line
     'schedule_tracker': {},  # Track bus scheduling
     'reserve_buses': {}  # Track reserve buses per line
@@ -131,8 +124,8 @@ simulation_state = {
 ############################################################################################################
 ############################################################################################################
 
-class RLBusAgent(Agent):
-    """Enhanced Bus Agent with RL decision making and full graph routing"""
+class BusAgent(Agent):
+    """Bus Agent with A* routing for optimal pathfinding"""
     
     async def setup(self):
         self.bus_id = int(str(self.jid).split('_')[1].split('@')[0])
@@ -142,27 +135,30 @@ class RLBusAgent(Agent):
         self.passenger_count = 0
         self.trip_start_time = 0
         self.direction = "forward"  # "forward" or "backward"
-        self.using_rl = True
         self.timeout_threshold = 0
         self.current_path = []
-        self.rl_decision_count = 0
         self.is_initialized = False
         
-        # Enhanced path tracking for full graph
+        # Enhanced path tracking for full graph with A* routing
         self.current_graph_node = None  # Current position in the full graph
         self.current_path_nodes = []  # List of graph node IDs
         self.current_path_edges = []  # List of edge IDs
-        self.a_star_path_nodes = []  # A* comparison path node IDs
-        self.a_star_path_edges = []  # A* comparison path edge IDs
         self.station_reached_count = 0  # Track stations reached
         self.line_completion_count = 0  # Track full line completions
         self.current_trip_start_station = None  # Track start of current trip
         self.steps_taken = 0  # Track steps in current trip
         self.route_steps = 0  # Track steps in current route segment (between stations)
         
+        # A* path tracking
+        self.total_routes_completed = 0  # Track total routes completed (station to station)
+        self.current_trip_visited_nodes = {}  # Track nodes visited in current trip only (station A to B)
+        self.astar_path = []  # Complete A* path nodes
+        self.astar_path_index = 0  # Current position in A* path
+        self.astar_path_calculated = False  # Whether path has been calculated for current route
+        
         if DEBUG_MESSAGING:
             print(MESSAGE_FORMATS['bus'].format(self.bus_id, system_time.get_current_time(), 
-                                               "RL Bus Agent starting setup..."))
+                                               "Bus Agent starting setup..."))
 
         template = Template()
         template.set_metadata("performative", "inform")
@@ -186,20 +182,19 @@ class RLBusAgent(Agent):
                         self.agent.is_initialized = True
                         bus_logger.info(f"Bus {self.agent.bus_id + 1} received initialization confirmation")
                         
-                        behaviour = self.agent.RLBusBehaviour(self.agent.bus_id)
+                        behaviour = self.agent.AStarBehaviour(self.agent.bus_id)
                         self.agent.add_behaviour(behaviour)
-                        bus_logger.info(f"Bus {self.agent.bus_id + 1} initialized and ready for full graph routing")
+                        bus_logger.info(f"Bus {self.agent.bus_id + 1} initialized and ready for A* routing")
                         self.kill() # Stop this behavior after initialization
                 else:
                     await asyncio.sleep(1)
 
-    class RLBusBehaviour(CyclicBehaviour):
+    class AStarBehaviour(CyclicBehaviour):
         def __init__(self, bus_id):
             super().__init__()
             self.bus_id = bus_id
             self.waiting_for_assignment = True
             self.is_active = False
-            self.rl_episode_data = []
 
         async def run(self):
             await self.update_bus_state()
@@ -220,7 +215,7 @@ class RLBusAgent(Agent):
             
             # Only make decisions if we have a different target than current
             if self.agent.target_station_id is not None:
-                await self.make_rl_decision()
+                await self.make_astar_decision()
             else:
                 # No valid target, request new target
                 await self.request_next_target()
@@ -236,11 +231,24 @@ class RLBusAgent(Agent):
             if self.agent.current_graph_node:
                 current_coords = full_graph_manager.get_node_coordinates(self.agent.current_graph_node)
                 current_coords = {'lat': current_coords[0], 'lon': current_coords[1]}
+                
+                # If bus is moving on an edge (has next node in path), interpolate position
+                if hasattr(self.agent, 'astar_path') and self.agent.astar_path and self.agent.astar_path_index < len(self.agent.astar_path) - 1:
+                    current_node = self.agent.astar_path[self.agent.astar_path_index]
+                    next_node = self.agent.astar_path[self.agent.astar_path_index + 1]
+                    
+                    # Calculate progress along the edge (0.5 = middle of edge, can be enhanced with actual distance tracking)
+                    progress_ratio = 0.5  # Default to middle of edge
+                    
+                    # Get interpolated position on the edge
+                    bus_lat, bus_lon = full_graph_manager.get_bus_position_on_edge(current_node, next_node, progress_ratio)
+                    current_coords = {'lat': bus_lat, 'lon': bus_lon}
+                    
             elif current_station:
                 current_coords = {'lat': current_station.lat, 'lon': current_station.lon}
             else:
                 current_coords = {'lat': 0, 'lon': 0}
-            
+                
             target_coords = {'lat': target_station.lat, 'lon': target_station.lon} if target_station else {'lat': 0, 'lon': 0}
             
             # Calculate distance to target
@@ -249,6 +257,11 @@ class RLBusAgent(Agent):
                 lat1, lon1 = current_coords['lat'], current_coords['lon']
                 lat2, lon2 = target_coords['lat'], target_coords['lon']
                 distance_to_next = np.sqrt((lat2 - lat1)**2 + (lon2 - lon1)**2) * 111.32  # Approximate km per degree
+            
+            # Convert A* path to coordinate path for visualization
+            path_coordinates = []
+            if hasattr(self.agent, 'astar_path') and self.agent.astar_path:
+                path_coordinates = full_graph_manager.get_path_coordinates(self.agent.astar_path)
             
             state = {
                 'bus_id': self.bus_id,
@@ -263,9 +276,10 @@ class RLBusAgent(Agent):
                 'destination_lon': target_coords['lon'],
                 'status': "Active" if self.is_active else "Waiting",
                 'timestamp': time.time(),
-                'using_rl': self.agent.using_rl,
                 'direction': self.agent.direction,
-                'path': json.dumps(self.agent.current_path),
+                'path': path_coordinates,  # Use coordinate path instead of JSON string
+                'current_location': current_station.name if current_station else "In Transit",
+                'destination': target_station.name if target_station else "Unknown",
                 'current_city': current_station.name if current_station else None,
                 'next_city': target_station.name if target_station else None,
                 'distance_to_next': distance_to_next,
@@ -280,28 +294,28 @@ class RLBusAgent(Agent):
             """Wait for line assignment from control agent"""
             await asyncio.sleep(1)
 
-        async def make_rl_decision(self):
-            """Make RL-based routing decision on the full graph"""
+        async def make_astar_decision(self):
+            """Make A*-based routing decision on the full graph"""
             if not self.agent.current_graph_node:
                 # Initialize current graph node from current station
                 if self.agent.current_station_id is not None:
                     if full_graph_manager is None:
-                        rl_logger.error(f"Bus {self.bus_id + 1} ERROR: full_graph_manager is None!")
+                        astar_logger.error(f"Bus {self.bus_id + 1} ERROR: full_graph_manager is None!")
                         await self.request_next_target()
                         return
                     
                     station_nodes = full_graph_manager.get_station_nodes(self.agent.current_station_id)
                     if station_nodes:
                         self.agent.current_graph_node = station_nodes[0]
-                        rl_logger.info(f"[INIT] Bus {self.bus_id + 1} initialized at graph node {self.agent.current_graph_node} (Station {self.agent.current_station_id + 1})")
+                        astar_logger.info(f"[INIT] Bus {self.bus_id + 1} initialized at graph node {self.agent.current_graph_node} (Station {self.agent.current_station_id + 1})")
                     else:
                         # Debug: Check if mapping exists
                         all_mappings = full_graph_manager.station_to_nodes
-                        rl_logger.error(f"Bus {self.bus_id + 1} cannot find graph nodes for station {self.agent.current_station_id}. Available mappings: {list(all_mappings.keys())}")
+                        astar_logger.error(f"Bus {self.bus_id + 1} cannot find graph nodes for station {self.agent.current_station_id}. Available mappings: {list(all_mappings.keys())}")
                         await self.request_next_target()
                         return
                 else:
-                    rl_logger.error(f"Bus {self.bus_id + 1} has no current station")
+                    astar_logger.error(f"Bus {self.bus_id + 1} has no current station")
                     await self.request_next_target()
                     return
             
@@ -310,190 +324,188 @@ class RLBusAgent(Agent):
                 await self.handle_station_arrival()
                 return
             
-            # Check for timeout - switch to A* if exceeded
-            if self.agent.rl_decision_count >= self.agent.timeout_threshold:
-                await self.switch_to_direct_route()
-                return
-            
             # Get possible next nodes from current position
             possible_nodes = full_graph_manager.get_possible_next_nodes(self.agent.current_graph_node)
             if not possible_nodes:
-                rl_logger.warning(f"Bus {self.bus_id + 1} has no possible moves from node {self.agent.current_graph_node}")
+                astar_logger.warning(f"Bus {self.bus_id + 1} has no possible moves from node {self.agent.current_graph_node}")
                 await self.request_next_target()
                 return
             
-            # Prepare RL state
-            global_state, action_states = self.prepare_rl_state_full_graph(possible_nodes)
+            # Get next node using A* pathfinding
+            next_node = self.get_astar_next_node(possible_nodes)
             
-            # Get RL decision
-            next_node = None
-            if self.agent.using_rl and len(action_states) > 0:
-                action_idx, action_prob, value_estimate, is_astar_action = rl_agent.get_action(
-                    self.bus_id, global_state, action_states, self.agent.a_star_path_nodes, self.agent.current_graph_node
-                )
-                next_node = possible_nodes[action_idx]
-                
-                # Update last_state for next experience storage
-                self.last_state = {
-                    'global': global_state.copy(),
-                    'action_states': [act.copy() for act in action_states],
-                    'action': action_idx
-                }
-                self.last_action = next_node
-                
-                # Enhanced RL logging with detailed edge and node information
-                edge_id = full_graph_manager.get_edge_id(self.agent.current_graph_node, next_node)
-                target_station_name = bus_lines_manager.get_station(self.agent.target_station_id).name if self.agent.target_station_id else "Unknown"
-                
-                rl_logger.info(f"[RL-STEP] Bus {self.bus_id + 1} | Step {self.agent.steps_taken + 1} | "
-                             f"From: {self.agent.current_graph_node} -> To: {next_node} | "
-                             f"Target: {target_station_name} | Prob: {action_prob:.3f} | Value: {value_estimate:.3f}")
-                
+            if not next_node:
+                # Fallback to shortest distance decision if A* fails
+                target_nodes = full_graph_manager.get_station_nodes(self.agent.target_station_id)
+                if target_nodes:
+                    # Choose the node that's closest to any target node
+                    best_node = None
+                    best_distance = float('inf')
+                    
+                    for node in possible_nodes:
+                        for target_node in target_nodes:
+                            weight = full_graph_manager.get_edge_weight(node, target_node)
+                            if weight < best_distance:
+                                best_distance = weight
+                                best_node = node
+                    
+                    next_node = best_node or possible_nodes[0]
+                    
+                    edge_id = full_graph_manager.get_edge_id(self.agent.current_graph_node, next_node)
+                    astar_logger.info(f"[FALLBACK-STEP] Bus {self.bus_id + 1} | Step {self.agent.steps_taken + 1} | "
+                                     f"From Node: {self.agent.current_graph_node} | To Node: {next_node} | "
+                                     f"Edge ID: {edge_id}")
+                else:
+                    next_node = possible_nodes[0]
             else:
-                # Fallback to shortest path decision if not using RL or no actions
-                next_node = possible_nodes[0] # Simplistic fallback
-                rl_logger.info(f"[FALLBACK-STEP] Bus {self.bus_id + 1} | Step {self.agent.steps_taken + 1} | "
-                                 f"From: {self.agent.current_graph_node} -> To: {next_node}")
+                # Log successful A* decision
+                edge_id = full_graph_manager.get_edge_id(self.agent.current_graph_node, next_node)
+                current_station = full_graph_manager.get_nearest_station_to_node(self.agent.current_graph_node)
+                target_station_name = bus_lines_manager.get_station(self.agent.target_station_id).name if self.agent.target_station_id else "Unknown"
+                edge_distance = full_graph_manager.get_edge_weight(self.agent.current_graph_node, next_node)
+                
+                astar_logger.info(f"[A*-STEP] Bus {self.bus_id + 1} | Route Step {self.agent.route_steps + 1} | "
+                                 f"From Node: {self.agent.current_graph_node} | To Node: {next_node} | "
+                                 f"Edge ID: {edge_id} | Distance: {edge_distance:.1f}m | "
+                                 f"Current Nearest Station: {current_station + 1 if current_station is not None else 'None'} | "
+                                 f"Target Station: {target_station_name}")
             
             # Execute move if valid
             if next_node and next_node != self.agent.current_graph_node:
                 await self.move_to_node(next_node)
-                self.agent.rl_decision_count += 1
                 self.agent.steps_taken += 1
             else:
-                rl_logger.warning(f"Bus {self.bus_id + 1} cannot move - invalid next node: {next_node}")
+                astar_logger.warning(f"Bus {self.bus_id + 1} cannot move - invalid next node: {next_node}")
                 await self.request_next_target()
 
-        def prepare_rl_state_full_graph(self, possible_nodes: List[str]) -> Tuple[np.ndarray, List[np.ndarray]]:
-            """Prepare state representation based on A* path comparison."""
+        def get_astar_next_node(self, possible_nodes: List[str]) -> Optional[str]:
+            """Get the next node from A* path for forced A* following"""
             if not self.agent.current_graph_node or self.agent.target_station_id is None:
-                return np.zeros(2), []
-
-            current_coords = full_graph_manager.get_node_coordinates(self.agent.current_graph_node)
-            target_station = bus_lines_manager.get_station(self.agent.target_station_id)
-            if not target_station:
-                return np.zeros(2), []
-
-            # Global state: [distance_to_dest, angle_to_dest]
-            dist_to_dest = np.linalg.norm(np.array(current_coords) - np.array([target_station.lat, target_station.lon]))
-            angle_to_dest = np.arctan2(target_station.lat - current_coords[0], target_station.lon - current_coords[1])
-            global_state = np.array([dist_to_dest, angle_to_dest])
-
-            # Action states
-            action_states = []
-            for next_node in possible_nodes:
-                next_coords = full_graph_manager.get_node_coordinates(next_node)
+                return None
+            
+            # Calculate A* path only once per route segment
+            if not self.agent.astar_path_calculated:
+                try:
+                    # Get target station nodes
+                    target_nodes = full_graph_manager.get_station_nodes(self.agent.target_station_id)
+                    if not target_nodes:
+                        return None
+                    
+                    # Find the best path from current node to any target station node
+                    best_path = None
+                    best_distance = float('inf')
+                    
+                    for target_node in target_nodes:
+                        try:
+                            # Use NetworkX A* directly from current node to target node
+                            path = nx.astar_path(full_graph_manager.graph, 
+                                               self.agent.current_graph_node, 
+                                               target_node,
+                                               heuristic=full_graph_manager._heuristic, 
+                                               weight='weight')
+                            distance = nx.astar_path_length(full_graph_manager.graph,
+                                                          self.agent.current_graph_node,
+                                                          target_node,
+                                                          heuristic=full_graph_manager._heuristic,
+                                                          weight='weight')
+                            
+                            if distance < best_distance:
+                                best_distance = distance
+                                best_path = path
+                                
+                        except nx.NetworkXNoPath:
+                            continue
+                    
+                    if best_path and len(best_path) >= 2:
+                        self.agent.astar_path = best_path
+                        self.agent.astar_path_index = 0  # Start at current position
+                        self.agent.astar_path_calculated = True
+                        
+                        astar_logger.info(f"[A*-INIT] Bus {self.bus_id + 1} calculated A* path: {len(best_path)} nodes, {best_distance:.1f}m")
+                    else:
+                        astar_logger.warning(f"[A*-INIT] Bus {self.bus_id + 1} failed to calculate A* path")
+                        return None
+                        
+                except Exception as e:
+                    astar_logger.error(f"[A*-INIT] Bus {self.bus_id + 1} A* calculation error: {e}")
+                    return None
+            
+            # If we have a valid A* path, follow it
+            if self.agent.astar_path and self.agent.astar_path_index < len(self.agent.astar_path):
+                # Find current position in A* path
+                current_node = self.agent.current_graph_node
                 
-                # Action state: [node_id, distance_to_dest_from_next, angle_to_dest_from_next]
-                dist = np.linalg.norm(np.array(next_coords) - np.array([target_station.lat, target_station.lon]))
-                angle = np.arctan2(target_station.lat - next_coords[0], target_station.lon - next_coords[1])
+                # Check if current node matches the expected position in A* path
+                if self.agent.astar_path_index < len(self.agent.astar_path) and current_node == self.agent.astar_path[self.agent.astar_path_index]:
+                    # We're on track, get next node
+                    if self.agent.astar_path_index + 1 < len(self.agent.astar_path):
+                        next_astar_node = self.agent.astar_path[self.agent.astar_path_index + 1]
+                        if next_astar_node in possible_nodes:
+                            self.agent.astar_path_index += 1  # Advance index
+                            return next_astar_node
+                else:
+                    # Current node doesn't match expected position, try to find it in the path
+                    for i, path_node in enumerate(self.agent.astar_path):
+                        if path_node == current_node:
+                            self.agent.astar_path_index = i  # Update index to current position
+                            if i + 1 < len(self.agent.astar_path):
+                                next_astar_node = self.agent.astar_path[i + 1]
+                                if next_astar_node in possible_nodes:
+                                    self.agent.astar_path_index += 1  # Advance index
+                                    return next_astar_node
+                            break
                 
-                # We need to pass numerical values to the network.
-                # The node_id is used for logic, not for the network input.
-                # So, we'll store it but prepare a numerical array for the network.
-                action_state_data = (next_node, dist, angle)
-                action_states.append(action_state_data)
-
-            # Prepare numerical action states for the network, excluding the non-numeric node_id
-            numerical_action_states = [np.array([s[1], s[2]]) for s in action_states]
+                # If we can't find exact match, find the closest node in possible_nodes to the next A* target
+                if self.agent.astar_path_index + 1 < len(self.agent.astar_path):
+                    target_node = self.agent.astar_path[self.agent.astar_path_index + 1]
+                    best_node = None
+                    best_distance = float('inf')
+                    
+                    for node in possible_nodes:
+                        try:
+                            dist = full_graph_manager.get_edge_weight(node, target_node)
+                            if dist < best_distance:
+                                best_distance = dist
+                                best_node = node
+                        except:
+                            continue
+                    
+                    if best_node:
+                        return best_node
             
-            # Also pass the node_id in a way that can be used for A* forcing logic
-            # We will pass the full action_states list with node_id to get_action
-            # and then strip it before passing to the network.
-            # For now, let's adjust get_action to handle this.
-            # The action_states passed to the network should be purely numerical.
-            
-            # Let's simplify and assume the network will receive numerical data only.
-            # The logic in get_action will need to handle the mapping.
-            
-            # Let's re-structure action_states to be what the network expects.
-            # The calling function will handle the mapping from index to node_id.
-            
-            # The state will be simpler: just distance and angle.
-            # The action will be choosing a path that minimizes these.
-            
-            # Let's refine the state to be more aligned with A*.
-            # Global state: [current_dist_from_astar_start, dist_to_astar_end]
-            # Action state: [dist_from_astar_start, dist_to_astar_end] for each neighbor
-            
-            astar_start_node = self.agent.a_star_path_nodes[0] if self.agent.a_star_path_nodes else None
-            astar_end_node = self.agent.a_star_path_nodes[-1] if self.agent.a_star_path_nodes else None
-
-            if not astar_start_node or not astar_end_node:
-                return np.zeros(2), []
-
-            start_coords = full_graph_manager.get_node_coordinates(astar_start_node)
-            end_coords = full_graph_manager.get_node_coordinates(astar_end_node)
-
-            current_dist_from_start = np.linalg.norm(np.array(current_coords) - np.array(start_coords))
-            current_dist_to_end = np.linalg.norm(np.array(current_coords) - np.array(end_coords))
-            global_state = np.array([current_dist_from_start, current_dist_to_end])
-
-            action_states_for_nn = []
-            self.agent.temp_possible_nodes = [] # Store nodes corresponding to action states
-            for next_node in possible_nodes:
-                self.agent.temp_possible_nodes.append(next_node)
-                next_coords = full_graph_manager.get_node_coordinates(next_node)
-                dist_from_start = np.linalg.norm(np.array(next_coords) - np.array(start_coords))
-                dist_to_end = np.linalg.norm(np.array(next_coords) - np.array(end_coords))
-                is_on_astar_path = 1.0 if next_node in self.agent.a_star_path_nodes else 0.0
-                action_states_for_nn.append(np.array([dist_from_start, dist_to_end, is_on_astar_path]))
-
-            return global_state, action_states_for_nn
-
-        def calculate_reward_full_graph(self, last_node: str, current_node: str) -> float:
-            """Calculate enhanced reward for the last action taken on full graph"""
-            if not last_node or not current_node:
-                return -1.0
-            
-            # Get edge weight (distance)
-            edge_weight = full_graph_manager.get_edge_weight(last_node, current_node)
-            
-            # Check if we reached target station
-            reached_target = False
-            if self.agent.target_station_id is not None:
-                reached_target = full_graph_manager.is_node_near_station(current_node, self.agent.target_station_id)
-            
-            # Calculate distance to goal for potential-based shaping
-            target_station = bus_lines_manager.get_station(self.agent.target_station_id)
-            prev_distance_to_goal = None
-            new_distance_to_goal = None
-            
-            if target_station:
-                # Previous distance to goal
-                prev_coords = full_graph_manager.get_node_coordinates(last_node)
-                prev_distance_to_goal = np.sqrt((prev_coords[0] - target_station.lat)**2 + 
-                                              (prev_coords[1] - target_station.lon)**2) * 111320  # meters
+            # Fallback: find node that moves toward target station
+            target_nodes = full_graph_manager.get_station_nodes(self.agent.target_station_id)
+            if target_nodes:
+                best_node = None
+                best_distance = float('inf')
                 
-                # New distance to goal
-                new_coords = full_graph_manager.get_node_coordinates(current_node)
-                new_distance_to_goal = np.sqrt((new_coords[0] - target_station.lat)**2 + 
-                                             (new_coords[1] - target_station.lon)**2) * 111320  # meters
+                for node in possible_nodes:
+                    for target_node in target_nodes:
+                        try:
+                            dist = full_graph_manager.get_edge_weight(node, target_node)
+                            if dist < best_distance:
+                                best_distance = dist
+                                best_node = node
+                        except:
+                            continue
+                
+                return best_node
             
-            # Use the enhanced reward calculation from RL agent
-            reward = rl_agent.calculate_enhanced_reward(
-                self.bus_id,
-                last_node,
-                current_node,
-                edge_weight,
-                reached_target,
-                system_time.get_current_time(),
-                prev_distance_to_goal,
-                new_distance_to_goal
-            )
-            
-            return reward
+            return None
 
         async def move_to_node(self, next_node: str):
             """Execute movement to next graph node"""
             if not self.agent.current_graph_node or not next_node:
-                rl_logger.error(f"Bus {self.bus_id + 1} movement failed - invalid nodes: current={self.agent.current_graph_node}, next={next_node}")
+                astar_logger.error(f"Bus {self.bus_id + 1} movement failed - invalid nodes: current={self.agent.current_graph_node}, next={next_node}")
                 return
             
             # Prevent moving to the same node
             if self.agent.current_graph_node == next_node:
-                rl_logger.warning(f"Bus {self.bus_id + 1} attempted to move to same node: {next_node}")
+                astar_logger.warning(f"Bus {self.bus_id + 1} attempted to move to same node: {next_node}")
                 return
+            
+            # Track node visits for current trip
+            self.agent.current_trip_visited_nodes[next_node] = self.agent.current_trip_visited_nodes.get(next_node, 0) + 1
             
             # Get edge weight and calculate travel time
             edge_weight = full_graph_manager.get_edge_weight(self.agent.current_graph_node, next_node)
@@ -522,24 +534,15 @@ class RLBusAgent(Agent):
             travel_time_real_seconds = travel_time_hours * 3600 / system_time.time_multiplier
             
             if incident_type:
-                rl_logger.warning(f"[INCIDENT] Bus {self.bus_id + 1} affected by {incident_type} on Edge {edge_id}")
+                astar_logger.warning(f"[INCIDENT] Bus {self.bus_id + 1} affected by {incident_type} on Edge {edge_id}")
             
-            # Check if this edge is part of the A* optimal path
-            is_astar_edge = rl_agent.is_edge_in_astar_path(self.bus_id, edge_id)
-            astar_indicator = "✓ A*" if is_astar_edge else "✗ Off-path"
+            # Check if node is being revisited
+            visit_count = self.agent.current_trip_visited_nodes.get(next_node, 0)
+            revisit_indicator = f" (Revisit #{visit_count})" if visit_count > 1 else ""
             
-            rl_logger.info(f"[MOVEMENT] Bus {self.bus_id + 1} traveling Edge {edge_id} "
-                         f"Nodes ({self.agent.current_graph_node} -> {next_node}). "
-                         f"Distance: {edge_weight:.1f}m, ETA: {travel_time_hours:.2f}h, {astar_indicator}")
-            
-            # Update RL agent tracking
-            rl_agent.update_route_tracking(
-                self.bus_id,
-                self.agent.current_graph_node,
-                next_node,
-                edge_weight,
-                system_time.get_current_time()
-            )
+            astar_logger.info(f"[MOVEMENT] Bus {self.bus_id + 1} traveling Edge {edge_id} "
+                             f"Nodes ({self.agent.current_graph_node} -> {next_node}). "
+                             f"Distance: {edge_weight:.1f}m, ETA: {travel_time_hours:.2f}h{revisit_indicator}")
             
             # Update path tracking
             self.agent.current_path_nodes.append(self.agent.current_graph_node)
@@ -553,90 +556,47 @@ class RLBusAgent(Agent):
             old_node = self.agent.current_graph_node
             self.agent.current_graph_node = next_node
             
-            rl_logger.info(f"[POSITION-UPDATE] Bus {self.bus_id + 1} moved from Node {old_node} to Node {next_node}")
+            # Enhanced logging with A* path progress
+            if self.agent.astar_path_calculated and self.agent.astar_path:
+                path_progress = f"{self.agent.astar_path_index}/{len(self.agent.astar_path)}"
+                astar_logger.info(f"[POSITION-UPDATE] Bus {self.bus_id + 1} moved from Node {old_node} to Node {next_node} | A* Progress: {path_progress}")
+            else:
+                astar_logger.info(f"[POSITION-UPDATE] Bus {self.bus_id + 1} moved from Node {old_node} to Node {next_node}")
             
-            # Update current station ID if we're near a station
-            nearest_station = full_graph_manager.get_nearest_station_to_node(next_node)
+            # Update nearest station based on new position
+            nearest_station = full_graph_manager.get_nearest_station_to_node(self.agent.current_graph_node)
             if nearest_station is not None:
                 self.agent.current_station_id = nearest_station
-            
-            # Reset RL decision count since we successfully moved
-            self.agent.rl_decision_count = 0
-            
-            # Store experience after move is completed (fixing timing issue)
-            if hasattr(self, 'last_state') and hasattr(self, 'last_action') and self.agent.using_rl:
-                # Calculate reward based on the move that was just completed
-                reward = self.calculate_reward_full_graph(self.last_action, old_node)
-                
-                # Check if reached target
-                done = full_graph_manager.is_node_near_station(self.agent.current_graph_node, self.agent.target_station_id)
-                
-                # Store reward using new interface
-                rl_agent.store_reward(self.bus_id, reward, done)
-                
-                # Clear state tracking when done
-                if done:
-                    if hasattr(self, 'last_state'):
-                        delattr(self, 'last_state')
-                    if hasattr(self, 'last_action'):
-                        delattr(self, 'last_action')
-
-        async def switch_to_direct_route(self):
-            """Switch to A* routing due to timeout"""
-            rl_logger.warning(f"Bus {self.bus_id + 1} switching to A* route due to timeout (decisions: {self.agent.rl_decision_count})")
-            self.agent.using_rl = False
-            
-            # Get A* path to target
-            if self.agent.target_station_id is not None:
-                current_station = full_graph_manager.get_nearest_station_to_node(self.agent.current_graph_node)
-                if current_station is not None:
-                    astar_nodes, astar_edges, distance = full_graph_manager.a_star_path_finding(current_station, self.agent.target_station_id)
-                    if astar_nodes and len(astar_nodes) > 1:
-                        # Take next step from A* path
-                        next_node = astar_nodes[1]  # First node is current
-                        await self.move_to_node(next_node)
-                        rl_logger.info(f"Bus {self.bus_id + 1} A* route: moved to node {next_node}")
-                    else:
-                        await self.request_next_target()
-                else:
-                    await self.request_next_target()
-            else:
-                await self.request_next_target()
 
         async def handle_station_arrival(self):
-            """Handle arrival at target station with enhanced logging and path comparison"""
+            """Handle arrival at target station"""
             target_station = bus_lines_manager.get_station(self.agent.target_station_id)
             
             if target_station:
-                # Complete route tracking in RL agent
-                rl_agent.complete_route_tracking(self.bus_id, system_time.get_current_time())
+                # Increment total routes completed (station to station)
+                self.agent.total_routes_completed += 1
                 
-                # Get final route statistics
-                route_stats = rl_agent.get_route_stats(self.bus_id)
+                # Reset visited nodes for next trip
+                self.agent.current_trip_visited_nodes = {}
                 
-                # Store final experience if using RL
-                if hasattr(self, 'last_state') and self.agent.using_rl:
-                    final_reward = 200.0  # Large reward for completion (increased from 100.0)
-                    rl_agent.store_reward(self.bus_id, final_reward, done=True)
+                # Calculate total route distance
+                total_distance = sum(full_graph_manager.get_edge_weight(
+                    self.agent.current_path_nodes[i] if i < len(self.agent.current_path_nodes) else self.agent.current_graph_node, 
+                    self.agent.current_path_nodes[i+1] if i+1 < len(self.agent.current_path_nodes) else self.agent.current_graph_node
+                ) for i in range(len(self.agent.current_path_nodes) - 1)) if len(self.agent.current_path_nodes) > 1 else 0
                 
-                # Enhanced arrival logging with route comparison
-                rl_steps = route_stats.get('rl_steps', 0)
-                astar_steps = route_stats.get('astar_steps', 0)
-                rl_distance = route_stats.get('rl_distance', 0.0)
-                astar_distance = route_stats.get('astar_distance', 0.0)
-                distance_ratio = route_stats.get('distance_ratio', 0.0)
-                elapsed_time = route_stats.get('elapsed_time', 0.0)
+                astar_logger.info(f"[ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus {self.bus_id + 1} reached {target_station.name} | "
+                                 f"Route {self.agent.total_routes_completed} | Steps: {self.agent.route_steps} | "
+                                 f"Distance: {total_distance:.1f}m | Time: {system_time.get_current_time():.2f}h")
                 
-                efficiency_indicator = "✓ Efficient" if distance_ratio <= 1.5 else "⚠ Inefficient"
+                # Reset path tracking for next route
+                self.agent.current_path_nodes = []
+                self.agent.current_path_edges = []
+                self.agent.route_steps = 0
+                self.agent.astar_path_calculated = False
                 
-                rl_logger.info(f"[ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus {self.bus_id + 1} reached {target_station.name} | "
-                             f"Route Steps: {rl_steps} (A*: {astar_steps}) | "
-                             f"Distance: {rl_distance:.1f}m (A*: {astar_distance:.1f}m) | "
-                             f"Ratio: {distance_ratio:.2f} | "
-                             f"Time: {elapsed_time:.2f}h | {efficiency_indicator}")
-                
-                # Clean up route tracking
-                rl_agent.cleanup_route_tracking(self.bus_id)
+                # Request next target
+                await self.request_next_target()
                 
                 # Handle passenger unloading/loading at station
                 await self.handle_passengers_at_station()
@@ -680,90 +640,6 @@ class RLBusAgent(Agent):
             msg.body = f"NEXT_TARGET:{self.bus_id}:{self.agent.assigned_line_id}:{self.agent.current_station_id}:{self.agent.direction}"
             await self.send(msg)
 
-        def save_path_comparison_plot(self, rl_path_nodes: List[str], a_star_path_nodes: List[str], 
-                                    destination_station_id: int):
-            """Save a plot comparing RL path vs A* path on the full graph"""
-            try:
-                # Create a subgraph for visualization
-                G = nx.Graph()
-                
-                # Add all nodes from both paths
-                all_nodes = set(rl_path_nodes + a_star_path_nodes)
-                node_positions = {}
-                
-                for node in all_nodes:
-                    if node:  # Make sure node is not None
-                        G.add_node(node)
-                        coords = full_graph_manager.get_node_coordinates(node)
-                        node_positions[node] = (coords[1], coords[0])  # lon, lat for plotting
-                
-                # Add edges from the full graph
-                for i in range(len(rl_path_nodes) - 1):
-                    if rl_path_nodes[i] and rl_path_nodes[i+1]:
-                        G.add_edge(rl_path_nodes[i], rl_path_nodes[i+1])
-                
-                for i in range(len(a_star_path_nodes) - 1):
-                    if a_star_path_nodes[i] and a_star_path_nodes[i+1]:
-                        G.add_edge(a_star_path_nodes[i], a_star_path_nodes[i+1])
-                
-                # Create the plot
-                plt.figure(figsize=(12, 8))
-                
-                # Draw all nodes in light gray
-                nx.draw_networkx_nodes(G, node_positions, node_color='lightgray', 
-                                     node_size=100, alpha=0.7)
-                
-                # Draw RL path in blue
-                if len(rl_path_nodes) > 1:
-                    rl_edges = [(rl_path_nodes[i], rl_path_nodes[i+1]) 
-                               for i in range(len(rl_path_nodes)-1) 
-                               if rl_path_nodes[i] and rl_path_nodes[i+1]]
-                    if rl_edges:
-                        nx.draw_networkx_edges(G, node_positions, edgelist=rl_edges,
-                                             edge_color='blue', width=3, alpha=0.8)
-                        nx.draw_networkx_nodes(G, node_positions, nodelist=[n for n in rl_path_nodes if n],
-                                             node_color='blue', node_size=150, alpha=0.9)
-                
-                # Draw A* path in red
-                if len(a_star_path_nodes) > 1:
-                    astar_edges = [(a_star_path_nodes[i], a_star_path_nodes[i+1]) 
-                                  for i in range(len(a_star_path_nodes)-1)
-                                  if a_star_path_nodes[i] and a_star_path_nodes[i+1]]
-                    if astar_edges:
-                        nx.draw_networkx_edges(G, node_positions, edgelist=astar_edges,
-                                             edge_color='red', width=2, alpha=0.6, style='dashed')
-                
-                # Highlight destination station nodes
-                target_station = bus_lines_manager.get_station(destination_station_id)
-                if target_station:
-                    target_nodes = full_graph_manager.get_station_nodes(destination_station_id)
-                    if target_nodes:
-                        nx.draw_networkx_nodes(G, node_positions, 
-                                             nodelist=target_nodes,
-                                             node_color='green', node_size=200, alpha=1.0)
-                
-                # Add legend
-                blue_patch = mpatches.Patch(color='blue', label=f'RL Path ({len(rl_path_nodes)} nodes)')
-                red_patch = mpatches.Patch(color='red', label=f'A* Path ({len(a_star_path_nodes)} nodes)')
-                green_patch = mpatches.Patch(color='green', label='Destination')
-                plt.legend(handles=[blue_patch, red_patch, green_patch])
-                
-                plt.title(f'Bus {self.bus_id + 1} Path Comparison - Full Graph Route to {target_station.name if target_station else "Unknown"}')
-                plt.axis('equal')
-                plt.tight_layout()
-                
-                # Save the plot
-                timestamp = time.strftime("%Y%m%d_%H%M%S")
-                filename = f"data/exports/bus_{self.bus_id+1}_path_comparison_{timestamp}.png"
-                Path("data/exports").mkdir(parents=True, exist_ok=True)
-                plt.savefig(filename, dpi=150, bbox_inches='tight')
-                plt.close()
-                
-                rl_logger.info(f"Bus {self.bus_id + 1} path comparison plot saved: {filename}")
-                
-            except Exception as e:
-                rl_logger.error(f"Error saving path comparison plot: {e}")
-
     class MessageHandler(CyclicBehaviour):
         async def run(self):
             msg = await self.receive(timeout=1)
@@ -781,37 +657,86 @@ class RLBusAgent(Agent):
                 _, assignment_data = msg.body.split(":", 1)
                 assignment = json.loads(assignment_data)
                 
+                # Set assignment data directly on agent
                 self.agent.assigned_line_id = assignment['line_id']
                 self.agent.current_station_id = assignment['start_station_id']
                 self.agent.target_station_id = assignment['target_station_id']
                 self.agent.direction = assignment.get('direction', 'forward')
+                self.agent.passenger_count = assignment.get('passenger_count', random.randint(15, 45))
+                self.agent.trip_start_time = system_time.get_current_time()
                 
-                # Get A* path for the entire route
-                self.agent.a_star_path_nodes, self.agent.a_star_path_edges, astar_distance = full_graph_manager.a_star_path_finding(
-                    self.agent.current_station_id, self.agent.target_station_id
-                )
+                # Reset A* path tracking for new route
+                self.agent.astar_path = []
+                self.agent.astar_path_index = 0
+                self.agent.astar_path_calculated = False
                 
-                # Initialize RL agent for this route
-                rl_agent.start_route_tracking(
-                    self.agent.bus_id,
-                    self.agent.current_station_id,
-                    self.agent.target_station_id,
-                    self.agent.a_star_path_nodes,
-                    self.agent.a_star_path_edges,
-                    astar_distance,
-                    len(self.agent.a_star_path_nodes)
-                )
-                rl_agent.start_episode(self.agent.bus_id)
-
-                # Set bus as active
+                # Calculate timeout threshold
+                line = bus_lines_manager.get_line(self.agent.assigned_line_id)
+                if line:
+                    self.agent.timeout_threshold = len(line.stations) * 10
+                    self.agent.astar_decision_count = 0
+                
+                # Initialize path tracking for this trip
+                self.agent.current_path_nodes = []
+                self.agent.current_trip_start_station = self.agent.current_station_id
+                
+                # Calculate A* path for reference
+                if self.agent.current_station_id is not None and self.agent.target_station_id is not None:
+                    astar_path, astar_edges, astar_distance = full_graph_manager.a_star_path_finding(
+                        self.agent.current_station_id, self.agent.target_station_id
+                    )
+                    
+                    # Enhanced logging at initialization
+                    current_station = bus_lines_manager.get_station(self.agent.current_station_id)
+                    target_station = bus_lines_manager.get_station(self.agent.target_station_id)
+                    
+                    bus_logger.info(f"[ROUTE-INIT] Bus {self.agent.bus_id + 1} | "
+                                  f"From: {current_station.name if current_station else 'Unknown'} -> "
+                                  f"To: {target_station.name if target_station else 'Unknown'} | "
+                                  f"A* Steps: {len(astar_path) - 1 if astar_path else 0} | "
+                                  f"A* Distance: {astar_distance:.1f}m")
+                else:
+                    bus_logger.warning(f"Bus {self.agent.bus_id + 1} assignment missing station IDs")
+                
+                # Reset steps counter for this route segment
+                self.agent.route_steps = 0
+                
+                # Update the Bus Behaviour state
                 for behaviour in self.agent.behaviours:
                     if hasattr(behaviour, 'waiting_for_assignment'):
                         behaviour.waiting_for_assignment = False
                         behaviour.is_active = True
+                        bus_logger.debug(f"Updated behaviour state for bus {self.agent.bus_id}")
                         break
                 
-                bus_logger.info(f"Bus {self.agent.bus_id + 1} assigned to line {self.agent.assigned_line_id}, following A* path logic.")
-
+                # Send acknowledgment
+                ack = Message(to=CONTROL_JID)
+                ack.set_metadata("performative", "confirm")
+                ack.body = f"LINE_ACCEPTED:{self.agent.bus_id}"
+                await self.send(ack)
+                
+                current_station = bus_lines_manager.get_station(self.agent.current_station_id)
+                target_station = bus_lines_manager.get_station(self.agent.target_station_id)
+                
+                bus_logger.info(f"Bus {self.agent.bus_id + 1} assigned to line {self.agent.assigned_line_id}: "
+                              f"{current_station.name if current_station else 'Unknown'} -> "
+                              f"{target_station.name if target_station else 'Unknown'}")
+                              
+                # Debug log the assignment - FORCE INFO LEVEL
+                bus_logger.info(f"[ASSIGNMENT-DEBUG] Bus {self.agent.bus_id + 1} assignment details: line_id={self.agent.assigned_line_id}, current={self.agent.current_station_id + 1 if self.agent.current_station_id is not None else None}, target={self.agent.target_station_id + 1 if self.agent.target_station_id is not None else None}")
+                
+                # Add small delay to ensure assignment persists
+                await asyncio.sleep(0.1)
+                
+                # Verify assignment is still set after delay
+                bus_logger.info(f"[ASSIGNMENT-VERIFY] Bus {self.agent.bus_id} after delay: line_id={self.agent.assigned_line_id}")
+                
+                # Force an immediate state update to reflect the assignment with proper current_city
+                for behaviour in self.agent.behaviours:
+                    if hasattr(behaviour, 'update_bus_state'):
+                        await behaviour.update_bus_state()
+                        break
+                        
             except Exception as e:
                 bus_logger.error(f"Bus {self.agent.bus_id} error processing line assignment: {e}")
 
@@ -824,29 +749,20 @@ class RLBusAgent(Agent):
                 self.agent.target_station_id = target_info['target_station_id']
                 self.agent.direction = target_info.get('direction', self.agent.direction)
                 self.agent.trip_start_time = system_time.get_current_time()
-                self.agent.using_rl = True  # Reset RL for new segment
+                self.agent.using_astar = True  # Reset A* for new segment
                 self.agent.current_path = []
                 self.agent.route_steps = 0  # Reset route steps for new segment
+                
+                # Reset A* path tracking for new route
+                self.agent.astar_path = []
+                self.agent.astar_path_index = 0
+                self.agent.astar_path_calculated = False
                 
                 # Calculate A* path for the new route segment and initialize tracking
                 if self.agent.current_station_id is not None and self.agent.target_station_id is not None:
                     astar_path, astar_edges, astar_distance = full_graph_manager.a_star_path_finding(
                         self.agent.current_station_id, self.agent.target_station_id
                     )
-                    
-                    # Initialize RL agent tracking for this route segment
-                    rl_agent.start_route_tracking(
-                        self.agent.bus_id,
-                        self.agent.current_station_id,
-                        self.agent.target_station_id,
-                        astar_path,
-                        astar_edges,
-                        astar_distance,
-                        len(astar_path) - 1 if astar_path else 0
-                    )
-                    
-                    # Start new episode for this bus route segment
-                    rl_agent.start_episode(self.agent.bus_id)
                     
                     # Enhanced logging for new target assignment
                     current_station = bus_lines_manager.get_station(self.agent.current_station_id)
@@ -1038,7 +954,7 @@ class StationAgent(Agent):
 ############################################################################################################
 
 class ControlAgent(Agent):
-    """Enhanced Control Agent with line-based bus management and RL integration"""
+    """Enhanced Control Agent with line-based bus management and A* routing"""
     
     async def setup(self):
         self.registered_buses = []
@@ -1050,11 +966,11 @@ class ControlAgent(Agent):
         
         # Initialize reserve buses and schedule for each line
         for line_id, line in bus_lines_manager.get_all_lines().items():
-            self.reserve_buses[line_id] = 2  # 5 reserve buses per line
+            self.reserve_buses[line_id] = CONFIG['buses']['reserve_buses_per_line']
             self.bus_schedule_tracker[line_id] = {
                 'buses_launched': 0,
                 'last_launch_time': -1,  # Set to -1 so first bus launches immediately
-                'launch_interval': 20/60  # 20 minutes in hours
+                'launch_interval': CONFIG['buses']['launch_interval_hours']
             }
         
         if DEBUG_MESSAGING:
@@ -1066,9 +982,6 @@ class ControlAgent(Agent):
         self.add_behaviour(self.ControlBehaviour())
         self.add_behaviour(self.LineManagementBehaviour())
         self.add_behaviour(self.IncidentManagementBehaviour())
-        
-        # Start RL training task
-        self.add_behaviour(self.RLTrainingBehaviour())
         
         control_logger.info("Control Agent setup complete")
 
@@ -1269,17 +1182,18 @@ class ControlAgent(Agent):
                 # Check if it's time to launch next bus
                 time_since_last = current_time - schedule_info.get('last_launch_time', 0)
                 buses_launched = schedule_info.get('buses_launched', 0)
-                launch_interval = schedule_info.get('launch_interval', 20/60)
+                launch_interval = schedule_info.get('launch_interval', CONFIG['buses']['launch_interval_hours'])
                 
                 # DEBUG: Log scheduling check
                 available_buses = [b for b in self.agent.registered_buses 
                                  if b not in self.agent.active_assignments]
                 
-                if len(available_buses) > 0 and buses_launched < 3:
+                max_buses = CONFIG['buses']['initial_buses_per_line']
+                if len(available_buses) > 0 and buses_launched < max_buses:
                     control_logger.info(f"DEBUG - Line {line_id}: time_since_last={time_since_last:.3f}h, launch_interval={launch_interval:.3f}h, buses_launched={buses_launched}, available_buses={len(available_buses)}")
                 
-                # Launch up to 3 buses per line with 20-minute intervals
-                if buses_launched < 3 and time_since_last >= launch_interval:
+                # Launch buses per line with configured intervals
+                if buses_launched < max_buses and time_since_last >= launch_interval:
                     if available_buses and len(line.stations) >= 2:
                         bus_id = available_buses[0]
                         
@@ -1423,27 +1337,6 @@ class ControlAgent(Agent):
                 del simulation_state['active_incidents'][edge]
                 control_logger.info(f"Incident on edge {edge} expired")
 
-    class RLTrainingBehaviour(CyclicBehaviour):
-        async def run(self):
-            """Periodically train the RL agent"""
-            await asyncio.sleep(30)  # Train every 30 seconds
-            
-            try:
-                rl_agent.update_policy(batch_size=32, epochs=4)
-                
-                # Save model periodically
-                if random.random() < 0.1:  # 10% chance to save
-                    rl_agent.save_model('data/models/ppo_model.pth')
-                    rl_logger.info("RL model saved")
-                
-                # Update training metrics
-                simulation_state['rl_training_metrics']['training_steps'].append(
-                    system_time.get_current_time()
-                )
-                
-            except Exception as e:
-                rl_logger.error(f"RL training error: {e}")
-
 
 ############################################################################################################
 ############################################################################################################
@@ -1495,7 +1388,7 @@ class IncidentManager:
 
 async def run_simulation(num_buses: int = 15, num_stations: int = 10):
     """Run the main simulation"""
-    control_logger.info("Starting enhanced traffic routing simulation with RL and full graph routing")
+    control_logger.info("Starting enhanced traffic routing simulation with A* and full graph routing")
     
     # Initialize the full graph manager and map stations to graph nodes
     full_graph_manager.map_stations_to_graph_nodes(bus_lines_manager)
@@ -1533,7 +1426,7 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
     # Create and start bus agents
     bus_agents = []
     for i in range(num_buses):
-        bus = RLBusAgent(get_bus_jid(i), "password")
+        bus = BusAgent(get_bus_jid(i), "password")
         try:
             await bus.start(auto_register=True)
             bus_agents.append(bus)
@@ -1568,9 +1461,7 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
         for agent in [control_agent] + station_agents + bus_agents:
             await agent.stop()
         
-        # Save final RL model
-        rl_agent.save_model('data/models/ppo_model_final.pth')
-        control_logger.info("Simulation ended and final model saved")
+        control_logger.info("Simulation ended")
 
 
 ############################################################################################################
@@ -1590,7 +1481,7 @@ def main():
     # Get logger for main
     main_logger = get_logger('MAIN')
     
-    main_logger.info("🚌 Enhanced Traffic Routing System with RL and Line-Based Routing")
+    main_logger.info("🚌 Enhanced Traffic Routing System with A* and Line-Based Routing")
     main_logger.info("=" * 70)
     
     # Check for bus lines

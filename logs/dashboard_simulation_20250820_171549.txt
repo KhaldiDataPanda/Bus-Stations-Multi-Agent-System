@@ -1,0 +1,1533 @@
+[DASHBOARD] - [logging_config] - Logging configured for dashboard simulation
+[DASHBOARD] - [logging_config] - Log file: logs\dashboard_simulation_20250820_171549.txt
+[DASHBOARD] - [MAIN] - 🚌 Enhanced Traffic Routing System with RL and Line-Based Routing
+[DASHBOARD] - [MAIN] - ======================================================================
+[DASHBOARD] - [MAIN] - ✅ Found 1 bus lines
+[DASHBOARD] - [MAIN] - ✅ Found 5 stations
+[DASHBOARD] - [MAIN] -    📍 Line 0: Blida_Line1 (5 stations)
+[DASHBOARD] - [control] - Starting enhanced traffic routing simulation with RL and full graph routing
+[DASHBOARD] - [full_graph_manager] - Mapped station 0 (Blida_Line1_Station_1) to graph nodes: ['1770656774', '3409168780', '432841141']
+[DASHBOARD] - [full_graph_manager] - Mapped station 1 (Blida_Line1_Station_2) to graph nodes: ['3538684944', '502701221', '3458187550']
+[DASHBOARD] - [full_graph_manager] - Mapped station 2 (Blida_Line1_Station_3) to graph nodes: ['433996449', '8451103243', '5121797983']
+[DASHBOARD] - [full_graph_manager] - Mapped station 3 (Blida_Line1_Station_4) to graph nodes: ['3225675471', '3641515811', '3225675465']
+[DASHBOARD] - [full_graph_manager] - Mapped station 4 (Blida_Line1_Station_5) to graph nodes: ['1172438963', '288413524', '11328558894']
+[DASHBOARD] - [control] - Graph initialized: 2662 nodes, 3702 edges, 5 mapped stations, avg degree: 2.78
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: control@laptop-ko0jtu4m/f269d0f1-c04f-427e-9d77-0178d7319ab7
+[DASHBOARD] - [spade.Agent] - Agent control@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - Control Agent setup complete
+[DASHBOARD] - [control] - ✅ Control agent started successfully: control@LAPTOP-KO0JTU4M
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_0@laptop-ko0jtu4m/cc580ed8-d59b-43dc-ac82-6d1bbf12431e
+[DASHBOARD] - [spade.Agent] - Agent station_0@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 1 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 0 started successfully
+[DASHBOARD] - [control] - Registered Station 1
+[DASHBOARD] - [station] - Station 1 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_1@laptop-ko0jtu4m/90aceb27-fc30-4430-aaca-3c81418d832c
+[DASHBOARD] - [spade.Agent] - Agent station_1@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 2 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 1 started successfully
+[DASHBOARD] - [control] - Registered Station 2
+[DASHBOARD] - [station] - Station 2 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_2@laptop-ko0jtu4m/c8809110-d370-4dcd-abe7-6b2d48d9108b
+[DASHBOARD] - [spade.Agent] - Agent station_2@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 3 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 2 started successfully
+[DASHBOARD] - [control] - Registered Station 3
+[DASHBOARD] - [station] - Station 3 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_3@laptop-ko0jtu4m/7d1c4d79-1f32-4009-ba81-1315c92838c4
+[DASHBOARD] - [spade.Agent] - Agent station_3@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 4 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 3 started successfully
+[DASHBOARD] - [control] - Registered Station 4
+[DASHBOARD] - [station] - Station 4 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_4@laptop-ko0jtu4m/28b57701-f87a-48e4-b136-8bd1690efec4
+[DASHBOARD] - [spade.Agent] - Agent station_4@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 5 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 4 started successfully
+[DASHBOARD] - [control] - Registered Station 5
+[DASHBOARD] - [station] - Station 5 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_0@laptop-ko0jtu4m/8d5959f3-66ee-4949-b7b4-bceeb4668db3
+[DASHBOARD] - [spade.Agent] - Agent bus_0@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 0 started successfully
+[DASHBOARD] - [control] - Registered Bus 1
+[DASHBOARD] - [bus] - Bus 1 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 1 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_1@laptop-ko0jtu4m/cf60878c-d8c1-4fdd-b2c9-a1f443a8af91
+[DASHBOARD] - [spade.Agent] - Agent bus_1@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 1 started successfully
+[DASHBOARD] - [control] - Registered Bus 2
+[DASHBOARD] - [bus] - Bus 2 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 2 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_2@laptop-ko0jtu4m/d51773f0-7e7f-49b6-8bf1-c5ee6680453e
+[DASHBOARD] - [spade.Agent] - Agent bus_2@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 2 started successfully
+[DASHBOARD] - [station] - Station 3 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [control] - Registered Bus 3
+[DASHBOARD] - [bus] - Bus 3 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 3 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_3@laptop-ko0jtu4m/f5788e2d-16d5-442a-a169-526697ce69eb
+[DASHBOARD] - [spade.Agent] - Agent bus_3@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 3 started successfully
+[DASHBOARD] - [control] - Registered Bus 4
+[DASHBOARD] - [bus] - Bus 4 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 4 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_4@laptop-ko0jtu4m/afaef03d-a1c2-4471-b189-6bc1afb78046
+[DASHBOARD] - [spade.Agent] - Agent bus_4@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 4 started successfully
+[DASHBOARD] - [control] - Registered Bus 5
+[DASHBOARD] - [bus] - Bus 5 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 5 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_5@laptop-ko0jtu4m/61833d07-f8ec-444c-b415-a6bce5ac8c84
+[DASHBOARD] - [spade.Agent] - Agent bus_5@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 5 started successfully
+[DASHBOARD] - [control] - Registered Bus 6
+[DASHBOARD] - [bus] - Bus 6 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 6 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_6@laptop-ko0jtu4m/aa994b7a-42d4-4efc-a90e-427d560cf0fd
+[DASHBOARD] - [spade.Agent] - Agent bus_6@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 6 started successfully
+[DASHBOARD] - [control] - Registered Bus 7
+[DASHBOARD] - [bus] - Bus 7 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 7 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_7@laptop-ko0jtu4m/b984f6b7-6f1e-4fbd-9d75-45fc75f2405e
+[DASHBOARD] - [spade.Agent] - Agent bus_7@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 7 started successfully
+[DASHBOARD] - [control] - Registered Bus 8
+[DASHBOARD] - [bus] - Bus 8 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 8 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_8@laptop-ko0jtu4m/d6ffbca2-c41a-44fe-bafb-b198bc35be2d
+[DASHBOARD] - [spade.Agent] - Agent bus_8@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 8 started successfully
+[DASHBOARD] - [control] - Registered Bus 9
+[DASHBOARD] - [bus] - Bus 9 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 9 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_9@laptop-ko0jtu4m/7f6746b5-aa28-4c97-89cd-20a64009069d
+[DASHBOARD] - [spade.Agent] - Agent bus_9@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 9 started successfully
+[DASHBOARD] - [control] - Registered Bus 10
+[DASHBOARD] - [bus] - Bus 10 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 10 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_10@laptop-ko0jtu4m/b0a241f1-875f-47c7-accd-1802dd40a6ae
+[DASHBOARD] - [spade.Agent] - Agent bus_10@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 10 started successfully
+[DASHBOARD] - [control] - Registered Bus 11
+[DASHBOARD] - [bus] - Bus 11 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 11 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_11@laptop-ko0jtu4m/9994a6ef-ab98-484a-98b9-1bb0e6a1157d
+[DASHBOARD] - [spade.Agent] - Agent bus_11@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 11 started successfully
+[DASHBOARD] - [control] - Registered Bus 12
+[DASHBOARD] - [bus] - Bus 12 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 12 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [station] - Station 4 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_12@laptop-ko0jtu4m/85cf66f5-f127-4051-a733-7635ae0d82dc
+[DASHBOARD] - [spade.Agent] - Agent bus_12@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 12 started successfully
+[DASHBOARD] - [control] - Registered Bus 13
+[DASHBOARD] - [bus] - Bus 13 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 13 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_13@laptop-ko0jtu4m/997abe88-332d-49c2-a520-6a5db98a5b72
+[DASHBOARD] - [spade.Agent] - Agent bus_13@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 13 started successfully
+[DASHBOARD] - [control] - Registered Bus 14
+[DASHBOARD] - [bus] - Bus 14 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 14 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_14@laptop-ko0jtu4m/b2c0adf1-3414-4a40-8e18-160c9b3974e1
+[DASHBOARD] - [spade.Agent] - Agent bus_14@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 14 started successfully
+[DASHBOARD] - [control] - Simulation started with 15 buses and 5 stations
+[DASHBOARD] - [control] - Registered Bus 15
+[DASHBOARD] - [bus] - Bus 15 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 15 initialized and ready for full graph routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=5.167h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 4 generated 3 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=9.333h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 5 generated 2 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [station] - Station 3 generated 1 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=13.500h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 1 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [station] - Station 5 generated 2 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [station] - Station 4 generated 3 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=17.667h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 1 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=21.833h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 2 generated 2 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=26.000h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 1 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=29.333h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=33.500h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=37.667h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [station] - Station 1 generated 1 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=41.833h, launch_interval=40.000h, buses_launched=0, available_buses=15
+[DASHBOARD] - [control] - Assigned line route to Bus 0: {'line_id': 0, 'start_station_id': 0, 'target_station_id': 1, 'direction': 'forward', 'passenger_count': 17}
+[DASHBOARD] - [control] - Scheduled Bus 1 for line 0 (bus 1/3)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_1 -> To: Blida_Line1_Station_2 | A* Steps: 12 | A* Distance: 1155.8m
+[DASHBOARD] - [bus] - Bus 1 assigned to line 0: Blida_Line1_Station_1 -> Blida_Line1_Station_2
+[DASHBOARD] - [bus] - [ASSIGNMENT-DEBUG] Bus 1 assignment details: line_id=0, current=1, target=2
+[DASHBOARD] - [bus] - [ASSIGNMENT-VERIFY] Bus 0 after delay: line_id=0
+[DASHBOARD] - [rl] - [INIT] Bus 1 initialized at graph node 1770656774 (Station 1)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 432841141
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 1770656774_432841141 Nodes (1770656774 -> 432841141). Distance: 15.3m, ETA: 0.00h, ✗ Off-path
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1770656774 to Node 432841141
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 1703261539_432841141 Nodes (432841141 -> 1703261539). Distance: 97.1m, ETA: 0.00h, ✓ A*
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 432841141 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A*
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #2)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=4.167h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #2)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #3)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #3)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #4)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #4)
+[DASHBOARD] - [rl_agent] - Policy updated - Loss: 64.1378
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=9.167h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [station] - Station 3 generated 2 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [station] - Station 5 generated 1 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #5)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #5)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #6)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #6)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=12.500h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #7)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 1 generated 3 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #7)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #8)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #8)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=16.667h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #9)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #9)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 5 generated 1 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #10)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 1 at step 20
+[DASHBOARD] - [plotting] - Saved network graph for Bus 1 at step 20
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=20.000h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #10)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #11)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #11)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #12)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=23.333h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #12)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #13)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #13)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #14)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=27.500h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #14)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 3 generated 2 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #15)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #15)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl_agent] - Policy updated - Loss: 27028.7793
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=30.833h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #16)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #16)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #17)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 2 generated 2 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #17)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #18)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=35.000h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #18)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #19)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #19)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 2 generated 3 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #20)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 1 at step 40
+[DASHBOARD] - [plotting] - Saved network graph for Bus 1 at step 40
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - Generated incident: light_traffic on Edge(Blida_Line1_Station_1->Blida_Line1_Station_4) [ID: 0->3]
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=39.167h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #20)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #21)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #21)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #22)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=43.333h, launch_interval=40.000h, buses_launched=1, available_buses=14
+[DASHBOARD] - [control] - Assigned line route to Bus 1: {'line_id': 0, 'start_station_id': 0, 'target_station_id': 1, 'direction': 'forward', 'passenger_count': 39}
+[DASHBOARD] - [control] - Scheduled Bus 2 for line 0 (bus 2/3)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_1 -> To: Blida_Line1_Station_2 | A* Steps: 12 | A* Distance: 1155.8m
+[DASHBOARD] - [bus] - Bus 2 assigned to line 0: Blida_Line1_Station_1 -> Blida_Line1_Station_2
+[DASHBOARD] - [bus] - [ASSIGNMENT-DEBUG] Bus 2 assignment details: line_id=0, current=1, target=2
+[DASHBOARD] - [bus] - [ASSIGNMENT-VERIFY] Bus 1 after delay: line_id=0
+[DASHBOARD] - [rl] - [INIT] Bus 2 initialized at graph node 1770656774 (Station 1)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 432841141
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 1770656774_432841141 Nodes (1770656774 -> 432841141). Distance: 15.3m, ETA: 0.00h, ✗ Off-path
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1770656774 to Node 432841141
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #22)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 1703261539_432841141 Nodes (432841141 -> 1703261539). Distance: 97.1m, ETA: 0.00h, ✓ A*
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 432841141 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #23)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A*
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #23)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #2)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #24)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #2)
+[DASHBOARD] - [control] - Status: 15 active buses, 1 active incidents, 1 bus lines
+[DASHBOARD] - [control] - Incident on edge (0, 3) expired
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=3.333h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #24)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #3)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #25)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #3)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #25)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #4)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #26)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 3 generated 3 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #4)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #26)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=7.500h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #5)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #27)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl_agent] - Policy updated - Loss: 40932.9570
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [station] - Station 1 generated 3 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #5)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #27)
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=10.000h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #6)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #28)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #6)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #28)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 4 generated 1 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #7)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #29)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #7)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #29)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=14.167h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #8)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #30)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 1 at step 60
+[DASHBOARD] - [plotting] - Saved network graph for Bus 1 at step 60
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=15.833h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #8)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #30)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #9)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 3 generated 3 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #31)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #9)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #31)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #10)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 2 at step 20
+[DASHBOARD] - [plotting] - Saved network graph for Bus 2 at step 20
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=19.167h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #32)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #10)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #32)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #11)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #33)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 1 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #11)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #33)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #12)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #34)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=22.500h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #12)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #34)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #13)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #35)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #13)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #35)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #14)
+[DASHBOARD] - [station] - Station 2 generated 1 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [station] - Station 5 generated 1 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #36)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=26.667h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #14)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #36)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #15)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #37)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 4 generated 2 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #15)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #37)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl_agent] - Policy updated - Loss: 131632.6562
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [control] - Generated incident: light_traffic on Edge(Blida_Line1_Station_3->Blida_Line1_Station_4) [ID: 2->3]
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #16)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #38)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=30.000h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #16)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #38)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #17)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #39)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #17)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #39)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #18)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #40)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 1 at step 80
+[DASHBOARD] - [plotting] - Saved network graph for Bus 1 at step 80
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=34.167h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #18)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #40)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #19)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #41)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #19)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 1 generated 1 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [station] - Station 5 generated 1 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #41)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #20)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 2 at step 40
+[DASHBOARD] - [plotting] - Saved network graph for Bus 2 at step 40
+[DASHBOARD] - [control] - Status: 15 active buses, 1 active incidents, 1 bus lines
+[DASHBOARD] - [control] - Incident on edge (2, 3) expired
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #42)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=37.500h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #20)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #42)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #21)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #43)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #21)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #43)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #22)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #44)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=41.667h, launch_interval=40.000h, buses_launched=2, available_buses=13
+[DASHBOARD] - [control] - Assigned line route to Bus 2: {'line_id': 0, 'start_station_id': 0, 'target_station_id': 1, 'direction': 'forward', 'passenger_count': 40}
+[DASHBOARD] - [control] - Scheduled Bus 3 for line 0 (bus 3/3)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_1 -> To: Blida_Line1_Station_2 | A* Steps: 12 | A* Distance: 1155.8m
+[DASHBOARD] - [bus] - Bus 3 assigned to line 0: Blida_Line1_Station_1 -> Blida_Line1_Station_2
+[DASHBOARD] - [bus] - [ASSIGNMENT-DEBUG] Bus 3 assignment details: line_id=0, current=1, target=2
+[DASHBOARD] - [bus] - [ASSIGNMENT-VERIFY] Bus 2 after delay: line_id=0
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #22)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #44)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [INIT] Bus 3 initialized at graph node 1770656774 (Station 1)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 432841141
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 1770656774_432841141 Nodes (1770656774 -> 432841141). Distance: 15.3m, ETA: 0.00h, ✗ Off-path
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1770656774 to Node 432841141
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #23)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #45)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 1703261539_432841141 Nodes (432841141 -> 1703261539). Distance: 97.1m, ETA: 0.00h, ✓ A*
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 432841141 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #23)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #45)
+[DASHBOARD] - [station] - Station 4 generated 1 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A*
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #24)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #46)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #2)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #24)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #46)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #2)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #25)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #47)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #3)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #25)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #47)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #3)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #26)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #48)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 1 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #4)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #26)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #48)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #4)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #27)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #49)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #5)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #27)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #49)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #5)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #28)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #50)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 1 at step 100
+[DASHBOARD] - [plotting] - Saved network graph for Bus 1 at step 100
+[DASHBOARD] - [rl_agent] - Policy updated - Loss: 179703.0781
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #28)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #6)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #50)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #29)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #6)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #51)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #29)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #7)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #51)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #30)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #7)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 2 at step 60
+[DASHBOARD] - [plotting] - Saved network graph for Bus 2 at step 60
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #52)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #30)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #8)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #52)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 3 generated 1 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #8)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #31)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #53)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #9)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #31)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #53)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #9)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #32)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #54)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 5 generated 1 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #10)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #32)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #54)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 3 at step 20
+[DASHBOARD] - [plotting] - Saved network graph for Bus 3 at step 20
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #33)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #55)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #10)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [station] - Station 1 generated 2 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #33)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #55)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #11)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #34)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #56)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #11)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #34)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #56)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #12)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #35)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #57)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #12)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #35)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #57)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #13)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #36)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #58)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #13)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #36)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #58)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #14)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #37)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #59)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #14)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #37)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #59)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #15)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #38)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #60)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #15)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 1 at step 120
+[DASHBOARD] - [plotting] - Saved network graph for Bus 1 at step 120
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #38)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #60)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #16)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #39)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #61)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #16)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #39)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #17)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #61)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #40)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 2 at step 80
+[DASHBOARD] - [plotting] - Saved network graph for Bus 2 at step 80
+[DASHBOARD] - [rl_agent] - Policy updated - Loss: 287850.1250
+[DASHBOARD] - [rl] - RL model saved
+[DASHBOARD] - [plotting] - Saved RL metrics plots
+[DASHBOARD] - [plotting] - Saved metrics data as CSV files
+[DASHBOARD] - [rl] - RL metrics plots updated
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #62)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #17)
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #40)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #62)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #41)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #18)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #63)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #41)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #18)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #63)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #42)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #19)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [station] - Station 3 generated 1 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [station] - Station 4 generated 1 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #64)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #42)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #19)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #64)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #43)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #20)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [plotting] - Saved path plot for Bus 3 at step 40
+[DASHBOARD] - [plotting] - Saved network graph for Bus 3 at step 40
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #65)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #43)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #20)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #65)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #44)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #21)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #66)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #44)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [station] - Station 5 generated 3 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #21)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 3409154623
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #66)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 2 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #45)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 3 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #22)
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [rl] - [FORCED-A*] Bus 1 (Route 1/500) forced to A* next node: 1703261539
+[DASHBOARD] - [rl] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (3409154623 -> 1703261539). Distance: 36.4m, ETA: 0.00h, ✓ A* (Revisit #67)
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/ControlBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/LineManagementBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/IncidentManagementBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLTrainingBehaviour with exit code: None
+[DASHBOARD] - [rl] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 1703261539
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [control] - Simulation ended and final model saved
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/ControlBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/RLBusBehaviour with exit code: None
+[DASHBOARD] - [root] - 
+🛑 Simulation stopped by user

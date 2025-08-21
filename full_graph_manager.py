@@ -1,6 +1,6 @@
 """
 Enhanced Graph Manager for Full Road Network Integration
-Handles the full road network from Blida_map.graphml and integrates with RL routing
+Handles the full road network from Blida_map.graphml and integrates with A* routing
 """
 import networkx as nx
 import numpy as np
@@ -201,3 +201,47 @@ class FullGraphManager:
             'mapped_stations': len(self.station_to_nodes),
             'average_node_degree': sum(dict(self.graph.degree()).values()) / self.graph.number_of_nodes() if self.graph.number_of_nodes() > 0 else 0
         }
+    
+    def get_bus_position_on_edge(self, start_node: str, end_node: str, progress_ratio: float = 0.5) -> Tuple[float, float]:
+        """
+        Calculate bus position along an edge based on progress ratio
+        
+        Args:
+            start_node: Starting node of the edge
+            end_node: Ending node of the edge  
+            progress_ratio: Progress along edge (0.0 = start, 1.0 = end, 0.5 = middle)
+        
+        Returns:
+            Tuple of (latitude, longitude) for the bus position
+        """
+        if start_node not in self.node_coordinates or end_node not in self.node_coordinates:
+            # Fallback to start node if coordinates not available
+            return self.get_node_coordinates(start_node)
+        
+        start_lat, start_lon = self.node_coordinates[start_node]
+        end_lat, end_lon = self.node_coordinates[end_node]
+        
+        # Clamp progress ratio between 0 and 1
+        progress_ratio = max(0.0, min(1.0, progress_ratio))
+        
+        # Linear interpolation between start and end coordinates
+        bus_lat = start_lat + (end_lat - start_lat) * progress_ratio
+        bus_lon = start_lon + (end_lon - start_lon) * progress_ratio
+        
+        return bus_lat, bus_lon
+    
+    def get_path_coordinates(self, path_nodes: List[str]) -> List[Tuple[float, float]]:
+        """
+        Convert a list of node IDs to coordinate pairs for path visualization
+        
+        Args:
+            path_nodes: List of node IDs representing the path
+            
+        Returns:
+            List of (lat, lon) tuples for the path
+        """
+        coordinates = []
+        for node_id in path_nodes:
+            if node_id in self.node_coordinates:
+                coordinates.append(self.node_coordinates[node_id])
+        return coordinates

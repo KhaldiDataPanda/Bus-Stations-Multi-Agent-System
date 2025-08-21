@@ -1,5 +1,5 @@
 """
-Enhanced Dashboard for Traffic Routing with RL
+Enhanced Dashboard for Traffic Routing with A*
 Features map-based line creation and real-time visualization
 """
 import streamlit as st
@@ -181,32 +181,83 @@ def create_simulation_map():
             fillColor=color
         ).add_to(m)
     
-    # Add buses with dynamic routing paths only
+    # Define diverse color palette for buses
+    bus_colors = [
+        '#FF0000',  # Red
+        '#00FF00',  # Green  
+        '#0000FF',  # Blue
+        '#FFD700',  # Gold
+        '#FF69B4',  # Hot Pink
+        '#8A2BE2',  # Blue Violet
+        '#00CED1',  # Dark Turquoise
+        '#FF4500',  # Orange Red
+        '#32CD32',  # Lime Green
+        '#FF1493',  # Deep Pink
+        '#00BFFF',  # Deep Sky Blue
+        '#DC143C',  # Crimson
+        '#9932CC',  # Dark Orchid
+        '#FF6347',  # Tomato
+        '#4169E1',  # Royal Blue
+        '#FF8C00',  # Dark Orange
+        '#7FFF00',  # Chartreuse
+        '#DA70D6',  # Orchid
+        '#B22222',  # Fire Brick
+        '#48D1CC'   # Medium Turquoise
+    ]
+    
+    # Add buses with X markers and diverse colors
     if bus_data:
-        for bus in bus_data:
-            # Determine bus icon color based on routing type
-            icon_color = 'green' if bus.get('using_rl', True) else 'blue'
-            routing_type = "RL Agent" if bus.get('using_rl', True) else "A* Algorithm"
+        for i, bus in enumerate(bus_data):
+            # Skip buses with invalid coordinates
+            if bus['lat'] == 0 and bus['lon'] == 0:
+                continue
+                
+            # Assign unique color to each bus
+            bus_color = bus_colors[i % len(bus_colors)]
             
+            # Create custom X marker HTML
+            x_html = f'''
+            <div style="text-align: center; color: {bus_color}; font-size: 20px; font-weight: bold; 
+                        text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white;">
+                ✕
+            </div>
+            '''
+            
+            # Add bus as X marker
             folium.Marker(
                 location=[bus['lat'], bus['lon']],
-                popup=f"Bus {bus['id'] + 1}<br>Passengers: {bus['passenger_count']}<br>Status: {bus['status']}<br>Routing: {routing_type}",
-                icon=folium.Icon(color=icon_color, icon='bus', prefix='fa')
+                popup=f"<b>Bus {bus['id'] + 1}</b><br>"
+                      f"Passengers: {bus['passenger_count']}<br>"
+                      f"Status: {bus['status']}<br>"
+                      f"Current: {bus.get('current_location', 'Unknown')}<br>"
+                      f"Destination: {bus.get('destination', 'Unknown')}<br>"
+                      f"Routing: A* Algorithm",
+                icon=folium.DivIcon(
+                    html=x_html,
+                    icon_size=(20, 20),
+                    icon_anchor=(10, 10)
+                )
             ).add_to(m)
             
-            # Add dynamic routing path if available (only when bus is moving)
+            # Add dynamic routing path with bus color (only current route segment)
             if 'path' in bus and bus['path'] and len(bus['path']) > 1:
-                path_color = 'red' if bus.get('using_rl', True) else 'blue'
-                path_style = '5, 5' if bus.get('using_rl', True) else '10, 5'  # Different dash patterns
+                # Convert path coordinates to proper format if needed
+                path_coords = []
+                for coord in bus['path']:
+                    if isinstance(coord, (list, tuple)) and len(coord) >= 2:
+                        # Handle both [lat, lon] and (lat, lon) formats
+                        lat, lon = coord[0], coord[1]
+                        if lat != 0 or lon != 0:  # Skip invalid coordinates
+                            path_coords.append([lat, lon])
                 
-                folium.PolyLine(
-                    bus['path'],
-                    color=path_color,
-                    weight=3,
-                    opacity=0.8,
-                    dash_array=path_style,
-                    popup=f"Bus {bus['id'] + 1} - {routing_type} Route"
-                ).add_to(m)
+                if len(path_coords) > 1:
+                    folium.PolyLine(
+                        path_coords,
+                        color=bus_color,
+                        weight=4,
+                        opacity=0.8,
+                        popup=f"Bus {bus['id'] + 1} Route"
+                    ).add_to(m)
     
     # Add incidents
     if incident_data:
@@ -551,25 +602,43 @@ def simulation_control_page():
         col1, col2 = st.columns(2)
         with col1:
             st.write("**🚌 Buses:**")
-            st.write("🟢 Green Bus = RL Agent Routing")
-            st.write("🔵 Blue Bus = A* Algorithm Routing")
+            st.write("✕ X Markers = Active buses (each has unique color)")
+            st.write("✕ Color-coded routes show bus paths")
             st.write("")
             st.write("**📍 Stations:**")
             st.write("🔴 Red Circle = Terminal Station")
             st.write("🔵 Blue Circle = Regular Station")
         with col2:
             st.write("**🛤️ Routes:**")
-            st.write("━━━ Red Dashed = RL Agent Path")
-            st.write("━━━ Blue Dashed = A* Algorithm Path")
+            st.write("━━━ Colored Lines = Current bus routes")
+            st.write("(Each bus has its own color)")
             st.write("")
             st.write("**⚠️ Incidents:**")
             st.write("🔴 Red Circle = Traffic Incident")
         
-        st.info("💡 **Note**: Only active routing paths are shown - no static line routes")
+        st.info("💡 **Note**: Each bus appears as a colored X marker with its route highlighted in the same color. Only active routes are shown.")
     
     if st.session_state.simulation_running:
         simulation_map = create_simulation_map()
         st_folium(simulation_map, width=1000, height=600, returned_objects=[])
+        
+        # Debug information for bus tracking
+        bus_data = get_api_data("buses")
+        if bus_data:
+            st.subheader("🐛 Debug: Active Buses")
+            with st.expander("View bus data", expanded=False):
+                for i, bus in enumerate(bus_data):
+                    st.write(f"**Bus {bus['id'] + 1}:**")
+                    st.write(f"- Position: ({bus['lat']:.6f}, {bus['lon']:.6f})")
+                    st.write(f"- Status: {bus['status']}")
+                    st.write(f"- Passengers: {bus['passenger_count']}")
+                    st.write(f"- Current Location: {bus.get('current_location', 'Unknown')}")
+                    st.write(f"- Destination: {bus.get('destination', 'Unknown')}")
+                    if 'path' in bus and bus['path']:
+                        st.write(f"- Path points: {len(bus['path'])}")
+                    st.write("---")
+        else:
+            st.warning("No bus data received from API. Check if the simulation is running and buses are active.")
         
         # Auto refresh every 10 seconds
         time.sleep(10)
@@ -647,77 +716,40 @@ def system_metrics_page():
     time.sleep(20)
     st.rerun()
 
-def rl_metrics_page():
-    """RL Agent performance metrics with 20s refresh"""
-    st.title("🤖 RL Agent Performance")
+def astar_metrics_page():
+    """A* Algorithm performance metrics with 20s refresh"""
+    st.title("🎯 A* Algorithm Performance")
     
-    rl_metrics = get_api_data("rl_metrics")
+    metrics = get_api_data("metrics")
     
-    if rl_metrics:
+    if metrics:
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.metric(
-                "Average Reward",
-                f"{rl_metrics.get('avg_reward', 0):.2f}",
-                delta=f"{rl_metrics.get('reward_delta', 0):.2f}"
+                "Average Steps",
+                f"{metrics.get('avg_steps', 0):.1f}",
+                delta=f"{metrics.get('steps_delta', 0):.1f}"
             )
         
         with col2:
             st.metric(
                 "Success Rate",
-                f"{rl_metrics.get('success_rate', 0):.1f}%",
-                delta=f"{rl_metrics.get('success_delta', 0):.1f}%"
+                f"{metrics.get('success_rate', 100):.1f}%",
+                delta=f"{metrics.get('success_delta', 0):.1f}%"
             )
         
         with col3:
             st.metric(
-                "Training Episodes",
-                rl_metrics.get('total_episodes', 0),
-                delta=rl_metrics.get('episodes_delta', 0)
+                "Total Routes",
+                metrics.get('total_routes', 0),
+                delta=metrics.get('routes_delta', 0)
             )
         
-        # RL performance charts
-        col1, col2 = st.columns(2)
+        st.info("📊 A* algorithm provides optimal pathfinding based on distance, ensuring efficient routing.")
         
-        with col1:
-            if 'reward_history' in rl_metrics:
-                df_rewards = pd.DataFrame(rl_metrics['reward_history'])
-                fig = px.line(df_rewards, x='episode', y='reward',
-                            title='RL Agent Reward Over Episodes')
-                st.plotly_chart(fig, use_container_width=True)
-            else:
-                st.info("Reward history not available")
-        
-        with col2:
-            if 'loss_history' in rl_metrics:
-                df_loss = pd.DataFrame(rl_metrics['loss_history'])
-                fig = px.line(df_loss, x='step', y='loss',
-                            title='Training Loss Over Time')
-                st.plotly_chart(fig, use_container_width=True)
-            else:
-                st.info("Loss history not available")
-        
-        # Additional RL insights
-        st.subheader("RL Agent Insights")
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("Recent Performance")
-            if 'recent_episodes' in rl_metrics:
-                df_recent = pd.DataFrame(rl_metrics['recent_episodes'])
-                st.dataframe(df_recent, use_container_width=True)
-            else:
-                st.info("Recent episode data not available")
-        
-        with col2:
-            st.subheader("Model Statistics")
-            st.write(f"Model Parameters: {rl_metrics.get('model_params', 'N/A')}")
-            st.write(f"Training Steps: {rl_metrics.get('training_steps', 'N/A')}")
-            st.write(f"Exploration Rate: {rl_metrics.get('exploration_rate', 'N/A'):.3f}")
     else:
-        st.warning("No RL metrics available. Make sure the simulation is running.")
+        st.warning("Performance metrics not available")
     
     # Auto refresh after 20 seconds
     time.sleep(20)
@@ -801,7 +833,7 @@ def main():
         
         page = st.radio(
             "Select Page",
-            ["Line Creation", "Simulation Control", "System Metrics", "RL Performance", "Traffic Analysis"],
+            ["Line Creation", "Simulation Control", "System Metrics", "A* Performance", "Traffic Analysis"],
             index=1 if st.session_state.get('simulation_running', False) else 0
         )
         
@@ -827,8 +859,8 @@ def main():
         simulation_control_page()
     elif page == "System Metrics":
         system_metrics_page()
-    elif page == "RL Performance":
-        rl_metrics_page()
+    elif page == "A* Performance":
+        astar_metrics_page()
     elif page == "Traffic Analysis":
         traffic_metrics_page()
 

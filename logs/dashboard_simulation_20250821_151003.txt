@@ -1,0 +1,1044 @@
+[DASHBOARD] - [logging_config] - Logging configured for dashboard simulation
+[DASHBOARD] - [logging_config] - Log file: logs\dashboard_simulation_20250821_151003.txt
+[DASHBOARD] - [MAIN] - 🚌 Enhanced Traffic Routing System with A* and Line-Based Routing
+[DASHBOARD] - [MAIN] - ======================================================================
+[DASHBOARD] - [MAIN] - ✅ Found 1 bus lines
+[DASHBOARD] - [MAIN] - ✅ Found 5 stations
+[DASHBOARD] - [MAIN] -    📍 Line 0: Blida_Line1 (5 stations)
+[DASHBOARD] - [control] - Starting enhanced traffic routing simulation with A* and full graph routing
+[DASHBOARD] - [full_graph_manager] - Mapped station 0 (Blida_Line1_Station_1) to graph nodes: ['1770656774', '3409168780', '432841141']
+[DASHBOARD] - [full_graph_manager] - Mapped station 1 (Blida_Line1_Station_2) to graph nodes: ['3538684944', '502701221', '3458187550']
+[DASHBOARD] - [full_graph_manager] - Mapped station 2 (Blida_Line1_Station_3) to graph nodes: ['433996449', '8451103243', '5121797983']
+[DASHBOARD] - [full_graph_manager] - Mapped station 3 (Blida_Line1_Station_4) to graph nodes: ['3225675471', '3641515811', '3225675465']
+[DASHBOARD] - [full_graph_manager] - Mapped station 4 (Blida_Line1_Station_5) to graph nodes: ['1172438963', '288413524', '11328558894']
+[DASHBOARD] - [control] - Graph initialized: 2662 nodes, 3702 edges, 5 mapped stations, avg degree: 2.78
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: control@laptop-ko0jtu4m/43ea4bd7-c2c4-4e81-a2ee-6f9b2116ffe1
+[DASHBOARD] - [spade.Agent] - Agent control@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - Control Agent setup complete
+[DASHBOARD] - [control] - ✅ Control agent started successfully: control@LAPTOP-KO0JTU4M
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_0@laptop-ko0jtu4m/3cb9276e-26a6-44d5-bb5c-6f3e91afc5a3
+[DASHBOARD] - [spade.Agent] - Agent station_0@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 1 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 0 started successfully
+[DASHBOARD] - [control] - Registered Station 1
+[DASHBOARD] - [station] - Station 1 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_1@laptop-ko0jtu4m/59f57d3f-ba0c-4c99-b7a0-1954b184ad8c
+[DASHBOARD] - [spade.Agent] - Agent station_1@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 2 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 1 started successfully
+[DASHBOARD] - [control] - Registered Station 2
+[DASHBOARD] - [station] - Station 2 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_2@laptop-ko0jtu4m/a6041224-ccaa-4701-870d-9a67115a0ce2
+[DASHBOARD] - [spade.Agent] - Agent station_2@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 3 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 2 started successfully
+[DASHBOARD] - [control] - Registered Station 3
+[DASHBOARD] - [station] - Station 3 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_3@laptop-ko0jtu4m/98a5bb52-d494-4619-896d-d6d69663b041
+[DASHBOARD] - [spade.Agent] - Agent station_3@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 4 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 3 started successfully
+[DASHBOARD] - [control] - Registered Station 4
+[DASHBOARD] - [station] - Station 4 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: station_4@laptop-ko0jtu4m/53f454db-84f4-446b-ab12-746e9956cc86
+[DASHBOARD] - [spade.Agent] - Agent station_4@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [station] - Station 5 setup complete
+[DASHBOARD] - [control] - ✅ Station agent 4 started successfully
+[DASHBOARD] - [control] - Registered Station 5
+[DASHBOARD] - [station] - Station 5 initialized
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationInitBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_0@laptop-ko0jtu4m/57e8a8ed-c1e8-4698-abdd-e5b52ef6b357
+[DASHBOARD] - [spade.Agent] - Agent bus_0@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 0 started successfully
+[DASHBOARD] - [control] - Registered Bus 1
+[DASHBOARD] - [bus] - Bus 1 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 1 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_1@laptop-ko0jtu4m/53afe9ee-e59c-49ee-8f88-cf262b168e20
+[DASHBOARD] - [spade.Agent] - Agent bus_1@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 1 started successfully
+[DASHBOARD] - [control] - Registered Bus 2
+[DASHBOARD] - [bus] - Bus 2 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 2 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_2@laptop-ko0jtu4m/80a179ae-8975-4654-9682-0e81bffa5cd8
+[DASHBOARD] - [spade.Agent] - Agent bus_2@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 2 started successfully
+[DASHBOARD] - [control] - Registered Bus 3
+[DASHBOARD] - [bus] - Bus 3 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 3 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_3@laptop-ko0jtu4m/ef4e709b-ee18-48e3-b659-e23eba7340a3
+[DASHBOARD] - [spade.Agent] - Agent bus_3@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 3 started successfully
+[DASHBOARD] - [control] - Registered Bus 4
+[DASHBOARD] - [bus] - Bus 4 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 4 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_4@laptop-ko0jtu4m/bea4869b-edd1-4b30-acb5-728642d1a413
+[DASHBOARD] - [spade.Agent] - Agent bus_4@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 4 started successfully
+[DASHBOARD] - [control] - Registered Bus 5
+[DASHBOARD] - [bus] - Bus 5 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 5 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_5@laptop-ko0jtu4m/4886cc5c-cf82-426f-aca3-d6f23a74e917
+[DASHBOARD] - [spade.Agent] - Agent bus_5@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 5 started successfully
+[DASHBOARD] - [control] - Registered Bus 6
+[DASHBOARD] - [bus] - Bus 6 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 6 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_6@laptop-ko0jtu4m/32e78d43-e623-41f2-bd66-b3c802e8a3ec
+[DASHBOARD] - [spade.Agent] - Agent bus_6@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 6 started successfully
+[DASHBOARD] - [control] - Registered Bus 7
+[DASHBOARD] - [bus] - Bus 7 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 7 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_7@laptop-ko0jtu4m/b0925ecd-1222-41b1-87bf-9e2d9f1bd341
+[DASHBOARD] - [spade.Agent] - Agent bus_7@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 7 started successfully
+[DASHBOARD] - [control] - Registered Bus 8
+[DASHBOARD] - [bus] - Bus 8 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 8 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_8@laptop-ko0jtu4m/750bce6e-3751-474e-b3dc-0e851df674ab
+[DASHBOARD] - [spade.Agent] - Agent bus_8@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 8 started successfully
+[DASHBOARD] - [control] - Registered Bus 9
+[DASHBOARD] - [bus] - Bus 9 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 9 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_9@laptop-ko0jtu4m/6e11408e-bc2d-4099-ac1d-e500ad4ce86a
+[DASHBOARD] - [spade.Agent] - Agent bus_9@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 9 started successfully
+[DASHBOARD] - [control] - Registered Bus 10
+[DASHBOARD] - [bus] - Bus 10 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 10 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_10@laptop-ko0jtu4m/b526993f-bf4b-418f-965e-34b66af84113
+[DASHBOARD] - [spade.Agent] - Agent bus_10@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 10 started successfully
+[DASHBOARD] - [control] - Registered Bus 11
+[DASHBOARD] - [bus] - Bus 11 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 11 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_11@laptop-ko0jtu4m/159c62e3-2de2-4f44-b6cb-a6e6eaf20ac3
+[DASHBOARD] - [spade.Agent] - Agent bus_11@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 11 started successfully
+[DASHBOARD] - [control] - Registered Bus 12
+[DASHBOARD] - [bus] - Bus 12 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 12 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_12@laptop-ko0jtu4m/d1614a6f-ad25-4fdc-bbf2-4d445d8741b7
+[DASHBOARD] - [spade.Agent] - Agent bus_12@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 12 started successfully
+[DASHBOARD] - [control] - Registered Bus 13
+[DASHBOARD] - [bus] - Bus 13 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 13 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_13@laptop-ko0jtu4m/56f2610d-48df-45bd-a85f-70c4f90c964b
+[DASHBOARD] - [spade.Agent] - Agent bus_13@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 13 started successfully
+[DASHBOARD] - [control] - Registered Bus 14
+[DASHBOARD] - [bus] - Bus 14 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 14 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [slixmpp.features.feature_bind.bind] - JID set to: bus_14@laptop-ko0jtu4m/a4933d76-f563-429f-b942-3c29ae981fbe
+[DASHBOARD] - [spade.Agent] - Agent bus_14@laptop-ko0jtu4m connected and authenticated.
+[DASHBOARD] - [control] - ✅ Bus agent 14 started successfully
+[DASHBOARD] - [control] - Simulation started with 15 buses and 5 stations
+[DASHBOARD] - [control] - Registered Bus 15
+[DASHBOARD] - [bus] - Bus 15 received initialization confirmation
+[DASHBOARD] - [bus] - Bus 15 initialized and ready for A* routing
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/InitBehavior with exit code: None
+[DASHBOARD] - [station] - Station 3 generated 1 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [station] - Station 5 generated 3 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=5.167h, launch_interval=0.500h, buses_launched=0, available_buses=15
+[DASHBOARD] - [control] - Assigned line route to Bus 0: {'line_id': 0, 'start_station_id': 0, 'target_station_id': 1, 'direction': 'forward', 'passenger_count': 39}
+[DASHBOARD] - [control] - Scheduled Bus 1 for line 0 (bus 1/3)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_1 -> To: Blida_Line1_Station_2 | A* Steps: 12 | A* Distance: 1155.8m
+[DASHBOARD] - [bus] - Bus 1 assigned to line 0: Blida_Line1_Station_1 -> Blida_Line1_Station_2
+[DASHBOARD] - [bus] - [ASSIGNMENT-DEBUG] Bus 1 assignment details: line_id=0, current=1, target=2
+[DASHBOARD] - [bus] - [ASSIGNMENT-VERIFY] Bus 0 after delay: line_id=0
+[DASHBOARD] - [astar] - [INIT] Bus 1 initialized at graph node 1770656774 (Station 1)
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 14 nodes, 1171.1m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 1770656774 | To Node: 432841141 | Edge ID: 1770656774_432841141 | Distance: 15.3m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1770656774_432841141 Nodes (1770656774 -> 432841141). Distance: 15.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1770656774 to Node 432841141 | A* Progress: 1/14
+[DASHBOARD] - [station] - Station 2 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 2 | From Node: 432841141 | To Node: 1703261539 | Edge ID: 1703261539_432841141 | Distance: 97.1m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1703261539_432841141 Nodes (432841141 -> 1703261539). Distance: 97.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 432841141 to Node 1703261539 | A* Progress: 2/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 3 | From Node: 1703261539 | To Node: 3409154623 | Edge ID: 3409154623_1703261539 | Distance: 36.4m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1703261539 to Node 3409154623 | A* Progress: 3/14
+[DASHBOARD] - [station] - Station 1 generated 1 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 4 | From Node: 3409154623 | To Node: 3216512268 | Edge ID: 3409154623_3216512268 | Distance: 130.2m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3409154623_3216512268 Nodes (3409154623 -> 3216512268). Distance: 130.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3409154623 to Node 3216512268 | A* Progress: 4/14
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=3.333h, launch_interval=0.500h, buses_launched=1, available_buses=14
+[DASHBOARD] - [control] - Assigned line route to Bus 1: {'line_id': 0, 'start_station_id': 0, 'target_station_id': 1, 'direction': 'forward', 'passenger_count': 30}
+[DASHBOARD] - [control] - Scheduled Bus 2 for line 0 (bus 2/3)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_1 -> To: Blida_Line1_Station_2 | A* Steps: 12 | A* Distance: 1155.8m
+[DASHBOARD] - [bus] - Bus 2 assigned to line 0: Blida_Line1_Station_1 -> Blida_Line1_Station_2
+[DASHBOARD] - [bus] - [ASSIGNMENT-DEBUG] Bus 2 assignment details: line_id=0, current=1, target=2
+[DASHBOARD] - [bus] - [ASSIGNMENT-VERIFY] Bus 1 after delay: line_id=0
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 5 | From Node: 3216512268 | To Node: 4231085216 | Edge ID: 4231085216_3216512268 | Distance: 112.6m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 4231085216_3216512268 Nodes (3216512268 -> 4231085216). Distance: 112.6m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3216512268 to Node 4231085216 | A* Progress: 5/14
+[DASHBOARD] - [astar] - [INIT] Bus 2 initialized at graph node 1770656774 (Station 1)
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 14 nodes, 1171.1m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 1770656774 | To Node: 432841141 | Edge ID: 1770656774_432841141 | Distance: 15.3m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1770656774_432841141 Nodes (1770656774 -> 432841141). Distance: 15.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1770656774 to Node 432841141 | A* Progress: 1/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 6 | From Node: 4231085216 | To Node: 4231085211 | Edge ID: 4231085216_4231085211 | Distance: 354.5m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 4231085216_4231085211 Nodes (4231085216 -> 4231085211). Distance: 354.5m, ETA: 0.01h
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 2 | From Node: 432841141 | To Node: 1703261539 | Edge ID: 1703261539_432841141 | Distance: 97.1m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1703261539_432841141 Nodes (432841141 -> 1703261539). Distance: 97.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 4231085216 to Node 4231085211 | A* Progress: 6/14
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 432841141 to Node 1703261539 | A* Progress: 2/14
+[DASHBOARD] - [station] - Station 5 generated 2 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 7 | From Node: 4231085211 | To Node: 893455470 | Edge ID: 4231085211_893455470 | Distance: 56.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 4231085211_893455470 Nodes (4231085211 -> 893455470). Distance: 56.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 3 | From Node: 1703261539 | To Node: 3409154623 | Edge ID: 3409154623_1703261539 | Distance: 36.4m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 4231085211 to Node 893455470 | A* Progress: 7/14
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1703261539 to Node 3409154623 | A* Progress: 3/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 8 | From Node: 893455470 | To Node: 1450611468 | Edge ID: 1450611468_893455470 | Distance: 41.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1450611468_893455470 Nodes (893455470 -> 1450611468). Distance: 41.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 4 | From Node: 3409154623 | To Node: 3216512268 | Edge ID: 3409154623_3216512268 | Distance: 130.2m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3409154623_3216512268 Nodes (3409154623 -> 3216512268). Distance: 130.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 893455470 to Node 1450611468 | A* Progress: 8/14
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3409154623 to Node 3216512268 | A* Progress: 4/14
+[DASHBOARD] - [control] - DEBUG - Line 0: time_since_last=4.167h, launch_interval=0.500h, buses_launched=2, available_buses=13
+[DASHBOARD] - [control] - Assigned line route to Bus 2: {'line_id': 0, 'start_station_id': 0, 'target_station_id': 1, 'direction': 'forward', 'passenger_count': 28}
+[DASHBOARD] - [control] - Scheduled Bus 3 for line 0 (bus 3/3)
+[DASHBOARD] - [full_graph_manager] - A* path from station 0 to 1: 13 nodes, distance: 1155.80m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_1 -> To: Blida_Line1_Station_2 | A* Steps: 12 | A* Distance: 1155.8m
+[DASHBOARD] - [bus] - Bus 3 assigned to line 0: Blida_Line1_Station_1 -> Blida_Line1_Station_2
+[DASHBOARD] - [bus] - [ASSIGNMENT-DEBUG] Bus 3 assignment details: line_id=0, current=1, target=2
+[DASHBOARD] - [bus] - [ASSIGNMENT-VERIFY] Bus 2 after delay: line_id=0
+[DASHBOARD] - [astar] - [INIT] Bus 3 initialized at graph node 1770656774 (Station 1)
+[DASHBOARD] - [astar] - [A*-INIT] Bus 3 calculated A* path: 14 nodes, 1171.1m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 1 | From Node: 1770656774 | To Node: 432841141 | Edge ID: 1770656774_432841141 | Distance: 15.3m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1770656774_432841141 Nodes (1770656774 -> 432841141). Distance: 15.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1770656774 to Node 432841141 | A* Progress: 1/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 9 | From Node: 1450611468 | To Node: 1504869214 | Edge ID: 1504869214_1450611468 | Distance: 63.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1504869214_1450611468 Nodes (1450611468 -> 1504869214). Distance: 63.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 5 | From Node: 3216512268 | To Node: 4231085216 | Edge ID: 4231085216_3216512268 | Distance: 112.6m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 4231085216_3216512268 Nodes (3216512268 -> 4231085216). Distance: 112.6m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1450611468 to Node 1504869214 | A* Progress: 9/14
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3216512268 to Node 4231085216 | A* Progress: 5/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 2 | From Node: 432841141 | To Node: 1703261539 | Edge ID: 1703261539_432841141 | Distance: 97.1m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1703261539_432841141 Nodes (432841141 -> 1703261539). Distance: 97.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 432841141 to Node 1703261539 | A* Progress: 2/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 10 | From Node: 1504869214 | To Node: 1504869227 | Edge ID: 1504869227_1504869214 | Distance: 58.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1504869227_1504869214 Nodes (1504869214 -> 1504869227). Distance: 58.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1504869214 to Node 1504869227 | A* Progress: 10/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 6 | From Node: 4231085216 | To Node: 4231085211 | Edge ID: 4231085216_4231085211 | Distance: 354.5m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 4231085216_4231085211 Nodes (4231085216 -> 4231085211). Distance: 354.5m, ETA: 0.01h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 4231085216 to Node 4231085211 | A* Progress: 6/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 3 | From Node: 1703261539 | To Node: 3409154623 | Edge ID: 3409154623_1703261539 | Distance: 36.4m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3409154623_1703261539 Nodes (1703261539 -> 3409154623). Distance: 36.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1703261539 to Node 3409154623 | A* Progress: 3/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 11 | From Node: 1504869227 | To Node: 893455457 | Edge ID: 1504869227_893455457 | Distance: 62.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1504869227_893455457 Nodes (1504869227 -> 893455457). Distance: 62.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1504869227 to Node 893455457 | A* Progress: 11/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 7 | From Node: 4231085211 | To Node: 893455470 | Edge ID: 4231085211_893455470 | Distance: 56.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 4231085211_893455470 Nodes (4231085211 -> 893455470). Distance: 56.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 4231085211 to Node 893455470 | A* Progress: 7/14
+[DASHBOARD] - [station] - Station 4 generated 2 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 4 | From Node: 3409154623 | To Node: 3216512268 | Edge ID: 3409154623_3216512268 | Distance: 130.2m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3409154623_3216512268 Nodes (3409154623 -> 3216512268). Distance: 130.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3409154623 to Node 3216512268 | A* Progress: 4/14
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 1 reached Blida_Line1_Station_2 | Route 1 | Steps: 11 | Distance: 966.1m | Time: 15.00h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 1 at Blida_Line1_Station_2: unloaded 1, loaded 2 passengers (total: 40)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 1 requesting next target from station 2 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 0: current_index=1, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 1 moving forward to station 3
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 1: next_target_id=3, current_station_id=2
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 1: Station 3 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 1 requesting next target from station 2 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 0: current_index=1, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 1 moving forward to station 3
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 1: next_target_id=3, current_station_id=2
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 1: Station 3 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 1 to 2: 6 nodes, distance: 650.07m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_2 -> To: Blida_Line1_Station_3 | A* Steps: 5 | A* Distance: 650.1m
+[DASHBOARD] - [bus] - Bus 1 received next target: Station 3
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 8 nodes, 792.9m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 893455457 | To Node: 433996435 | Edge ID: 893455457_433996435 | Distance: 89.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 893455457_433996435 Nodes (893455457 -> 433996435). Distance: 89.0m, ETA: 0.00h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 1 state updated: current=2, target=3
+[DASHBOARD] - [full_graph_manager] - A* path from station 1 to 2: 6 nodes, distance: 650.07m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_2 -> To: Blida_Line1_Station_3 | A* Steps: 5 | A* Distance: 650.1m
+[DASHBOARD] - [bus] - Bus 1 received next target: Station 3
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 1 state updated: current=2, target=3
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 893455457 to Node 433996435
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 8 | From Node: 893455470 | To Node: 1450611468 | Edge ID: 1450611468_893455470 | Distance: 41.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1450611468_893455470 Nodes (893455470 -> 1450611468). Distance: 41.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 893455470 to Node 1450611468 | A* Progress: 8/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 5 | From Node: 3216512268 | To Node: 4231085216 | Edge ID: 4231085216_3216512268 | Distance: 112.6m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 4231085216_3216512268 Nodes (3216512268 -> 4231085216). Distance: 112.6m, ETA: 0.00h
+[DASHBOARD] - [control] - Generated incident: light_traffic on Edge(Blida_Line1_Station_3->Blida_Line1_Station_2) [ID: 2->1]
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3216512268 to Node 4231085216 | A* Progress: 5/14
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 7 nodes, 703.9m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 433996435 | To Node: 502701221 | Edge ID: 502701221_433996435 | Distance: 53.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701221_433996435 Nodes (433996435 -> 502701221). Distance: 53.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 433996435 to Node 502701221 | A* Progress: 1/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 9 | From Node: 1450611468 | To Node: 1504869214 | Edge ID: 1504869214_1450611468 | Distance: 63.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1504869214_1450611468 Nodes (1450611468 -> 1504869214). Distance: 63.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1450611468 to Node 1504869214 | A* Progress: 9/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 6 | From Node: 4231085216 | To Node: 4231085211 | Edge ID: 4231085216_4231085211 | Distance: 354.5m | Current Nearest Station: 1 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 4231085216_4231085211 Nodes (4231085216 -> 4231085211). Distance: 354.5m, ETA: 0.01h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 2 | From Node: 502701221 | To Node: 1725063402 | Edge ID: 1725063402_502701221 | Distance: 22.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1725063402_502701221 Nodes (502701221 -> 1725063402). Distance: 22.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701221 to Node 1725063402 | A* Progress: 2/7
+[DASHBOARD] - [station] - Station 4 generated 1 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 4231085216 to Node 4231085211 | A* Progress: 6/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 10 | From Node: 1504869214 | To Node: 1504869227 | Edge ID: 1504869227_1504869214 | Distance: 58.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1504869227_1504869214 Nodes (1504869214 -> 1504869227). Distance: 58.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1504869214 to Node 1504869227 | A* Progress: 10/14
+[DASHBOARD] - [control] - Status: 15 active buses, 1 active incidents, 1 bus lines
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 3 | From Node: 1725063402 | To Node: 502701274 | Edge ID: 1725063402_502701274 | Distance: 96.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1725063402_502701274 Nodes (1725063402 -> 502701274). Distance: 96.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 7 | From Node: 4231085211 | To Node: 893455470 | Edge ID: 4231085211_893455470 | Distance: 56.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 4231085211_893455470 Nodes (4231085211 -> 893455470). Distance: 56.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1725063402 to Node 502701274 | A* Progress: 3/7
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 4231085211 to Node 893455470 | A* Progress: 7/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 11 | From Node: 1504869227 | To Node: 893455457 | Edge ID: 1504869227_893455457 | Distance: 62.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1504869227_893455457 Nodes (1504869227 -> 893455457). Distance: 62.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1504869227 to Node 893455457 | A* Progress: 11/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 4 | From Node: 502701274 | To Node: 502701211 | Edge ID: 502701274_502701211 | Distance: 118.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701274_502701211 Nodes (502701274 -> 502701211). Distance: 118.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 8 | From Node: 893455470 | To Node: 1450611468 | Edge ID: 1450611468_893455470 | Distance: 41.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1450611468_893455470 Nodes (893455470 -> 1450611468). Distance: 41.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701274 to Node 502701211 | A* Progress: 4/7
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 893455470 to Node 1450611468 | A* Progress: 8/14
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 2 reached Blida_Line1_Station_2 | Route 1 | Steps: 11 | Distance: 966.1m | Time: 20.00h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 2 at Blida_Line1_Station_2: unloaded 9, loaded 12 passengers (total: 33)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 2 requesting next target from station 2 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 1: current_index=1, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 2 moving forward to station 3
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 2: next_target_id=3, current_station_id=2
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 2: Station 3 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 2 requesting next target from station 2 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 1: current_index=1, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 2 moving forward to station 3
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 2: next_target_id=3, current_station_id=2
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 2: Station 3 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 1 to 2: 6 nodes, distance: 650.07m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_2 -> To: Blida_Line1_Station_3 | A* Steps: 5 | A* Distance: 650.1m
+[DASHBOARD] - [bus] - Bus 2 received next target: Station 3
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 8 nodes, 792.9m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 893455457 | To Node: 433996435 | Edge ID: 893455457_433996435 | Distance: 89.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 893455457_433996435 Nodes (893455457 -> 433996435). Distance: 89.0m, ETA: 0.00h
+[DASHBOARD] - [station] - Station 1 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 2 state updated: current=2, target=3
+[DASHBOARD] - [full_graph_manager] - A* path from station 1 to 2: 6 nodes, distance: 650.07m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_2 -> To: Blida_Line1_Station_3 | A* Steps: 5 | A* Distance: 650.1m
+[DASHBOARD] - [bus] - Bus 2 received next target: Station 3
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 2 state updated: current=2, target=3
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 893455457 to Node 433996435
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 5 | From Node: 502701211 | To Node: 502701238 | Edge ID: 502701238_502701211 | Distance: 33.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701238_502701211 Nodes (502701211 -> 502701238). Distance: 33.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 9 | From Node: 1450611468 | To Node: 1504869214 | Edge ID: 1504869214_1450611468 | Distance: 63.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1504869214_1450611468 Nodes (1450611468 -> 1504869214). Distance: 63.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701211 to Node 502701238 | A* Progress: 5/7
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1450611468 to Node 1504869214 | A* Progress: 9/14
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 7 nodes, 703.9m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 433996435 | To Node: 502701221 | Edge ID: 502701221_433996435 | Distance: 53.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701221_433996435 Nodes (433996435 -> 502701221). Distance: 53.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 433996435 to Node 502701221 | A* Progress: 1/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 6 | From Node: 502701238 | To Node: 433996449 | Edge ID: 502701238_433996449 | Distance: 379.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701238_433996449 Nodes (502701238 -> 433996449). Distance: 379.4m, ETA: 0.01h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 10 | From Node: 1504869214 | To Node: 1504869227 | Edge ID: 1504869227_1504869214 | Distance: 58.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1504869227_1504869214 Nodes (1504869214 -> 1504869227). Distance: 58.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1504869214 to Node 1504869227 | A* Progress: 10/14
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 2 | From Node: 502701221 | To Node: 1725063402 | Edge ID: 1725063402_502701221 | Distance: 22.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1725063402_502701221 Nodes (502701221 -> 1725063402). Distance: 22.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701238 to Node 433996449 | A* Progress: 6/7
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701221 to Node 1725063402 | A* Progress: 2/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 11 | From Node: 1504869227 | To Node: 893455457 | Edge ID: 1504869227_893455457 | Distance: 62.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1504869227_893455457 Nodes (1504869227 -> 893455457). Distance: 62.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1504869227 to Node 893455457 | A* Progress: 11/14
+[DASHBOARD] - [station] - Station 2 generated 1 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [station] - Station 3 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 3 | From Node: 1725063402 | To Node: 502701274 | Edge ID: 1725063402_502701274 | Distance: 96.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1725063402_502701274 Nodes (1725063402 -> 502701274). Distance: 96.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 1 reached Blida_Line1_Station_3 | Route 2 | Steps: 6 | Distance: 413.5m | Time: 22.50h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 1 at Blida_Line1_Station_3: unloaded 2, loaded 9 passengers (total: 47)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 1 requesting next target from station 3 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 0: current_index=2, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 1 moving forward to station 4
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 1: next_target_id=4, current_station_id=3
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 1: Station 4 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 1 requesting next target from station 3 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 0: current_index=2, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 1 moving forward to station 4
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 1: next_target_id=4, current_station_id=3
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 1: Station 4 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 2 to 3: 38 nodes, distance: 2796.26m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_3 -> To: Blida_Line1_Station_4 | A* Steps: 37 | A* Distance: 2796.3m
+[DASHBOARD] - [bus] - Bus 1 received next target: Station 4
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 38 nodes, 2796.3m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 433996449 | To Node: 502701238 | Edge ID: 502701238_433996449 | Distance: 379.4m | Current Nearest Station: 3 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701238_433996449 Nodes (433996449 -> 502701238). Distance: 379.4m, ETA: 0.01h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 1 state updated: current=3, target=4
+[DASHBOARD] - [full_graph_manager] - A* path from station 2 to 3: 38 nodes, distance: 2796.26m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_3 -> To: Blida_Line1_Station_4 | A* Steps: 37 | A* Distance: 2796.3m
+[DASHBOARD] - [bus] - Bus 1 received next target: Station 4
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1725063402 to Node 502701274 | A* Progress: 3/7
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 1 state updated: current=3, target=4
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 433996449 to Node 502701238
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 3 reached Blida_Line1_Station_2 | Route 1 | Steps: 11 | Distance: 966.1m | Time: 23.33h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 3 at Blida_Line1_Station_2: unloaded 5, loaded 13 passengers (total: 36)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 3 requesting next target from station 2 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 2: current_index=1, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 3 moving forward to station 3
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 3: next_target_id=3, current_station_id=2
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 3: Station 3 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 3 requesting next target from station 2 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 2: current_index=1, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 3 moving forward to station 3
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 3: next_target_id=3, current_station_id=2
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 3: Station 3 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 1 to 2: 6 nodes, distance: 650.07m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_2 -> To: Blida_Line1_Station_3 | A* Steps: 5 | A* Distance: 650.1m
+[DASHBOARD] - [bus] - Bus 3 received next target: Station 3
+[DASHBOARD] - [astar] - [A*-INIT] Bus 3 calculated A* path: 8 nodes, 792.9m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 1 | From Node: 893455457 | To Node: 433996435 | Edge ID: 893455457_433996435 | Distance: 89.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 893455457_433996435 Nodes (893455457 -> 433996435). Distance: 89.0m, ETA: 0.00h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 3 state updated: current=2, target=3
+[DASHBOARD] - [full_graph_manager] - A* path from station 1 to 2: 6 nodes, distance: 650.07m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_2 -> To: Blida_Line1_Station_3 | A* Steps: 5 | A* Distance: 650.1m
+[DASHBOARD] - [bus] - Bus 3 received next target: Station 3
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 3 state updated: current=2, target=3
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 893455457 to Node 433996435
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 4 | From Node: 502701274 | To Node: 502701211 | Edge ID: 502701274_502701211 | Distance: 118.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701274_502701211 Nodes (502701274 -> 502701211). Distance: 118.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701274 to Node 502701211 | A* Progress: 4/7
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 37 nodes, 2416.8m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 502701238 | To Node: 502701211 | Edge ID: 502701238_502701211 | Distance: 33.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701238_502701211 Nodes (502701238 -> 502701211). Distance: 33.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701238 to Node 502701211 | A* Progress: 1/37
+[DASHBOARD] - [astar] - [A*-INIT] Bus 3 calculated A* path: 7 nodes, 703.9m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 1 | From Node: 433996435 | To Node: 502701221 | Edge ID: 502701221_433996435 | Distance: 53.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701221_433996435 Nodes (433996435 -> 502701221). Distance: 53.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 433996435 to Node 502701221 | A* Progress: 1/7
+[DASHBOARD] - [control] - Incident on edge (2, 1) expired
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 5 | From Node: 502701211 | To Node: 502701238 | Edge ID: 502701238_502701211 | Distance: 33.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701238_502701211 Nodes (502701211 -> 502701238). Distance: 33.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701211 to Node 502701238 | A* Progress: 5/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 2 | From Node: 502701211 | To Node: 502701274 | Edge ID: 502701274_502701211 | Distance: 118.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701274_502701211 Nodes (502701211 -> 502701274). Distance: 118.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 2 | From Node: 502701221 | To Node: 1725063402 | Edge ID: 1725063402_502701221 | Distance: 22.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1725063402_502701221 Nodes (502701221 -> 1725063402). Distance: 22.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701211 to Node 502701274 | A* Progress: 2/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701221 to Node 1725063402 | A* Progress: 2/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 6 | From Node: 502701238 | To Node: 433996449 | Edge ID: 502701238_433996449 | Distance: 379.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701238_433996449 Nodes (502701238 -> 433996449). Distance: 379.4m, ETA: 0.01h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701238 to Node 433996449 | A* Progress: 6/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 3 | From Node: 502701274 | To Node: 1725063402 | Edge ID: 1725063402_502701274 | Distance: 96.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1725063402_502701274 Nodes (502701274 -> 1725063402). Distance: 96.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 3 | From Node: 1725063402 | To Node: 502701274 | Edge ID: 1725063402_502701274 | Distance: 96.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1725063402_502701274 Nodes (1725063402 -> 502701274). Distance: 96.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701274 to Node 1725063402 | A* Progress: 3/37
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1725063402 to Node 502701274 | A* Progress: 3/7
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 2 reached Blida_Line1_Station_3 | Route 2 | Steps: 6 | Distance: 413.5m | Time: 26.67h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 2 at Blida_Line1_Station_3: unloaded 8, loaded 1 passengers (total: 26)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 2 requesting next target from station 3 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 1: current_index=2, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 2 moving forward to station 4
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 2: next_target_id=4, current_station_id=3
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 2: Station 4 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 2 requesting next target from station 3 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 1: current_index=2, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 2 moving forward to station 4
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 2: next_target_id=4, current_station_id=3
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 2: Station 4 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 2 to 3: 38 nodes, distance: 2796.26m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_3 -> To: Blida_Line1_Station_4 | A* Steps: 37 | A* Distance: 2796.3m
+[DASHBOARD] - [bus] - Bus 2 received next target: Station 4
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 38 nodes, 2796.3m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 433996449 | To Node: 502701238 | Edge ID: 502701238_433996449 | Distance: 379.4m | Current Nearest Station: 3 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701238_433996449 Nodes (433996449 -> 502701238). Distance: 379.4m, ETA: 0.01h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 2 state updated: current=3, target=4
+[DASHBOARD] - [full_graph_manager] - A* path from station 2 to 3: 38 nodes, distance: 2796.26m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_3 -> To: Blida_Line1_Station_4 | A* Steps: 37 | A* Distance: 2796.3m
+[DASHBOARD] - [bus] - Bus 2 received next target: Station 4
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 2 state updated: current=3, target=4
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 4 | From Node: 1725063402 | To Node: 502701221 | Edge ID: 1725063402_502701221 | Distance: 22.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1725063402_502701221 Nodes (1725063402 -> 502701221). Distance: 22.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 4 | From Node: 502701274 | To Node: 502701211 | Edge ID: 502701274_502701211 | Distance: 118.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701274_502701211 Nodes (502701274 -> 502701211). Distance: 118.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1725063402 to Node 502701221 | A* Progress: 4/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701274 to Node 502701211 | A* Progress: 4/7
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 433996449 to Node 502701238
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 5 | From Node: 502701221 | To Node: 433996435 | Edge ID: 502701221_433996435 | Distance: 53.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502701221_433996435 Nodes (502701221 -> 433996435). Distance: 53.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502701221 to Node 433996435 | A* Progress: 5/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 5 | From Node: 502701211 | To Node: 502701238 | Edge ID: 502701238_502701211 | Distance: 33.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701238_502701211 Nodes (502701211 -> 502701238). Distance: 33.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 37 nodes, 2416.8m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 502701238 | To Node: 502701211 | Edge ID: 502701238_502701211 | Distance: 33.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701238_502701211 Nodes (502701238 -> 502701211). Distance: 33.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701211 to Node 502701238 | A* Progress: 5/7
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701238 to Node 502701211 | A* Progress: 1/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 6 | From Node: 433996435 | To Node: 893455457 | Edge ID: 893455457_433996435 | Distance: 89.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 893455457_433996435 Nodes (433996435 -> 893455457). Distance: 89.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 433996435 to Node 893455457 | A* Progress: 6/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 6 | From Node: 502701238 | To Node: 433996449 | Edge ID: 502701238_433996449 | Distance: 379.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701238_433996449 Nodes (502701238 -> 433996449). Distance: 379.4m, ETA: 0.01h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 2 | From Node: 502701211 | To Node: 502701274 | Edge ID: 502701274_502701211 | Distance: 118.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701274_502701211 Nodes (502701211 -> 502701274). Distance: 118.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701211 to Node 502701274 | A* Progress: 2/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701238 to Node 433996449 | A* Progress: 6/7
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 7 | From Node: 893455457 | To Node: 1504869233 | Edge ID: 1504869233_893455457 | Distance: 130.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1504869233_893455457 Nodes (893455457 -> 1504869233). Distance: 130.3m, ETA: 0.00h
+[DASHBOARD] - [station] - Station 4 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 893455457 to Node 1504869233 | A* Progress: 7/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 3 | From Node: 502701274 | To Node: 1725063402 | Edge ID: 1725063402_502701274 | Distance: 96.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1725063402_502701274 Nodes (502701274 -> 1725063402). Distance: 96.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701274 to Node 1725063402 | A* Progress: 3/37
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 3 reached Blida_Line1_Station_3 | Route 2 | Steps: 6 | Distance: 413.5m | Time: 30.00h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 3 at Blida_Line1_Station_3: unloaded 2, loaded 14 passengers (total: 48)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 3 requesting next target from station 3 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 2: current_index=2, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 3 moving forward to station 4
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 3: next_target_id=4, current_station_id=3
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 3: Station 4 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 3 requesting next target from station 3 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 2: current_index=2, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 3 moving forward to station 4
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 3: next_target_id=4, current_station_id=3
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 3: Station 4 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 2 to 3: 38 nodes, distance: 2796.26m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_3 -> To: Blida_Line1_Station_4 | A* Steps: 37 | A* Distance: 2796.3m
+[DASHBOARD] - [bus] - Bus 3 received next target: Station 4
+[DASHBOARD] - [astar] - [A*-INIT] Bus 3 calculated A* path: 38 nodes, 2796.3m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 1 | From Node: 433996449 | To Node: 502701238 | Edge ID: 502701238_433996449 | Distance: 379.4m | Current Nearest Station: 3 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701238_433996449 Nodes (433996449 -> 502701238). Distance: 379.4m, ETA: 0.01h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 3 state updated: current=3, target=4
+[DASHBOARD] - [full_graph_manager] - A* path from station 2 to 3: 38 nodes, distance: 2796.26m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_3 -> To: Blida_Line1_Station_4 | A* Steps: 37 | A* Distance: 2796.3m
+[DASHBOARD] - [bus] - Bus 3 received next target: Station 4
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 3 state updated: current=3, target=4
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 433996449 to Node 502701238
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 8 | From Node: 1504869233 | To Node: 3253820069 | Edge ID: 3253820069_1504869233 | Distance: 121.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3253820069_1504869233 Nodes (1504869233 -> 3253820069). Distance: 121.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 4 | From Node: 1725063402 | To Node: 502701221 | Edge ID: 1725063402_502701221 | Distance: 22.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1725063402_502701221 Nodes (1725063402 -> 502701221). Distance: 22.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1504869233 to Node 3253820069 | A* Progress: 8/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1725063402 to Node 502701221 | A* Progress: 4/37
+[DASHBOARD] - [astar] - [A*-INIT] Bus 3 calculated A* path: 37 nodes, 2416.8m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 1 | From Node: 502701238 | To Node: 502701211 | Edge ID: 502701238_502701211 | Distance: 33.4m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701238_502701211 Nodes (502701238 -> 502701211). Distance: 33.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701238 to Node 502701211 | A* Progress: 1/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 9 | From Node: 3253820069 | To Node: 3620989625 | Edge ID: 3620989625_3253820069 | Distance: 39.2m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3620989625_3253820069 Nodes (3253820069 -> 3620989625). Distance: 39.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 5 | From Node: 502701221 | To Node: 433996435 | Edge ID: 502701221_433996435 | Distance: 53.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502701221_433996435 Nodes (502701221 -> 433996435). Distance: 53.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3253820069 to Node 3620989625 | A* Progress: 9/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502701221 to Node 433996435 | A* Progress: 5/37
+[DASHBOARD] - [station] - Station 2 generated 3 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 2 | From Node: 502701211 | To Node: 502701274 | Edge ID: 502701274_502701211 | Distance: 118.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701274_502701211 Nodes (502701211 -> 502701274). Distance: 118.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701211 to Node 502701274 | A* Progress: 2/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 10 | From Node: 3620989625 | To Node: 3253819154 | Edge ID: 3620989625_3253819154 | Distance: 85.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3620989625_3253819154 Nodes (3620989625 -> 3253819154). Distance: 85.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 6 | From Node: 433996435 | To Node: 893455457 | Edge ID: 893455457_433996435 | Distance: 89.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 893455457_433996435 Nodes (433996435 -> 893455457). Distance: 89.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3620989625 to Node 3253819154 | A* Progress: 10/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 433996435 to Node 893455457 | A* Progress: 6/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 3 | From Node: 502701274 | To Node: 1725063402 | Edge ID: 1725063402_502701274 | Distance: 96.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1725063402_502701274 Nodes (502701274 -> 1725063402). Distance: 96.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701274 to Node 1725063402 | A* Progress: 3/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 11 | From Node: 3253819154 | To Node: 703421221 | Edge ID: 3253819154_703421221 | Distance: 36.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3253819154_703421221 Nodes (3253819154 -> 703421221). Distance: 36.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 7 | From Node: 893455457 | To Node: 1504869233 | Edge ID: 1504869233_893455457 | Distance: 130.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1504869233_893455457 Nodes (893455457 -> 1504869233). Distance: 130.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3253819154 to Node 703421221 | A* Progress: 11/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 893455457 to Node 1504869233 | A* Progress: 7/37
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 4 | From Node: 1725063402 | To Node: 502701221 | Edge ID: 1725063402_502701221 | Distance: 22.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1725063402_502701221 Nodes (1725063402 -> 502701221). Distance: 22.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1725063402 to Node 502701221 | A* Progress: 4/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 12 | From Node: 703421221 | To Node: 1703220552 | Edge ID: 1703220552_703421221 | Distance: 31.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1703220552_703421221 Nodes (703421221 -> 1703220552). Distance: 31.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 703421221 to Node 1703220552 | A* Progress: 12/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 8 | From Node: 1504869233 | To Node: 3253820069 | Edge ID: 3253820069_1504869233 | Distance: 121.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3253820069_1504869233 Nodes (1504869233 -> 3253820069). Distance: 121.9m, ETA: 0.00h
+[DASHBOARD] - [station] - Station 4 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1504869233 to Node 3253820069 | A* Progress: 8/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 5 | From Node: 502701221 | To Node: 433996435 | Edge ID: 502701221_433996435 | Distance: 53.8m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502701221_433996435 Nodes (502701221 -> 433996435). Distance: 53.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 13 | From Node: 1703220552 | To Node: 1703220572 | Edge ID: 1703220572_1703220552 | Distance: 45.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1703220572_1703220552 Nodes (1703220552 -> 1703220572). Distance: 45.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502701221 to Node 433996435 | A* Progress: 5/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1703220552 to Node 1703220572 | A* Progress: 13/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 9 | From Node: 3253820069 | To Node: 3620989625 | Edge ID: 3620989625_3253820069 | Distance: 39.2m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3620989625_3253820069 Nodes (3253820069 -> 3620989625). Distance: 39.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3253820069 to Node 3620989625 | A* Progress: 9/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 6 | From Node: 433996435 | To Node: 893455457 | Edge ID: 893455457_433996435 | Distance: 89.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 893455457_433996435 Nodes (433996435 -> 893455457). Distance: 89.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 14 | From Node: 1703220572 | To Node: 703421219 | Edge ID: 1703220572_703421219 | Distance: 33.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1703220572_703421219 Nodes (1703220572 -> 703421219). Distance: 33.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 433996435 to Node 893455457 | A* Progress: 6/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1703220572 to Node 703421219 | A* Progress: 14/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 10 | From Node: 3620989625 | To Node: 3253819154 | Edge ID: 3620989625_3253819154 | Distance: 85.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3620989625_3253819154 Nodes (3620989625 -> 3253819154). Distance: 85.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3620989625 to Node 3253819154 | A* Progress: 10/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 7 | From Node: 893455457 | To Node: 1504869233 | Edge ID: 1504869233_893455457 | Distance: 130.3m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1504869233_893455457 Nodes (893455457 -> 1504869233). Distance: 130.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 15 | From Node: 703421219 | To Node: 703421216 | Edge ID: 703421219_703421216 | Distance: 31.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 703421219_703421216 Nodes (703421219 -> 703421216). Distance: 31.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 703421219 to Node 703421216 | A* Progress: 15/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 893455457 to Node 1504869233 | A* Progress: 7/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 11 | From Node: 3253819154 | To Node: 703421221 | Edge ID: 3253819154_703421221 | Distance: 36.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3253819154_703421221 Nodes (3253819154 -> 703421221). Distance: 36.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3253819154 to Node 703421221 | A* Progress: 11/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 16 | From Node: 703421216 | To Node: 1724202765 | Edge ID: 1724202765_703421216 | Distance: 51.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1724202765_703421216 Nodes (703421216 -> 1724202765). Distance: 51.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 8 | From Node: 1504869233 | To Node: 3253820069 | Edge ID: 3253820069_1504869233 | Distance: 121.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3253820069_1504869233 Nodes (1504869233 -> 3253820069). Distance: 121.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 703421216 to Node 1724202765 | A* Progress: 16/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 12 | From Node: 703421221 | To Node: 1703220552 | Edge ID: 1703220552_703421221 | Distance: 31.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1703220552_703421221 Nodes (703421221 -> 1703220552). Distance: 31.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1504869233 to Node 3253820069 | A* Progress: 8/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 703421221 to Node 1703220552 | A* Progress: 12/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 17 | From Node: 1724202765 | To Node: 3620989624 | Edge ID: 3620989624_1724202765 | Distance: 78.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3620989624_1724202765 Nodes (1724202765 -> 3620989624). Distance: 78.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 9 | From Node: 3253820069 | To Node: 3620989625 | Edge ID: 3620989625_3253820069 | Distance: 39.2m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3620989625_3253820069 Nodes (3253820069 -> 3620989625). Distance: 39.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1724202765 to Node 3620989624 | A* Progress: 17/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 13 | From Node: 1703220552 | To Node: 1703220572 | Edge ID: 1703220572_1703220552 | Distance: 45.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1703220572_1703220552 Nodes (1703220552 -> 1703220572). Distance: 45.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3253820069 to Node 3620989625 | A* Progress: 9/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1703220552 to Node 1703220572 | A* Progress: 13/37
+[DASHBOARD] - [station] - Station 3 generated 1 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [station] - Station 4 generated 2 passenger requests to Blida_Line1_Station_2
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 18 | From Node: 3620989624 | To Node: 1705458693 | Edge ID: 3620989624_1705458693 | Distance: 297.6m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3620989624_1705458693 Nodes (3620989624 -> 1705458693). Distance: 297.6m, ETA: 0.01h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 10 | From Node: 3620989625 | To Node: 3253819154 | Edge ID: 3620989625_3253819154 | Distance: 85.0m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3620989625_3253819154 Nodes (3620989625 -> 3253819154). Distance: 85.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 14 | From Node: 1703220572 | To Node: 703421219 | Edge ID: 1703220572_703421219 | Distance: 33.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1703220572_703421219 Nodes (1703220572 -> 703421219). Distance: 33.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3620989625 to Node 3253819154 | A* Progress: 10/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1703220572 to Node 703421219 | A* Progress: 14/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3620989624 to Node 1705458693 | A* Progress: 18/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 11 | From Node: 3253819154 | To Node: 703421221 | Edge ID: 3253819154_703421221 | Distance: 36.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3253819154_703421221 Nodes (3253819154 -> 703421221). Distance: 36.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 15 | From Node: 703421219 | To Node: 703421216 | Edge ID: 703421219_703421216 | Distance: 31.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 703421219_703421216 Nodes (703421219 -> 703421216). Distance: 31.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3253819154 to Node 703421221 | A* Progress: 11/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 703421219 to Node 703421216 | A* Progress: 15/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 19 | From Node: 1705458693 | To Node: 930848153 | Edge ID: 1705458693_930848153 | Distance: 138.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1705458693_930848153 Nodes (1705458693 -> 930848153). Distance: 138.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1705458693 to Node 930848153 | A* Progress: 19/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 12 | From Node: 703421221 | To Node: 1703220552 | Edge ID: 1703220552_703421221 | Distance: 31.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1703220552_703421221 Nodes (703421221 -> 1703220552). Distance: 31.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 16 | From Node: 703421216 | To Node: 1724202765 | Edge ID: 1724202765_703421216 | Distance: 51.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1724202765_703421216 Nodes (703421216 -> 1724202765). Distance: 51.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 703421221 to Node 1703220552 | A* Progress: 12/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 703421216 to Node 1724202765 | A* Progress: 16/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 20 | From Node: 930848153 | To Node: 502703281 | Edge ID: 930848153_502703281 | Distance: 19.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 930848153_502703281 Nodes (930848153 -> 502703281). Distance: 19.3m, ETA: 0.00h
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 930848153 to Node 502703281 | A* Progress: 20/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 13 | From Node: 1703220552 | To Node: 1703220572 | Edge ID: 1703220572_1703220552 | Distance: 45.7m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1703220572_1703220552 Nodes (1703220552 -> 1703220572). Distance: 45.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 17 | From Node: 1724202765 | To Node: 3620989624 | Edge ID: 3620989624_1724202765 | Distance: 78.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3620989624_1724202765 Nodes (1724202765 -> 3620989624). Distance: 78.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1703220552 to Node 1703220572 | A* Progress: 13/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1724202765 to Node 3620989624 | A* Progress: 17/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 21 | From Node: 502703281 | To Node: 502703277 | Edge ID: 502703281_502703277 | Distance: 30.1m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502703281_502703277 Nodes (502703281 -> 502703277). Distance: 30.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703281 to Node 502703277 | A* Progress: 21/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 14 | From Node: 1703220572 | To Node: 703421219 | Edge ID: 1703220572_703421219 | Distance: 33.5m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1703220572_703421219 Nodes (1703220572 -> 703421219). Distance: 33.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 18 | From Node: 3620989624 | To Node: 1705458693 | Edge ID: 3620989624_1705458693 | Distance: 297.6m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3620989624_1705458693 Nodes (3620989624 -> 1705458693). Distance: 297.6m, ETA: 0.01h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1703220572 to Node 703421219 | A* Progress: 14/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 22 | From Node: 502703277 | To Node: 502703269 | Edge ID: 502703277_502703269 | Distance: 113.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502703277_502703269 Nodes (502703277 -> 502703269). Distance: 113.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3620989624 to Node 1705458693 | A* Progress: 18/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703277 to Node 502703269 | A* Progress: 22/37
+[DASHBOARD] - [station] - Station 4 generated 2 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 15 | From Node: 703421219 | To Node: 703421216 | Edge ID: 703421219_703421216 | Distance: 31.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 703421219_703421216 Nodes (703421219 -> 703421216). Distance: 31.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 703421219 to Node 703421216 | A* Progress: 15/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 19 | From Node: 1705458693 | To Node: 930848153 | Edge ID: 1705458693_930848153 | Distance: 138.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1705458693_930848153 Nodes (1705458693 -> 930848153). Distance: 138.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 23 | From Node: 502703269 | To Node: 502703267 | Edge ID: 502703269_502703267 | Distance: 93.2m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502703269_502703267 Nodes (502703269 -> 502703267). Distance: 93.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703269 to Node 502703267 | A* Progress: 23/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1705458693 to Node 930848153 | A* Progress: 19/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 16 | From Node: 703421216 | To Node: 1724202765 | Edge ID: 1724202765_703421216 | Distance: 51.1m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1724202765_703421216 Nodes (703421216 -> 1724202765). Distance: 51.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 703421216 to Node 1724202765 | A* Progress: 16/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 24 | From Node: 502703267 | To Node: 1294025669 | Edge ID: 1294025669_502703267 | Distance: 9.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1294025669_502703267 Nodes (502703267 -> 1294025669). Distance: 9.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 20 | From Node: 930848153 | To Node: 502703281 | Edge ID: 930848153_502703281 | Distance: 19.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 930848153_502703281 Nodes (930848153 -> 502703281). Distance: 19.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703267 to Node 1294025669 | A* Progress: 24/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 930848153 to Node 502703281 | A* Progress: 20/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 17 | From Node: 1724202765 | To Node: 3620989624 | Edge ID: 3620989624_1724202765 | Distance: 78.9m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3620989624_1724202765 Nodes (1724202765 -> 3620989624). Distance: 78.9m, ETA: 0.00h
+[DASHBOARD] - [station] - Station 1 generated 1 passenger requests to Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1724202765 to Node 3620989624 | A* Progress: 17/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 21 | From Node: 502703281 | To Node: 502703277 | Edge ID: 502703281_502703277 | Distance: 30.1m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502703281_502703277 Nodes (502703281 -> 502703277). Distance: 30.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 25 | From Node: 1294025669 | To Node: 502703849 | Edge ID: 1294025669_502703849 | Distance: 32.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1294025669_502703849 Nodes (1294025669 -> 502703849). Distance: 32.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703281 to Node 502703277 | A* Progress: 21/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1294025669 to Node 502703849 | A* Progress: 25/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 18 | From Node: 3620989624 | To Node: 1705458693 | Edge ID: 3620989624_1705458693 | Distance: 297.6m | Current Nearest Station: 2 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3620989624_1705458693 Nodes (3620989624 -> 1705458693). Distance: 297.6m, ETA: 0.01h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 22 | From Node: 502703277 | To Node: 502703269 | Edge ID: 502703277_502703269 | Distance: 113.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502703277_502703269 Nodes (502703277 -> 502703269). Distance: 113.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3620989624 to Node 1705458693 | A* Progress: 18/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 26 | From Node: 502703849 | To Node: 502703838 | Edge ID: 502703849_502703838 | Distance: 111.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 502703849_502703838 Nodes (502703849 -> 502703838). Distance: 111.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703277 to Node 502703269 | A* Progress: 22/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703849 to Node 502703838 | A* Progress: 26/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 19 | From Node: 1705458693 | To Node: 930848153 | Edge ID: 1705458693_930848153 | Distance: 138.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1705458693_930848153 Nodes (1705458693 -> 930848153). Distance: 138.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 23 | From Node: 502703269 | To Node: 502703267 | Edge ID: 502703269_502703267 | Distance: 93.2m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502703269_502703267 Nodes (502703269 -> 502703267). Distance: 93.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 27 | From Node: 502703838 | To Node: 1449025129 | Edge ID: 1449025129_502703838 | Distance: 151.4m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1449025129_502703838 Nodes (502703838 -> 1449025129). Distance: 151.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1705458693 to Node 930848153 | A* Progress: 19/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703269 to Node 502703267 | A* Progress: 23/37
+[DASHBOARD] - [station] - Station 1 generated 2 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703838 to Node 1449025129 | A* Progress: 27/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 20 | From Node: 930848153 | To Node: 502703281 | Edge ID: 930848153_502703281 | Distance: 19.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 930848153_502703281 Nodes (930848153 -> 502703281). Distance: 19.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 24 | From Node: 502703267 | To Node: 1294025669 | Edge ID: 1294025669_502703267 | Distance: 9.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1294025669_502703267 Nodes (502703267 -> 1294025669). Distance: 9.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 930848153 to Node 502703281 | A* Progress: 20/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703267 to Node 1294025669 | A* Progress: 24/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 28 | From Node: 1449025129 | To Node: 502703841 | Edge ID: 1449025129_502703841 | Distance: 37.4m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1449025129_502703841 Nodes (1449025129 -> 502703841). Distance: 37.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1449025129 to Node 502703841 | A* Progress: 28/37
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 21 | From Node: 502703281 | To Node: 502703277 | Edge ID: 502703281_502703277 | Distance: 30.1m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502703281_502703277 Nodes (502703281 -> 502703277). Distance: 30.1m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 25 | From Node: 1294025669 | To Node: 502703849 | Edge ID: 1294025669_502703849 | Distance: 32.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1294025669_502703849 Nodes (1294025669 -> 502703849). Distance: 32.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703281 to Node 502703277 | A* Progress: 21/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1294025669 to Node 502703849 | A* Progress: 25/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 29 | From Node: 502703841 | To Node: 3692132059 | Edge ID: 3692132059_502703841 | Distance: 28.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3692132059_502703841 Nodes (502703841 -> 3692132059). Distance: 28.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 502703841 to Node 3692132059 | A* Progress: 29/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 22 | From Node: 502703277 | To Node: 502703269 | Edge ID: 502703277_502703269 | Distance: 113.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502703277_502703269 Nodes (502703277 -> 502703269). Distance: 113.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 26 | From Node: 502703849 | To Node: 502703838 | Edge ID: 502703849_502703838 | Distance: 111.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 502703849_502703838 Nodes (502703849 -> 502703838). Distance: 111.3m, ETA: 0.00h
+[DASHBOARD] - [station] - Station 3 generated 2 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703277 to Node 502703269 | A* Progress: 22/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 30 | From Node: 3692132059 | To Node: 2121765140 | Edge ID: 3692132059_2121765140 | Distance: 80.0m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3692132059_2121765140 Nodes (3692132059 -> 2121765140). Distance: 80.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703849 to Node 502703838 | A* Progress: 26/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3692132059 to Node 2121765140 | A* Progress: 30/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 23 | From Node: 502703269 | To Node: 502703267 | Edge ID: 502703269_502703267 | Distance: 93.2m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502703269_502703267 Nodes (502703269 -> 502703267). Distance: 93.2m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 27 | From Node: 502703838 | To Node: 1449025129 | Edge ID: 1449025129_502703838 | Distance: 151.4m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1449025129_502703838 Nodes (502703838 -> 1449025129). Distance: 151.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 1 reached Blida_Line1_Station_4 | Route 3 | Steps: 30 | Distance: 2541.1m | Time: 53.33h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 1 at Blida_Line1_Station_4: unloaded 9, loaded 10 passengers (total: 48)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 1 requesting next target from station 4 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 0: current_index=3, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 1 moving forward to station 5
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 1: next_target_id=5, current_station_id=4
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 1: Station 5 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 1 requesting next target from station 4 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 0: current_index=3, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 1 moving forward to station 5
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 1: next_target_id=5, current_station_id=4
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 1: Station 5 (forward)
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703269 to Node 502703267 | A* Progress: 23/37
+[DASHBOARD] - [full_graph_manager] - A* path from station 3 to 4: 23 nodes, distance: 1122.88m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_4 -> To: Blida_Line1_Station_5 | A* Steps: 22 | A* Distance: 1122.9m
+[DASHBOARD] - [bus] - Bus 1 received next target: Station 5
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 30 nodes, 1316.6m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 2121765140 | To Node: 1691756388 | Edge ID: 2121765140_1691756388 | Distance: 30.6m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 2121765140_1691756388 Nodes (2121765140 -> 1691756388). Distance: 30.6m, ETA: 0.00h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 1 state updated: current=4, target=5
+[DASHBOARD] - [full_graph_manager] - A* path from station 3 to 4: 23 nodes, distance: 1122.88m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 1 | From: Blida_Line1_Station_4 -> To: Blida_Line1_Station_5 | A* Steps: 22 | A* Distance: 1122.9m
+[DASHBOARD] - [bus] - Bus 1 received next target: Station 5
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 1 state updated: current=4, target=5
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703838 to Node 1449025129 | A* Progress: 27/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 2121765140 to Node 1691756388
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 24 | From Node: 502703267 | To Node: 1294025669 | Edge ID: 1294025669_502703267 | Distance: 9.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1294025669_502703267 Nodes (502703267 -> 1294025669). Distance: 9.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703267 to Node 1294025669 | A* Progress: 24/37
+[DASHBOARD] - [astar] - [A*-INIT] Bus 1 calculated A* path: 29 nodes, 1286.0m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 1 | From Node: 1691756388 | To Node: 288410969 | Edge ID: 1691756388_288410969 | Distance: 10.7m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1691756388_288410969 Nodes (1691756388 -> 288410969). Distance: 10.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 28 | From Node: 1449025129 | To Node: 502703841 | Edge ID: 1449025129_502703841 | Distance: 37.4m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1449025129_502703841 Nodes (1449025129 -> 502703841). Distance: 37.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1691756388 to Node 288410969 | A* Progress: 1/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1449025129 to Node 502703841 | A* Progress: 28/37
+[DASHBOARD] - [station] - Station 1 generated 2 passenger requests to Blida_Line1_Station_5
+[DASHBOARD] - [station] - Station 5 generated 3 passenger requests to Blida_Line1_Station_1
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 25 | From Node: 1294025669 | To Node: 502703849 | Edge ID: 1294025669_502703849 | Distance: 32.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1294025669_502703849 Nodes (1294025669 -> 502703849). Distance: 32.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1294025669 to Node 502703849 | A* Progress: 25/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 2 | From Node: 288410969 | To Node: 1695830951 | Edge ID: 1695830951_288410969 | Distance: 24.0m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1695830951_288410969 Nodes (288410969 -> 1695830951). Distance: 24.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 29 | From Node: 502703841 | To Node: 3692132059 | Edge ID: 3692132059_502703841 | Distance: 28.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3692132059_502703841 Nodes (502703841 -> 3692132059). Distance: 28.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 288410969 to Node 1695830951 | A* Progress: 2/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 502703841 to Node 3692132059 | A* Progress: 29/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 26 | From Node: 502703849 | To Node: 502703838 | Edge ID: 502703849_502703838 | Distance: 111.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 502703849_502703838 Nodes (502703849 -> 502703838). Distance: 111.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 3 | From Node: 1695830951 | To Node: 1703189619 | Edge ID: 1703189619_1695830951 | Distance: 33.8m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1703189619_1695830951 Nodes (1695830951 -> 1703189619). Distance: 33.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 30 | From Node: 3692132059 | To Node: 2121765140 | Edge ID: 3692132059_2121765140 | Distance: 80.0m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 3692132059_2121765140 Nodes (3692132059 -> 2121765140). Distance: 80.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703849 to Node 502703838 | A* Progress: 26/37
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1695830951 to Node 1703189619 | A* Progress: 3/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 3692132059 to Node 2121765140 | A* Progress: 30/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 27 | From Node: 502703838 | To Node: 1449025129 | Edge ID: 1449025129_502703838 | Distance: 151.4m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1449025129_502703838 Nodes (502703838 -> 1449025129). Distance: 151.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 4 | From Node: 1703189619 | To Node: 1704208201 | Edge ID: 1704208201_1703189619 | Distance: 51.8m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1704208201_1703189619 Nodes (1703189619 -> 1704208201). Distance: 51.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 2 reached Blida_Line1_Station_4 | Route 3 | Steps: 30 | Distance: 2541.1m | Time: 56.67h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 2 at Blida_Line1_Station_4: unloaded 4, loaded 6 passengers (total: 28)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 2 requesting next target from station 4 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 1: current_index=3, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 2 moving forward to station 5
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 2: next_target_id=5, current_station_id=4
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 2: Station 5 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 2 requesting next target from station 4 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 1: current_index=3, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 2 moving forward to station 5
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 2: next_target_id=5, current_station_id=4
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 2: Station 5 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 3 to 4: 23 nodes, distance: 1122.88m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_4 -> To: Blida_Line1_Station_5 | A* Steps: 22 | A* Distance: 1122.9m
+[DASHBOARD] - [bus] - Bus 2 received next target: Station 5
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 30 nodes, 1316.6m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 2121765140 | To Node: 1691756388 | Edge ID: 2121765140_1691756388 | Distance: 30.6m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 2121765140_1691756388 Nodes (2121765140 -> 1691756388). Distance: 30.6m, ETA: 0.00h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 2 state updated: current=4, target=5
+[DASHBOARD] - [full_graph_manager] - A* path from station 3 to 4: 23 nodes, distance: 1122.88m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 2 | From: Blida_Line1_Station_4 -> To: Blida_Line1_Station_5 | A* Steps: 22 | A* Distance: 1122.9m
+[DASHBOARD] - [bus] - Bus 2 received next target: Station 5
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 2 state updated: current=4, target=5
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1703189619 to Node 1704208201 | A* Progress: 4/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 2121765140 to Node 1691756388
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703838 to Node 1449025129 | A* Progress: 27/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 5 | From Node: 1704208201 | To Node: 3641515811 | Edge ID: 3641515811_1704208201 | Distance: 24.3m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3641515811_1704208201 Nodes (1704208201 -> 3641515811). Distance: 24.3m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-INIT] Bus 2 calculated A* path: 29 nodes, 1286.0m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 1 | From Node: 1691756388 | To Node: 288410969 | Edge ID: 1691756388_288410969 | Distance: 10.7m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1691756388_288410969 Nodes (1691756388 -> 288410969). Distance: 10.7m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1704208201 to Node 3641515811 | A* Progress: 5/29
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 28 | From Node: 1449025129 | To Node: 502703841 | Edge ID: 1449025129_502703841 | Distance: 37.4m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 1449025129_502703841 Nodes (1449025129 -> 502703841). Distance: 37.4m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1691756388 to Node 288410969 | A* Progress: 1/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 1449025129 to Node 502703841 | A* Progress: 28/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 6 | From Node: 3641515811 | To Node: 3225675465 | Edge ID: 3225675465_3641515811 | Distance: 18.5m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 3225675465_3641515811 Nodes (3641515811 -> 3225675465). Distance: 18.5m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 2 | From Node: 288410969 | To Node: 1695830951 | Edge ID: 1695830951_288410969 | Distance: 24.0m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1695830951_288410969 Nodes (288410969 -> 1695830951). Distance: 24.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3641515811 to Node 3225675465 | A* Progress: 6/29
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 29 | From Node: 502703841 | To Node: 3692132059 | Edge ID: 3692132059_502703841 | Distance: 28.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3692132059_502703841 Nodes (502703841 -> 3692132059). Distance: 28.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 288410969 to Node 1695830951 | A* Progress: 2/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 502703841 to Node 3692132059 | A* Progress: 29/37
+[DASHBOARD] - [control] - Status: 15 active buses, 0 active incidents, 1 bus lines
+[DASHBOARD] - [station] - Station 1 generated 1 passenger requests to Blida_Line1_Station_3
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 7 | From Node: 3225675465 | To Node: 1449025116 | Edge ID: 1449025116_3225675465 | Distance: 12.6m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1449025116_3225675465 Nodes (3225675465 -> 1449025116). Distance: 12.6m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 3 | From Node: 1695830951 | To Node: 1703189619 | Edge ID: 1703189619_1695830951 | Distance: 33.8m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1703189619_1695830951 Nodes (1695830951 -> 1703189619). Distance: 33.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 3225675465 to Node 1449025116 | A* Progress: 7/29
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 30 | From Node: 3692132059 | To Node: 2121765140 | Edge ID: 3692132059_2121765140 | Distance: 80.0m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_4
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 3692132059_2121765140 Nodes (3692132059 -> 2121765140). Distance: 80.0m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1695830951 to Node 1703189619 | A* Progress: 3/29
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 3692132059 to Node 2121765140 | A* Progress: 30/37
+[DASHBOARD] - [astar] - [A*-STEP] Bus 1 | Route Step 8 | From Node: 1449025116 | To Node: 1450617773 | Edge ID: 1450617773_1449025116 | Distance: 43.9m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 1 traveling Edge 1450617773_1449025116 Nodes (1449025116 -> 1450617773). Distance: 43.9m, ETA: 0.00h
+[DASHBOARD] - [astar] - [A*-STEP] Bus 2 | Route Step 4 | From Node: 1703189619 | To Node: 1704208201 | Edge ID: 1704208201_1703189619 | Distance: 51.8m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 2 traveling Edge 1704208201_1703189619 Nodes (1703189619 -> 1704208201). Distance: 51.8m, ETA: 0.00h
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 1 moved from Node 1449025116 to Node 1450617773 | A* Progress: 8/29
+[DASHBOARD] - [astar] - [ARRIVAL] ✅✅✅✅✅✅ ✅✅✅✅✅✅ Bus 3 reached Blida_Line1_Station_4 | Route 3 | Steps: 30 | Distance: 2541.1m | Time: 60.83h
+[DASHBOARD] - [bus] - [PASSENGERS] Bus 3 at Blida_Line1_Station_4: unloaded 1, loaded 0 passengers (total: 47)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 3 requesting next target from station 4 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 2: current_index=3, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 3 moving forward to station 5
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 3: next_target_id=5, current_station_id=4
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 3: Station 5 (forward)
+[DASHBOARD] - [control] - [NEXT-TARGET] Bus 3 requesting next target from station 4 going forward
+[DASHBOARD] - [control] - [DIRECTION-LOGIC] Bus 2: current_index=3, direction=forward, line_length=5
+[DASHBOARD] - [control] - [FORWARD] Bus 3 moving forward to station 5
+[DASHBOARD] - [control] - [FINAL-CHECK] Bus 3: next_target_id=5, current_station_id=4
+[DASHBOARD] - [control] - ✅ Assigned next target to Bus 3: Station 5 (forward)
+[DASHBOARD] - [full_graph_manager] - A* path from station 3 to 4: 23 nodes, distance: 1122.88m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_4 -> To: Blida_Line1_Station_5 | A* Steps: 22 | A* Distance: 1122.9m
+[DASHBOARD] - [bus] - Bus 3 received next target: Station 5
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 2 moved from Node 1703189619 to Node 1704208201 | A* Progress: 4/29
+[DASHBOARD] - [astar] - [A*-INIT] Bus 3 calculated A* path: 30 nodes, 1316.6m
+[DASHBOARD] - [astar] - [A*-STEP] Bus 3 | Route Step 1 | From Node: 2121765140 | To Node: 1691756388 | Edge ID: 2121765140_1691756388 | Distance: 30.6m | Current Nearest Station: 4 | Target Station: Blida_Line1_Station_5
+[DASHBOARD] - [astar] - [MOVEMENT] Bus 3 traveling Edge 2121765140_1691756388 Nodes (2121765140 -> 1691756388). Distance: 30.6m, ETA: 0.00h
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 3 state updated: current=4, target=5
+[DASHBOARD] - [full_graph_manager] - A* path from station 3 to 4: 23 nodes, distance: 1122.88m
+[DASHBOARD] - [bus] - [ROUTE-INIT] Bus 3 | From: Blida_Line1_Station_4 -> To: Blida_Line1_Station_5 | A* Steps: 22 | A* Distance: 1122.9m
+[DASHBOARD] - [bus] - Bus 3 received next target: Station 5
+[DASHBOARD] - [bus] - [TARGET-UPDATE] Bus 3 state updated: current=4, target=5
+[DASHBOARD] - [astar] - [POSITION-UPDATE] Bus 3 moved from Node 2121765140 to Node 1691756388
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/ControlBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/LineManagementBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/IncidentManagementBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [slixmpp.xmlstream.xmlstream] - connection_lost: (None,)
+[DASHBOARD] - [spade.Agent] - Client disconnected.
+[DASHBOARD] - [control] - Simulation ended
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/ControlBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/LineManagementBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/StationBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/IncidentManagementBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/MessageHandler with exit code: None
+[DASHBOARD] - [spade.behaviour] - Killing behavior CyclicBehaviour/AStarBehaviour with exit code: None
+[DASHBOARD] - [root] - 
+🛑 Simulation stopped by user

@@ -53,9 +53,9 @@ def a_star(matrix, start, goal):
 
 
 class SystemTime:
-    def __init__(self):
+    def __init__(self, time_multiplier: float = 60):
         self._current_time = 0  # Time in system hours
-        self.time_multiplier = 60  # 1 real minute = 1 system hour
+        self.time_multiplier = time_multiplier  # Configurable time multiplier
         self.incidents = {}  # {(city_a, city_b): {'type': type, 'start_time': time, 'duration': duration}}
 
     async def update_time(self):
