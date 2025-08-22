@@ -17,21 +17,22 @@ import sys
 import os
 from pathlib import Path
 
-# Import custom modules
+
 from utils import SystemTime, SystemState
 from db_manager import DatabaseManager
 from bus_lines_manager import BusLinesManager
 
+
+
 app = FastAPI(title="Enhanced Traffic Routing Dashboard API")
 
 # Enable CORS for dashboard
-app.add_middleware(
+app.add_middleware(  
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
-)
+    allow_headers=["*"],)
 
 # Global instances
 system_time = SystemTime()
@@ -49,9 +50,9 @@ simulation_state = {
     "incident_data": {},
     "metrics": {
         "bus_utilization_history": [],
-        "passenger_flow_history": []
+        "passenger_flow_history": []}
     }
-}
+
 
 # Request/Response models
 class BusLineCreate(BaseModel):
@@ -68,11 +69,36 @@ class SimulationControl(BaseModel):
     action: str  # "start", "stop"
     parameters: Optional[Dict[str, Any]] = {}
 
+
+class DataRefreshThread(threading.Thread):
+    def __init__(self, state_manager, db_manager):
+        super().__init__(daemon=True)
+        self.state_manager = state_manager
+        self.db_manager = db_manager
+        self.running = True
+    
+    def run(self):
+        while self.running:
+            try:
+                # Refresh in-memory state from database every 5 seconds
+                latest_buses = self.db_manager.get_latest_bus_states_map()
+                for bus_state in latest_buses:
+                    self.state_manager.update_bus_state(
+                        bus_state['bus_id'], 
+                        bus_state
+                    )
+                time.sleep(5)
+            except Exception as e:
+                print(f"Data refresh error: {e}")
+                time.sleep(10)
+
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize API server"""
     print("🚀 Enhanced Traffic Routing API Server starting...")
-    
+    refresh_thread = DataRefreshThread(state_manager, db_manager)
+    refresh_thread.start()    
     print("✅ API Server ready")
 
 @app.get("/")
@@ -129,6 +155,8 @@ async def get_bus_lines():
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting bus lines: {str(e)}")
+
+
 
 @app.post("/bus_lines")
 async def create_bus_line(line_data: BusLineCreate):
@@ -197,6 +225,8 @@ async def start_simulation():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error starting simulation: {str(e)}")
 
+
+
 @app.post("/stop_simulation")
 async def stop_simulation():
     """Stop the simulation"""
@@ -235,6 +265,8 @@ async def get_simulation_status():
             simulation_state["process"] = None
     
     return status
+
+
 
 # Real-time Data Endpoints
 @app.get("/buses")
@@ -286,6 +318,8 @@ async def get_buses():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting bus data: {str(e)}")
 
+
+
 @app.get("/incidents")
 async def get_incidents():
     """Get current traffic incidents"""
@@ -301,6 +335,7 @@ async def get_incidents():
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting incident data: {str(e)}")
+
 
 @app.get("/metrics")
 async def get_metrics():
@@ -345,14 +380,16 @@ async def get_metrics():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting metrics: {str(e)}")
 
+
+
 @app.get("/traffic_metrics")
 async def get_traffic_metrics():
     """Get traffic and network performance metrics"""
     try:
         traffic_metrics = {
-            "avg_speed": 45.0,  # km/h
-            "efficiency": 75.0,  # percentage
-            "congestion_level": "Medium",  # Low, Medium, High
+            "avg_speed": 0.0,  # km/h
+            "efficiency": 0.0,  # percentage
+            "congestion_level": "N/A",  # Low, Medium, High
             "total_distance_traveled": 0.0,
             "avg_trip_duration": 0.0,
             "network_utilization": 0.0
@@ -382,17 +419,15 @@ async def export_bus_data():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error exporting bus data: {str(e)}")
 
+
 @app.get("/export/metrics")
 async def export_metrics():
     """Export performance metrics as CSV"""
     try:
-        metrics = await get_metrics()
-        
+        metrics = await get_metrics()        
         # Convert metrics to exportable format
         df = pd.DataFrame([metrics])
         df['timestamp'] = time.time()
-        
-        # Save to file
         filename = f"data/exports/metrics_export_{int(time.time())}.csv"
         Path("data/exports").mkdir(parents=True, exist_ok=True)
         df.to_csv(filename, index=False)

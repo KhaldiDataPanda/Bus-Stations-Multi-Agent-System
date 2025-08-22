@@ -23,6 +23,8 @@ import threading
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+
+
 # Get hostname for dynamic JID creation
 HOSTNAME = socket.gethostname()
 CONTROL_JID = f"control@{HOSTNAME}"
@@ -40,7 +42,7 @@ def get_station_jid(station_id: int) -> str:
 from utils import log_message, a_star, SystemTime, SystemState
 from db_manager import DatabaseManager
 from bus_lines_manager import BusLinesManager, Station, BusLine
-from plotting_utils import initialize_plotter, get_plotter
+
 
 # Load configuration
 import json
@@ -49,7 +51,7 @@ with open('config.json', 'r') as f:
 
 
 
-Path(CONFIG['plotting']['plot_folder']).mkdir(parents=True, exist_ok=True)
+
 
 # Initialize managers
 db_manager = DatabaseManager()
@@ -66,8 +68,7 @@ full_graph_manager = None
 if full_graph_manager is None:
     full_graph_manager = FullGraphManager('data/Blida_map.graphml')
 
-# Initialize plotting (after graph manager is created)
-plotter = initialize_plotter('config.json', full_graph_manager)
+
 
 # Global simulation state
 simulation_running = False
@@ -1263,8 +1264,7 @@ class ControlAgent(Agent):
                             'start_station_id': start_station.id,
                             'target_station_id': target_station.id,
                             'direction': direction,
-                            'passenger_count': random.randint(25, 55)
-                        }
+                            'passenger_count': random.randint(25, 55)}
                         
                         await self.assign_line_to_bus(bus_id, assignment)
                         

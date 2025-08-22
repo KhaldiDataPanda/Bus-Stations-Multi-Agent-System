@@ -10,6 +10,11 @@ import os
 import requests
 from pathlib import Path
 
+
+
+
+
+
 def run_command(command, name, cwd=None):
     """Run a command in a separate process"""
     print(f"Starting {name}...")
@@ -31,6 +36,7 @@ def run_command(command, name, cwd=None):
     except Exception as e:
         print(f"Error starting {name}: {e}")
         return None
+    
 
 def check_api_health(max_retries=10, delay=2):
     """Check if API server is responding"""
@@ -49,6 +55,8 @@ def check_api_health(max_retries=10, delay=2):
             time.sleep(delay)
     
     return False
+
+
 
 def main():
     print("🚌 Enhanced Traffic Routing Dashboard System Launcher")

@@ -51,7 +51,7 @@ class DatabaseManager:
             )
         ''')
         
-        # Lightweight schema migration for bus_states: add columns if missing
+        
         cursor.execute("PRAGMA table_info(bus_states)")
         existing_cols = {row[1] for row in cursor.fetchall()}
         columns_to_add = {
@@ -110,6 +110,8 @@ class DatabaseManager:
         
         # Run database operation in thread pool to avoid blocking
         await asyncio.get_event_loop().run_in_executor(None, _save)
+    
+
     
     async def save_station_state(self, station_id, state):
         """Save station state asynchronously"""

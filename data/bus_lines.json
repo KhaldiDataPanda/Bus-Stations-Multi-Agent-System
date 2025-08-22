@@ -2,13 +2,28 @@
   "lines": {
     "0": {
       "id": 0,
-      "name": "Blida_Line1",
+      "name": "Line1",
       "stations": [
         0,
         1,
         2,
         3,
-        4
+        4,
+        5,
+        6
+      ],
+      "reserve_buses": 5
+    },
+    "1": {
+      "id": 1,
+      "name": "Line2",
+      "stations": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
       ],
       "reserve_buses": 5
     }
@@ -16,45 +31,109 @@
   "stations": {
     "0": {
       "id": 0,
-      "name": "Blida_Line1_Station_1",
-      "lat": 36.48522421329735,
-      "lon": 2.81404771709359,
+      "name": "Line1_Station_1",
+      "lat": 36.49750513536502,
+      "lon": 2.8578380784641046,
       "line_id": 0,
       "is_terminal": true
     },
     "1": {
       "id": 1,
-      "name": "Blida_Line1_Station_2",
-      "lat": 36.47886952507317,
-      "lon": 2.8036855564631993,
+      "name": "Line1_Station_2",
+      "lat": 36.488955003351705,
+      "lon": 2.8502083561918568,
       "line_id": 0,
       "is_terminal": false
     },
     "2": {
       "id": 2,
-      "name": "Blida_Line1_Station_3",
-      "lat": 36.468352268602594,
-      "lon": 2.795520031451339,
+      "name": "Line1_Station_3",
+      "lat": 36.48664564636874,
+      "lon": 2.847705141301829,
       "line_id": 0,
       "is_terminal": false
     },
     "3": {
       "id": 3,
-      "name": "Blida_Line1_Station_4",
-      "lat": 36.473446261585266,
-      "lon": 2.8232211151297864,
+      "name": "Line1_Station_4",
+      "lat": 36.48417868668005,
+      "lon": 2.8430430982127364,
       "line_id": 0,
       "is_terminal": false
     },
     "4": {
       "id": 4,
-      "name": "Blida_Line1_Station_5",
-      "lat": 36.4762123748686,
-      "lon": 2.8334600460811106,
+      "name": "Line1_Station_5",
+      "lat": 36.483810552018134,
+      "lon": 2.837774247471941,
       "line_id": 0,
+      "is_terminal": false
+    },
+    "5": {
+      "id": 5,
+      "name": "Line1_Station_6",
+      "lat": 36.4781567267178,
+      "lon": 2.8161254782438454,
+      "line_id": 0,
+      "is_terminal": false
+    },
+    "6": {
+      "id": 6,
+      "name": "Line1_Station_7",
+      "lat": 36.47488374468145,
+      "lon": 2.826895309369385,
+      "line_id": 0,
+      "is_terminal": true
+    },
+    "7": {
+      "id": 7,
+      "name": "Line2_Station_1",
+      "lat": 36.49108362949292,
+      "lon": 2.806576690771879,
+      "line_id": 1,
+      "is_terminal": true
+    },
+    "8": {
+      "id": 8,
+      "name": "Line2_Station_2",
+      "lat": 36.48769860158398,
+      "lon": 2.8074953249367685,
+      "line_id": 1,
+      "is_terminal": false
+    },
+    "9": {
+      "id": 9,
+      "name": "Line2_Station_3",
+      "lat": 36.48658052789461,
+      "lon": 2.8046871948373022,
+      "line_id": 1,
+      "is_terminal": false
+    },
+    "10": {
+      "id": 10,
+      "name": "Line2_Station_4",
+      "lat": 36.48073021377397,
+      "lon": 2.8026553684971,
+      "line_id": 1,
+      "is_terminal": false
+    },
+    "11": {
+      "id": 11,
+      "name": "Line2_Station_5",
+      "lat": 36.47293790436821,
+      "lon": 2.7939145186435894,
+      "line_id": 1,
+      "is_terminal": false
+    },
+    "12": {
+      "id": 12,
+      "name": "Line2_Station_6",
+      "lat": 36.46626319959401,
+      "lon": 2.7859031251253707,
+      "line_id": 1,
       "is_terminal": true
     }
   },
-  "next_line_id": 1,
-  "next_station_id": 5
+  "next_line_id": 2,
+  "next_station_id": 13
 }

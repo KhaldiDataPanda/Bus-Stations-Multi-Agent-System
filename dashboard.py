@@ -113,8 +113,8 @@ def create_base_map():
     
     m = folium.Map(
         location=[center_lat, center_lon],
-        zoom_start=12,
-        tiles='OpenStreetMap'
+        zoom_start=15,
+        tiles='cartodbpositron'
     )
     
     # Add existing stations to map
@@ -147,7 +147,7 @@ def create_base_map():
         folium.CircleMarker(
             location=[point['lat'], point['lng']],
             radius=6,
-            popup=f"Station {i+1}",
+            popup=f"Station {i}",
             color='orange',
             fill=True,
             fillColor='orange'
@@ -165,8 +165,8 @@ def create_simulation_map():
     center_lat, center_lon = graph_loader.get_map_center()
     m = folium.Map(
         location=[center_lat, center_lon],
-        zoom_start=12,
-        tiles='OpenStreetMap'
+        zoom_start=15,
+        tiles='cartodbpositron'
     )
     
     # Add stations only (no static lines)
@@ -320,7 +320,7 @@ def line_creation_page():
                 for i, point in enumerate(st.session_state.selected_points):
                     col_a, col_b = st.columns([3, 1])
                     with col_a:
-                        st.write(f"Station {i+1}: ({point['lat']:.4f}, {point['lng']:.4f})")
+                        st.write(f"Station {i}: ({point['lat']:.4f}, {point['lng']:.4f})")
                     with col_b:
                         if st.button("❌", key=f"remove_{i}", help="Remove this station"):
                             st.session_state.selected_points.pop(i)
@@ -345,7 +345,7 @@ def line_creation_page():
                 col_a, col_b = st.columns([3, 1])
                 with col_a:
                     coord_input = st.text_input(
-                        f"Station {i+1} (lat, lon):", 
+                        f"Station {i} (lat, lon):", 
                         value=st.session_state.coordinate_inputs[i],
                         key=f"coord_{i}",
                         placeholder="36.4735, 2.8311"
@@ -380,9 +380,9 @@ def line_creation_page():
                             lon = float(parts[1].strip())
                             valid_coordinates.append({'lat': lat, 'lng': lon})
                         else:
-                            st.error(f"Station {i+1}: Invalid format. Use 'latitude, longitude'")
+                            st.error(f"Station {i}: Invalid format. Use 'latitude, longitude'")
                     except ValueError:
-                        st.error(f"Station {i+1}: Invalid numbers. Use decimal format (e.g., 36.4735, 2.8311)")
+                        st.error(f"Station {i}: Invalid numbers. Use decimal format (e.g., 36.4735, 2.8311)")
             
             # Update selected points for compatibility with map method
             if creation_method == "Coordinate Input":
@@ -469,7 +469,7 @@ def line_creation_page():
                         edited_coords = []
                         for i, station in enumerate(line.stations):
                             coord_str = st.text_input(
-                                f"Station {i+1} coordinates:", 
+                                f"Station {i} coordinates:", 
                                 value=f"{station.lat}, {station.lon}",
                                 key=f"edit_coord_{line_id}_{i}"
                             )
@@ -484,7 +484,7 @@ def line_creation_page():
                         new_station_count = st.session_state.get(f'new_stations_{line_id}', 0)
                         for i in range(new_station_count):
                             new_coord = st.text_input(
-                                f"New Station {i+1} coordinates:", 
+                                f"New Station {i} coordinates:", 
                                 placeholder="36.4735, 2.8311",
                                 key=f"new_coord_{line_id}_{i}"
                             )

@@ -7,6 +7,9 @@ import numpy as np
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 import logging
+import json
+with open('config.json') as f:
+    config = json.load(f)
 
 @dataclass
 class Station:
@@ -22,8 +25,11 @@ class BusLine:
     id: int
     name: str
     stations: List[Station]
-    reserve_buses: int = 5  # Number of reserve buses at terminals
+    reserve_buses: int = config['buses']['reserve_buses_per_line']  # Number of reserve buses at terminals
     
+    
+
+
 class BusLinesManager:
     def __init__(self):
         self.lines: Dict[int, BusLine] = {}
@@ -58,12 +64,12 @@ class BusLinesManager:
             
             station = Station(
                 id=station_id,
-                name=f"{name}_Station_{i+1}",
+                name=f"{name}_Station_{i}",
                 lat=lat,
                 lon=lon,
                 line_id=line_id,
-                is_terminal=is_terminal
-            )
+                is_terminal=is_terminal )
+            
             
             stations.append(station)
             self.stations[station_id] = station
@@ -79,6 +85,35 @@ class BusLinesManager:
         
         self.logger.info(f"Created bus line {name} (ID: {line_id}) with {len(stations)} stations")
         return line_id
+    
+
+
+    def delete_line(self, line_id: int) -> bool:
+        """
+        Delete a bus line and all its stations
+        Args: line_id: ID of the line to delete
+        Returns:True if successfully deleted, False if line not found
+        """
+        if line_id not in self.lines:
+            self.logger.warning(f"Line {line_id} not found for deletion")
+            return False
+        
+        line = self.lines[line_id]
+        
+        # Remove all stations belonging to this line
+        stations_to_remove = [station.id for station in line.stations]
+        for station_id in stations_to_remove:
+            if station_id in self.stations:
+                del self.stations[station_id]
+        
+        # Remove the line
+        del self.lines[line_id]
+        
+        self.logger.info(f"Deleted line '{line.name}' (ID: {line_id}) and {len(stations_to_remove)} stations")
+        return True
+
+
+
     
     def get_line(self, line_id: int) -> Optional[BusLine]:
         """Get a bus line by ID"""
@@ -297,28 +332,3 @@ class BusLinesManager:
         demand = self.get_line_demand(line_id, passenger_requests)
         return demand >= threshold
     
-    def delete_line(self, line_id: int) -> bool:
-        """
-        Delete a bus line and all its stations
-        Args:
-            line_id: ID of the line to delete
-        Returns:
-            True if successfully deleted, False if line not found
-        """
-        if line_id not in self.lines:
-            self.logger.warning(f"Line {line_id} not found for deletion")
-            return False
-        
-        line = self.lines[line_id]
-        
-        # Remove all stations belonging to this line
-        stations_to_remove = [station.id for station in line.stations]
-        for station_id in stations_to_remove:
-            if station_id in self.stations:
-                del self.stations[station_id]
-        
-        # Remove the line
-        del self.lines[line_id]
-        
-        self.logger.info(f"Deleted line '{line.name}' (ID: {line_id}) and {len(stations_to_remove)} stations")
-        return True

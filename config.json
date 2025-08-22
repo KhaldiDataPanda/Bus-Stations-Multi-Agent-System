@@ -8,11 +8,6 @@
         "reserve_buses_per_line": 2,
         "launch_interval_hours": 1,
         "comment_launch_interval": "Time between bus launches in simulation hours (0.333 = 20 minutes)"
-    },
-    "plotting": {
-        "plot_every_n_steps": 20,
-        "save_individual_bus_plots": true,
-        "save_network_graph_plots": true,
-        "plot_folder": "data/plots"
     }
+
 }

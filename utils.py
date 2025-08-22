@@ -4,7 +4,6 @@ import asyncio
 
 
 
-
 def log_message(direction, sender, receiver, message,system_time ,expected_response=None,DEBUG_MESSAGING=True):
     if DEBUG_MESSAGING:
         base_msg = f"[{system_time.get_current_time():.2f}h] {direction} | From: {sender} | To: {receiver} | Message: {message}"

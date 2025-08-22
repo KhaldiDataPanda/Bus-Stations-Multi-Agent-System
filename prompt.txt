@@ -1,6 +1,0 @@
-
-Notes: 
-- Don't create virtual env
-- Don't creat any markdown files
-- Don't create test_files, test directly the simulation to check if your changes work 
-- Don't chnage the current loggins
