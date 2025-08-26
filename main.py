@@ -24,6 +24,16 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 
+from utils import log_message, a_star, SystemTime, SystemState
+from db_manager import DatabaseManager
+from bus_lines_manager import BusLinesManager, Station, BusLine
+
+import json
+with open('config.json', 'r') as f:
+    CONFIG = json.load(f)
+
+
+
 
 # Get hostname for dynamic JID creation
 HOSTNAME = socket.gethostname()
@@ -38,16 +48,22 @@ def get_station_jid(station_id: int) -> str:
     return f"station_{station_id}@{HOSTNAME}"
 
 
-# Import custom modules
-from utils import log_message, a_star, SystemTime, SystemState
-from db_manager import DatabaseManager
-from bus_lines_manager import BusLinesManager, Station, BusLine
 
+# Message and logging configuration
+MESSAGE_FORMATS = {
+    'system': "[SYSTEM TIME {:.2f}h] {}",
+    'bus': "[BUS-{} | {:.2f}h] {}",
+    'station': "[STATION-{} | {:.2f}h] {}",
+    'control': "[CONTROL | {:.2f}h] {}",
+    'incident': "[INCIDENT | {:.2f}h] Bus {} - {} between stations {} and {}" }
 
-# Load configuration
-import json
-with open('config.json', 'r') as f:
-    CONFIG = json.load(f)
+LOGGING_FORMAT = {
+    'bus': '[BUS-%(bus_id)s ] - %(levelname)s - %(message)s',
+    'station': '[STATION-%(station_id)s ] - %(levelname)s - %(message)s',
+    'control': '[CONTROL ] - %(levelname)s - %(message)s',
+    'astar': '[A*-ROUTING ] - %(levelname)s - %(message)s' }
+
+DEBUG_MESSAGING = False  # Set to True for detailed message logging
 
 
 
@@ -58,15 +74,17 @@ db_manager = DatabaseManager()
 bus_lines_manager = BusLinesManager()
 bus_lines_manager.load_from_file('data/bus_lines.json')
 
-# Load graph data from Blida map
+
+
+# Load graph 
 from graph_loader import GraphLoader
 from full_graph_manager import FullGraphManager
 
 graph_loader = GraphLoader('data/Blida_map.graphml')
-# Initialize full_graph_manager only if not already set (allows external initialization)
-full_graph_manager = None
+full_graph_manager = None  # Initialize full_graph_manager only if not already set (allows external initialization)
 if full_graph_manager is None:
     full_graph_manager = FullGraphManager('data/Blida_map.graphml')
+
 
 
 
@@ -74,23 +92,6 @@ if full_graph_manager is None:
 simulation_running = False
 simulation_lock = threading.Lock()
 
-# Message and logging configuration
-MESSAGE_FORMATS = {
-    'system': "[SYSTEM TIME {:.2f}h] {}",
-    'bus': "[BUS-{} | {:.2f}h] {}",
-    'station': "[STATION-{} | {:.2f}h] {}",
-    'control': "[CONTROL | {:.2f}h] {}",
-    'incident': "[INCIDENT | {:.2f}h] Bus {} - {} between stations {} and {}"
-}
-
-LOGGING_FORMAT = {
-    'bus': '[BUS-%(bus_id)s ] - %(levelname)s - %(message)s',
-    'station': '[STATION-%(station_id)s ] - %(levelname)s - %(message)s',
-    'control': '[CONTROL ] - %(levelname)s - %(message)s',
-    'astar': '[A*-ROUTING ] - %(levelname)s - %(message)s'
-}
-
-DEBUG_MESSAGING = False  # Set to True for detailed message logging
 
 # Configure logging with simplified formatters
 bus_logger = logging.getLogger('bus')
@@ -98,16 +99,17 @@ station_logger = logging.getLogger('station')
 control_logger = logging.getLogger('control')
 astar_logger = logging.getLogger('astar')
 
-# Note: Logging handlers are now configured in utils.py
-# Individual logger levels can still be adjusted if needed
 for logger in [bus_logger, station_logger, control_logger, astar_logger]:
     logger.setLevel(logging.INFO)
+
+
+
 
 # System managers
 system_time = SystemTime(time_multiplier=CONFIG['simulation']['time_speed_multiplier'])
 state_manager = SystemState()
 
-# Global simulation state
+
 simulation_state = {
     'running': False,
     'passenger_requests': [],
@@ -115,8 +117,7 @@ simulation_state = {
     'bus_performance_metrics': defaultdict(list),
     'buses_by_line': defaultdict(list),  # Track buses per line
     'schedule_tracker': {},  # Track bus scheduling
-    'reserve_buses': {}  # Track reserve buses per line
-}
+    'reserve_buses': {} }  # Track reserve buses per line
 
 
 ############################################################################################################
@@ -166,6 +167,8 @@ class BusAgent(Agent):
         self.add_behaviour(self.InitBehavior())
         self.add_behaviour(self.MessageHandler())
 
+
+
     class InitBehavior(CyclicBehaviour):
         async def run(self):
             if not self.agent.is_initialized:
@@ -189,6 +192,7 @@ class BusAgent(Agent):
                         self.kill() # Stop this behavior after initialization
                 else:
                     await asyncio.sleep(1)
+
 
     class AStarBehaviour(CyclicBehaviour):
         def __init__(self, bus_id):
@@ -1165,6 +1169,8 @@ class ControlAgent(Agent):
             except Exception as e:
                 control_logger.error(f"Emergency assignment error: {e}", exc_info=True)
 
+
+
     class LineManagementBehaviour(CyclicBehaviour):
         """Manages bus scheduling and reserve bus releases"""
         
@@ -1218,7 +1224,6 @@ class ControlAgent(Agent):
                             'last_launch_time': current_time,
                             'launch_interval': launch_interval
                         }
-                        
                         # Track bus assignment
                         simulation_state['buses_by_line'][line_id].append(bus_id)
                         
@@ -1269,6 +1274,7 @@ class ControlAgent(Agent):
                         await self.assign_line_to_bus(bus_id, assignment)
                         
                         control_logger.info(f"Released reserve bus {bus_id} for line {line_id} due to high demand ({line_demand} passengers)")
+
 
         async def assign_line_to_bus(self, bus_id, assignment):
             """Assign a line-based route to a bus"""
@@ -1391,13 +1397,11 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
     control_logger.info("Starting enhanced traffic routing simulation with A* and full graph routing")
     
     # Initialize the full graph manager and map stations to graph nodes
-    full_graph_manager.map_stations_to_graph_nodes(bus_lines_manager)
-    
+    full_graph_manager.map_stations_to_graph_nodes(bus_lines_manager)    
     # Log graph statistics
     stats = full_graph_manager.get_graph_stats()
     control_logger.info(f"Graph initialized: {stats['total_nodes']} nodes, {stats['total_edges']} edges, "
-                       f"{stats['mapped_stations']} mapped stations, avg degree: {stats['average_node_degree']:.2f}")
-    
+                       f"{stats['mapped_stations']} mapped stations, avg degree: {stats['average_node_degree']:.2f}")    
     # Start system time
     asyncio.create_task(system_time.update_time())
     
@@ -1455,8 +1459,7 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
     
     finally:
         # Cleanup
-        simulation_state['running'] = False
-        
+        simulation_state['running'] = False        
         # Stop all agents
         for agent in [control_agent] + station_agents + bus_agents:
             await agent.stop()
@@ -1469,18 +1472,15 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
 #-----------------------------          MAIN EXECUTION          ----------------------------------------
 ############################################################################################################
 ############################################################################################################
+from utils import setup_logging, get_logger
+
 
 def main():
     """Main execution function"""
-    # Import logging configuration for dashboard simulation
-    from utils import setup_logging, get_logger
     
-    # Setup logging for dashboard simulation
     setup_logging("dashboard")
     
-    # Get logger for main
     main_logger = get_logger('MAIN')
-    
     main_logger.info("🚌 Enhanced Traffic Routing System with A* and Line-Based Routing")
     main_logger.info("=" * 70)
     
@@ -1500,9 +1500,8 @@ def main():
     for line_id, line in lines.items():
         main_logger.info(f"   📍 Line {line_id}: {line.name} ({len(line.stations)} stations)")
     
-    try:
-        # Calculate total buses needed (3 per line + some extras)
-        total_buses = max(15, len(lines) * 3 + 5)
+    try: # Calculate total buses needed 
+        total_buses = (CONFIG['buses']['initial_buses_per_line'] + CONFIG['buses']['reserve_buses_per_line']) *len(lines)
         asyncio.run(run_simulation(num_buses=total_buses, num_stations=len(stations)))
     except KeyboardInterrupt:
         logging.info("\n🛑 Simulation stopped by user")

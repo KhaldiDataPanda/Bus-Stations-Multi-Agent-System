@@ -205,12 +205,10 @@ class FullGraphManager:
     def get_bus_position_on_edge(self, start_node: str, end_node: str, progress_ratio: float = 0.5) -> Tuple[float, float]:
         """
         Calculate bus position along an edge based on progress ratio
-        
         Args:
             start_node: Starting node of the edge
             end_node: Ending node of the edge  
             progress_ratio: Progress along edge (0.0 = start, 1.0 = end, 0.5 = middle)
-        
         Returns:
             Tuple of (latitude, longitude) for the bus position
         """
@@ -233,10 +231,8 @@ class FullGraphManager:
     def get_path_coordinates(self, path_nodes: List[str]) -> List[Tuple[float, float]]:
         """
         Convert a list of node IDs to coordinate pairs for path visualization
-        
         Args:
             path_nodes: List of node IDs representing the path
-            
         Returns:
             List of (lat, lon) tuples for the path
         """

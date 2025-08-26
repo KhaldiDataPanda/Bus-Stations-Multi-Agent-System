@@ -16,38 +16,37 @@ import numpy as np
 from bus_lines_manager import BusLinesManager, Station, BusLine
 from graph_loader import GraphLoader
 import logging
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 
-# Configure logging for dashboard UI
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - [DASHBOARD-UI] - %(message)s')
-logger = logging.getLogger(__name__)
 
-# Initialize graph loader
+# Init 
+
 graph_loader = GraphLoader('data/Blida_map.graphml')
 
-# Page configuration
+
 st.set_page_config(
     page_title="Traffic Routing Dashboard",
     page_icon="🚌",
     layout="wide",
-    initial_sidebar_state="expanded"
-)
+    initial_sidebar_state="expanded" )
 
-# Initialize session state
+
 if 'bus_lines_manager' not in st.session_state:
     st.session_state.bus_lines_manager = BusLinesManager()
     st.session_state.bus_lines_manager.load_from_file('data/bus_lines.json')
-
 if 'simulation_running' not in st.session_state:
     st.session_state.simulation_running = False
-
 if 'selected_points' not in st.session_state:
     st.session_state.selected_points = []
-
 if 'current_line_name' not in st.session_state:
     st.session_state.current_line_name = ""
 
+
+
 # API base URL
 API_BASE_URL = "http://localhost:8000"
+
 
 def get_api_data(endpoint: str):
     """Get data from API endpoint"""
@@ -56,9 +55,13 @@ def get_api_data(endpoint: str):
         if response.status_code == 200:
             return response.json()
         else:
+            print(f"API {endpoint} error: {response.status_code}")
             return None
     except requests.exceptions.RequestException:
         return None
+    
+
+
 
 def start_simulation():
     """Start the main simulation"""
@@ -91,6 +94,7 @@ def start_simulation():
     except Exception as e:
         st.error(f"❌ Unexpected error: {e}")
 
+
 def stop_simulation():
     """Stop the simulation"""
     try:
@@ -105,6 +109,9 @@ def stop_simulation():
         st.session_state.simulation_running = False
     except requests.exceptions.RequestException as e:
         st.error(f"❌ Error stopping simulation: {e}")
+
+
+
 
 def create_base_map():
     """Create base map for line creation"""
@@ -160,6 +167,9 @@ def create_simulation_map():
     # Get bus positions from API
     bus_data = get_api_data("buses")
     incident_data = get_api_data("incidents")
+
+    print("Bus Data:", bus_data)  # Debug print to check bus data format
+    print("Incident Data:", incident_data)  # Debug print to check incident data format
     
     # Use actual Blida coordinates from the graph
     center_lat, center_lon = graph_loader.get_map_center()
@@ -180,30 +190,11 @@ def create_simulation_map():
             fill=True,
             fillColor=color
         ).add_to(m)
+
     
-    # Define diverse color palette for buses
-    bus_colors = [
-        '#FF0000',  # Red
-        '#00FF00',  # Green  
-        '#0000FF',  # Blue
-        '#FFD700',  # Gold
-        '#FF69B4',  # Hot Pink
-        '#8A2BE2',  # Blue Violet
-        '#00CED1',  # Dark Turquoise
-        '#FF4500',  # Orange Red
-        '#32CD32',  # Lime Green
-        '#FF1493',  # Deep Pink
-        '#00BFFF',  # Deep Sky Blue
-        '#DC143C',  # Crimson
-        '#9932CC',  # Dark Orchid
-        '#FF6347',  # Tomato
-        '#4169E1',  # Royal Blue
-        '#FF8C00',  # Dark Orange
-        '#7FFF00',  # Chartreuse
-        '#DA70D6',  # Orchid
-        '#B22222',  # Fire Brick
-        '#48D1CC'   # Medium Turquoise
-    ]
+
+    cmap = plt.cm.tab20  # tab20 provides 20 distinct colors
+    bus_colors = [mcolors.to_hex(cmap(i)) for i in range(20)]
     
     # Add buses with X markers and diverse colors
     if bus_data:

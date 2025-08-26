@@ -1,11 +1,12 @@
 """
-Enhanced API Server for A*-based Traffic Routing Dashboard
+API Server for A*-based Traffic Routing Dashboard
 Provides endpoints for simulation control, bus tracking, and metrics
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
+from contextlib import asynccontextmanager
 import asyncio
 import json
 import pandas as pd
@@ -17,22 +18,11 @@ import sys
 import os
 from pathlib import Path
 
-
 from utils import SystemTime, SystemState
 from db_manager import DatabaseManager
 from bus_lines_manager import BusLinesManager
 
 
-
-app = FastAPI(title="Enhanced Traffic Routing Dashboard API")
-
-# Enable CORS for dashboard
-app.add_middleware(  
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],)
 
 # Global instances
 system_time = SystemTime()
@@ -41,7 +31,8 @@ db_manager = DatabaseManager()
 bus_lines_manager = BusLinesManager()
 bus_lines_manager.load_from_file('data/bus_lines.json')
 
-# Simulation state
+
+
 simulation_state = {
     "running": False,
     "process": None,
@@ -50,8 +41,7 @@ simulation_state = {
     "incident_data": {},
     "metrics": {
         "bus_utilization_history": [],
-        "passenger_flow_history": []}
-    }
+        "passenger_flow_history": []}}
 
 
 # Request/Response models
@@ -68,6 +58,9 @@ class IncidentCreate(BaseModel):
 class SimulationControl(BaseModel):
     action: str  # "start", "stop"
     parameters: Optional[Dict[str, Any]] = {}
+
+
+
 
 
 class DataRefreshThread(threading.Thread):
@@ -93,13 +86,40 @@ class DataRefreshThread(threading.Thread):
                 time.sleep(10)
 
 
-@app.on_event("startup")
-async def startup_event():
-    """Initialize API server"""
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Initialize and cleanup API server"""
     print("🚀 Enhanced Traffic Routing API Server starting...")
     refresh_thread = DataRefreshThread(state_manager, db_manager)
     refresh_thread.start()    
     print("✅ API Server ready")
+    
+    yield
+
+    # Cleanup on shutdown
+    if hasattr(refresh_thread, 'running'):
+        refresh_thread.running = False
+    print("🛑 API Server shutting down...")
+
+
+
+
+app = FastAPI(title="Enhanced Traffic Routing Dashboard API", lifespan=lifespan)
+
+
+
+app.add_middleware(     # Enable CORS for dashboard
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],)
+
+
+
+
 
 @app.get("/")
 async def root():
@@ -110,6 +130,9 @@ async def root():
         "simulation_running": simulation_state["running"],
         "version": "2.0.0"
     }
+
+
+
 
 # Bus Lines Management Endpoints
 @app.get("/bus_lines")
@@ -180,6 +203,9 @@ async def create_bus_line(line_data: BusLineCreate):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error creating bus line: {str(e)}")
 
+
+
+
 @app.delete("/bus_lines/{line_id}")
 async def delete_bus_line(line_id: int):
     """Delete a bus line"""
@@ -193,6 +219,8 @@ async def delete_bus_line(line_id: int):
             
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deleting bus line: {str(e)}")
+
+
 
 # Simulation Control Endpoints
 @app.post("/start_simulation")
@@ -400,42 +428,7 @@ async def get_traffic_metrics():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting traffic metrics: {str(e)}")
 
-# Data Export Endpoints
-@app.get("/export/buses")
-async def export_bus_data():
-    """Export bus data as CSV"""
-    try:
-        # Use latest per-bus rows for export
-        rows = db_manager.get_latest_bus_states_map()
-        df = pd.DataFrame(rows)
-        
-        # Save to file
-        filename = f"data/exports/bus_export_{int(time.time())}.csv"
-        Path("data/exports").mkdir(parents=True, exist_ok=True)
-        df.to_csv(filename, index=False)
-        
-        return FileResponse(filename, filename=f"bus_data_{int(time.time())}.csv")
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error exporting bus data: {str(e)}")
 
-
-@app.get("/export/metrics")
-async def export_metrics():
-    """Export performance metrics as CSV"""
-    try:
-        metrics = await get_metrics()        
-        # Convert metrics to exportable format
-        df = pd.DataFrame([metrics])
-        df['timestamp'] = time.time()
-        filename = f"data/exports/metrics_export_{int(time.time())}.csv"
-        Path("data/exports").mkdir(parents=True, exist_ok=True)
-        df.to_csv(filename, index=False)
-        
-        return FileResponse(filename, filename=f"metrics_{int(time.time())}.csv")
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error exporting metrics: {str(e)}")
 
 # Health Check
 @app.get("/health")
@@ -447,6 +440,8 @@ async def health_check():
         "simulation_running": simulation_state["running"],
         "api_version": "2.0.0"
     }
+
+
 
 if __name__ == "__main__":
     import uvicorn

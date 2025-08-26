@@ -71,7 +71,7 @@ def main():
     
     try:
         # Start API server
-        print("\n🔧 Starting API server...")
+        print("\n🔧 Running python api_server.py")
         api_process = run_command("python api_server.py", "API Server")
         if api_process:
             processes.append(("API Server", api_process))
@@ -89,7 +89,7 @@ def main():
             return
         
         # Start Streamlit dashboard
-        print("\n🖥️  Starting Streamlit dashboard...")
+        print("\n🖥️  Starting Streamlit : streamlit run dashboard.py --server.port 8501")
         dashboard_process = run_command("streamlit run dashboard.py --server.port 8501", "Dashboard")
         if dashboard_process:
             processes.append(("Dashboard", dashboard_process))

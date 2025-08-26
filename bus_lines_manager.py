@@ -112,41 +112,24 @@ class BusLinesManager:
         self.logger.info(f"Deleted line '{line.name}' (ID: {line_id}) and {len(stations_to_remove)} stations")
         return True
 
+    def remove_line(self, line_id: int) -> bool:
+        """Remove a bus line and its stations"""
+        if line_id not in self.lines:
+            return False
+        
+        line = self.lines[line_id]
+        
+        # Remove all stations from this line
+        for station in line.stations:
+            if station.id in self.stations:
+                del self.stations[station.id]
+        
+        # Remove the line
+        del self.lines[line_id]
+        
+        self.logger.info(f"Removed bus line {line.name} (ID: {line_id})")
+        return True
 
-
-    
-    def get_line(self, line_id: int) -> Optional[BusLine]:
-        """Get a bus line by ID"""
-        return self.lines.get(line_id)
-    
-    def get_station(self, station_id: int) -> Optional[Station]:
-        """Get a station by ID"""
-        return self.stations.get(station_id)
-    
-    def get_all_lines(self) -> Dict[int, BusLine]:
-        """Get all bus lines"""
-        return self.lines.copy()
-    
-    def get_all_stations(self) -> Dict[int, Station]:
-        """Get all stations"""
-        return self.stations.copy()
-    
-    def get_terminal_stations(self) -> List[Station]:
-        """Get all terminal stations (start/end of lines)"""
-        return [station for station in self.stations.values() if station.is_terminal]
-    
-    def get_line_stations(self, line_id: int) -> List[Station]:
-        """Get all stations for a specific line"""
-        line = self.lines.get(line_id)
-        return line.stations if line else []
-    
-    def get_stations_by_line(self) -> Dict[int, List[Station]]:
-        """Get stations grouped by line"""
-        result = {}
-        for line_id, line in self.lines.items():
-            result[line_id] = line.stations
-        return result
-    
     def find_nearest_station(self, lat: float, lon: float) -> Optional[Station]:
         """Find the nearest station to given coordinates"""
         if not self.stations:
@@ -200,24 +183,43 @@ class BusLinesManager:
                 return line.stations[next_index]
         
         return None
+
     
-    def remove_line(self, line_id: int) -> bool:
-        """Remove a bus line and its stations"""
-        if line_id not in self.lines:
-            return False
-        
-        line = self.lines[line_id]
-        
-        # Remove all stations from this line
-        for station in line.stations:
-            if station.id in self.stations:
-                del self.stations[station.id]
-        
-        # Remove the line
-        del self.lines[line_id]
-        
-        self.logger.info(f"Removed bus line {line.name} (ID: {line_id})")
-        return True
+    def get_line(self, line_id: int) -> Optional[BusLine]:
+        """Get a bus line by ID"""
+        return self.lines.get(line_id)
+    
+    def get_station(self, station_id: int) -> Optional[Station]:
+        """Get a station by ID"""
+        return self.stations.get(station_id)
+    
+    def get_all_lines(self) -> Dict[int, BusLine]:
+        """Get all bus lines"""
+        return self.lines.copy()
+    
+    def get_all_stations(self) -> Dict[int, Station]:
+        """Get all stations"""
+        return self.stations.copy()
+    
+    def get_terminal_stations(self) -> List[Station]:
+        """Get all terminal stations (start/end of lines)"""
+        return [station for station in self.stations.values() if station.is_terminal]
+    
+    def get_line_stations(self, line_id: int) -> List[Station]:
+        """Get all stations for a specific line"""
+        line = self.lines.get(line_id)
+        return line.stations if line else []
+    
+    def get_stations_by_line(self) -> Dict[int, List[Station]]:
+        """Get stations grouped by line"""
+        result = {}
+        for line_id, line in self.lines.items():
+            result[line_id] = line.stations
+        return result
+    
+
+    
+
     
     def save_to_file(self, filename: str):
         """Save lines configuration to JSON file"""
