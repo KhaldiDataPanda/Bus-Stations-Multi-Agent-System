@@ -71,8 +71,8 @@ def main():
     
     try:
         # Start API server
-        print("\n🔧 Running python api_server.py")
-        api_process = run_command("python api_server.py", "API Server")
+        print("\n🔧 Running python web_platform/api_server.py")
+        api_process = run_command("python web_platform/api_server.py", "API Server")
         if api_process:
             processes.append(("API Server", api_process))
             print("⏳ Waiting for API server to be ready...")
@@ -89,8 +89,8 @@ def main():
             return
         
         # Start Streamlit dashboard
-        print("\n🖥️  Starting Streamlit : streamlit run dashboard.py --server.port 8501")
-        dashboard_process = run_command("streamlit run dashboard.py --server.port 8501", "Dashboard")
+        print("\n🖥️  Starting Streamlit : streamlit run web_platform/dashboard.py --server.port 8501")
+        dashboard_process = run_command("streamlit run web_platform/dashboard.py --server.port 8501", "Dashboard")
         if dashboard_process:
             processes.append(("Dashboard", dashboard_process))
             print("✅ Dashboard started on http://localhost:8501")

@@ -3,6 +3,7 @@ data/Archive
 
 # Common Python ignores
 __pycache__/
+.logs/
 *.py[cod]
 *$py.class
 *.so

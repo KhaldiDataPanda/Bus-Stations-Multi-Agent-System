@@ -24,9 +24,9 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 
-from utils import log_message, a_star, SystemTime, SystemState
-from db_manager import DatabaseManager
-from bus_lines_manager import BusLinesManager, Station, BusLine
+from simulation.utils import log_message, a_star, SystemTime, SystemState , setup_logging, get_logger
+from data.db_manager import DatabaseManager
+from simulation.bus_lines_manager import BusLinesManager, Station, BusLine
 
 import json
 with open('config.json', 'r') as f:
@@ -77,8 +77,8 @@ bus_lines_manager.load_from_file('data/bus_lines.json')
 
 
 # Load graph 
-from graph_loader import GraphLoader
-from full_graph_manager import FullGraphManager
+from simulation.graph_loader import GraphLoader
+from simulation.full_graph_manager import FullGraphManager
 
 graph_loader = GraphLoader('data/Blida_map.graphml')
 full_graph_manager = None  # Initialize full_graph_manager only if not already set (allows external initialization)
@@ -1472,7 +1472,7 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
 #-----------------------------          MAIN EXECUTION          ----------------------------------------
 ############################################################################################################
 ############################################################################################################
-from utils import setup_logging, get_logger
+
 
 
 def main():
