@@ -49,7 +49,7 @@ def get_station_jid(station_id: int) -> str:
 
 
 
-# Message and logging configuration
+# Loggings
 MESSAGE_FORMATS = {
     'system': "[SYSTEM TIME {:.2f}h] {}",
     'bus': "[BUS-{} | {:.2f}h] {}",
@@ -63,7 +63,7 @@ LOGGING_FORMAT = {
     'control': '[CONTROL ] - %(levelname)s - %(message)s',
     'astar': '[A*-ROUTING ] - %(levelname)s - %(message)s' }
 
-DEBUG_MESSAGING = False  # Set to True for detailed message logging
+DEBUG_MESSAGING = False  
 
 
 
@@ -141,7 +141,6 @@ class BusAgent(Agent):
         self.current_path = []
         self.is_initialized = False
         
-        # Enhanced path tracking for full graph with A* routing
         self.current_graph_node = None  # Current position in the full graph
         self.current_path_nodes = []  # List of graph node IDs
         self.current_path_edges = []  # List of edge IDs
@@ -151,7 +150,6 @@ class BusAgent(Agent):
         self.steps_taken = 0  # Track steps in current trip
         self.route_steps = 0  # Track steps in current route segment (between stations)
         
-        # A* path tracking
         self.total_routes_completed = 0  # Track total routes completed (station to station)
         self.current_trip_visited_nodes = {}  # Track nodes visited in current trip only (station A to B)
         self.astar_path = []  # Complete A* path nodes
@@ -159,8 +157,7 @@ class BusAgent(Agent):
         self.astar_path_calculated = False  # Whether path has been calculated for current route
         
         if DEBUG_MESSAGING:
-            print(MESSAGE_FORMATS['bus'].format(self.bus_id, system_time.get_current_time(), 
-                                               "Bus Agent starting setup..."))
+            print(MESSAGE_FORMATS['bus'].format(self.bus_id, system_time.get_current_time(), "Bus Agent starting setup..."))
 
         template = Template()
         template.set_metadata("performative", "inform")
@@ -282,7 +279,7 @@ class BusAgent(Agent):
                 'status': "Active" if self.is_active else "Waiting",
                 'timestamp': time.time(),
                 'direction': self.agent.direction,
-                'path': path_coordinates,  # Use coordinate path instead of JSON string
+                'path': path_coordinates,  
                 'current_location': current_station.name if current_station else "In Transit",
                 'destination': target_station.name if target_station else "Unknown",
                 'current_city': current_station.name if current_station else None,
@@ -298,6 +295,9 @@ class BusAgent(Agent):
         async def wait_for_line_assignment(self):
             """Wait for line assignment from control agent"""
             await asyncio.sleep(1)
+
+##########################################
+##########################################
 
         async def make_astar_decision(self):
             """Make A*-based routing decision on the full graph"""
@@ -382,6 +382,7 @@ class BusAgent(Agent):
             else:
                 astar_logger.warning(f"Bus {self.bus_id + 1} cannot move - invalid next node: {next_node}")
                 await self.request_next_target()
+
 
         def get_astar_next_node(self, possible_nodes: List[str]) -> Optional[str]:
             """Get the next node from A* path for forced A* following"""
@@ -498,6 +499,7 @@ class BusAgent(Agent):
             
             return None
 
+
         async def move_to_node(self, next_node: str):
             """Execute movement to next graph node"""
             if not self.agent.current_graph_node or not next_node:
@@ -573,15 +575,15 @@ class BusAgent(Agent):
             if nearest_station is not None:
                 self.agent.current_station_id = nearest_station
 
+
+
+
         async def handle_station_arrival(self):
-            """Handle arrival at target station"""
+
             target_station = bus_lines_manager.get_station(self.agent.target_station_id)
-            
             if target_station:
-                # Increment total routes completed (station to station)
-                self.agent.total_routes_completed += 1
                 
-                # Reset visited nodes for next trip
+                self.agent.total_routes_completed += 1
                 self.agent.current_trip_visited_nodes = {}
                 
                 # Calculate total route distance
@@ -631,7 +633,7 @@ class BusAgent(Agent):
                 self.agent.passenger_count -= unloading
                 
                 # Load new passengers
-                loading = random.randint(0, 15)
+                loading = random.randint(0, 10)
                 self.agent.passenger_count = min(60, self.agent.passenger_count + loading)  # Max 60 passengers
                 
                 if unloading > 0 or loading > 0:
@@ -644,6 +646,9 @@ class BusAgent(Agent):
             msg.set_metadata("performative", "request")
             msg.body = f"NEXT_TARGET:{self.bus_id}:{self.agent.assigned_line_id}:{self.agent.current_station_id}:{self.agent.direction}"
             await self.send(msg)
+
+
+
 
     class MessageHandler(CyclicBehaviour):
         async def run(self):
@@ -823,14 +828,15 @@ class StationAgent(Agent):
         self.max_registration_attempts = 3
         
         if DEBUG_MESSAGING:
-            print(MESSAGE_FORMATS['station'].format(self.station_id, system_time.get_current_time(), 
-                                                   "Station Agent starting setup..."))
-        
+            print(MESSAGE_FORMATS['station'].format(self.station_id, system_time.get_current_time(), "Station Agent starting setup..."))
+       
         template = Template()
         template.set_metadata("performative", "inform")
         self.add_behaviour(self.StationInitBehaviour())
         self.add_behaviour(self.StationBehaviour(self.station_id))
         station_logger.info(f"Station {self.station_id + 1} setup complete")
+
+
 
     class StationInitBehaviour(CyclicBehaviour):
         async def run(self):
@@ -862,6 +868,8 @@ class StationAgent(Agent):
             else:
                 await asyncio.sleep(5)
 
+
+
     class StationBehaviour(CyclicBehaviour):
         def __init__(self, station_id):
             super().__init__()
@@ -871,7 +879,7 @@ class StationAgent(Agent):
             if not self.agent.is_initialized:
                 await asyncio.sleep(1)
                 return
-
+            
             # Generate passenger requests
             await self.generate_passenger_requests()
             
@@ -882,22 +890,16 @@ class StationAgent(Agent):
             
             await asyncio.sleep(2)
 
+
         async def generate_passenger_requests(self):
             """Generate passenger requests with target distribution of 5 passengers per 30 minutes"""
-            # Generate passengers with proper distribution
-            # Target: 5 passengers per 30 minutes = 0.1667 passengers per minute
-            # In simulation time with time_multiplier, this becomes more frequent
-            
-            # Calculate probability based on time multiplier
-            # We check every 1 second (real time), so probability should be:
-            # (5 passengers / 30 minutes) * (1 minute / 60 seconds) * time_multiplier
+        
             passenger_rate_per_second = (5.0 / (30.0 * 60.0)) * system_time.time_multiplier
             
-            # Use random generation based on Poisson process
+            # Poisson-Based Generation PRocess
             if random.random() < passenger_rate_per_second:
-                # Generate 1-3 passengers at a time
-                num_passengers = random.randint(1, 3)
                 
+                num_passengers = random.randint(1, 3)    
                 # Choose random destination from other stations
                 all_stations = bus_lines_manager.get_all_stations()
                 available_destinations = [s.id for s in all_stations.values() if s.id != self.station_id]
@@ -911,8 +913,7 @@ class StationAgent(Agent):
                         'destination_station': destination,
                         'passenger_count': num_passengers,
                         'timestamp': system_time.get_current_time(),
-                        'wait_time': 0.0
-                    }
+                        'wait_time': 0.0 }
                     
                     self.agent.waiting_passengers.append(passenger_request)
                     simulation_state['passenger_requests'].append(passenger_request)
@@ -924,6 +925,7 @@ class StationAgent(Agent):
             for passenger in self.agent.waiting_passengers:
                 passenger['wait_time'] = current_time - passenger['timestamp']
 
+
         async def handle_message(self, msg):
             """Handle incoming messages"""
             if "BUS_ARRIVED" in msg.body:
@@ -931,24 +933,23 @@ class StationAgent(Agent):
             elif "INCIDENT" in msg.body:
                 await self.handle_incident_report(msg)
 
+
         async def handle_bus_arrival(self, msg):
             """Handle bus arrival at station"""
             try:
                 parts = msg.body.split(":")
                 bus_id = int(parts[1])
-                
-                # Load passengers onto bus (simplified)
+                # Load passengers onto bus 
                 if self.agent.waiting_passengers:
                     loaded_passengers = self.agent.waiting_passengers[:5]  # Load up to 5 passenger groups
-                    self.agent.waiting_passengers = self.agent.waiting_passengers[5:]
-                    
+                    self.agent.waiting_passengers = self.agent.waiting_passengers[5:]                    
                     station_logger.info(f"Station {self.station_id + 1} loaded {len(loaded_passengers)} passenger groups onto Bus {bus_id + 1}")
                 
             except Exception as e:
                 station_logger.error(f"Station {self.station_id} error handling bus arrival: {e}")
 
+
         async def handle_incident_report(self, msg):
-            """Handle incident reports"""
             station_logger.info(f"Station {self.station_id} received incident report: {msg.body}")
 
 
@@ -989,6 +990,7 @@ class ControlAgent(Agent):
         self.add_behaviour(self.IncidentManagementBehaviour())
         
         control_logger.info("Control Agent setup complete")
+
 
     class ControlBehaviour(CyclicBehaviour):
         async def run(self):
@@ -1180,7 +1182,7 @@ class ControlAgent(Agent):
             await asyncio.sleep(5)
 
         async def schedule_regular_buses(self):
-            """Schedule regular buses (3 per line, 20-minute intervals)"""
+            """Schedule regular buses """
             current_time = system_time.get_current_time()
             
             for line_id, line in bus_lines_manager.get_all_lines().items():
@@ -1317,7 +1319,7 @@ class ControlAgent(Agent):
                     'light_traffic': random.uniform(1, 3),  # 1-3 hours
                     'heavy_traffic': random.uniform(2, 6),  # 2-6 hours
                     'closed_road': random.uniform(4, 12)    # 4-12 hours
-                }
+                    }
                 
                 incident = {
                     'type': incident_type,
@@ -1396,25 +1398,27 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
     """Run the main simulation"""
     control_logger.info("Starting enhanced traffic routing simulation with A* and full graph routing")
     
-    # Initialize the full graph manager and map stations to graph nodes
+    
     full_graph_manager.map_stations_to_graph_nodes(bus_lines_manager)    
-    # Log graph statistics
     stats = full_graph_manager.get_graph_stats()
+
     control_logger.info(f"Graph initialized: {stats['total_nodes']} nodes, {stats['total_edges']} edges, "
                        f"{stats['mapped_stations']} mapped stations, avg degree: {stats['average_node_degree']:.2f}")    
+    
     # Start system time
     asyncio.create_task(system_time.update_time())
     
-    # Create and start control agent with auto-registration
+
+    # Create-Start control agent
     control_agent = ControlAgent(CONTROL_JID, "password")
     try:
         await control_agent.start(auto_register=True)
         control_logger.info(f"✅ Control agent started successfully: {CONTROL_JID}")
     except Exception as e:
-        control_logger.error(f"❌ Failed to start control agent: {e}")
         raise
     
-    # Create and start station agents (one for each station in all lines)
+
+    # Create-Start station agents
     station_agents = []
     all_stations = bus_lines_manager.get_all_stations()
     for station_id in all_stations.keys():
@@ -1423,11 +1427,11 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
             await station.start(auto_register=True)
             station_agents.append(station)
             control_logger.info(f"✅ Station agent {station_id} started successfully")
-        except Exception as e:
+        except Exception as e: # Continue with other stations even if one fails
             control_logger.error(f"❌ Failed to start station agent {station_id}: {e}")
-            # Continue with other stations even if one fails
+            
     
-    # Create and start bus agents
+    # Create-Start bus agents
     bus_agents = []
     for i in range(num_buses):
         bus = BusAgent(get_bus_jid(i), "password")
@@ -1437,33 +1441,29 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
             control_logger.info(f"✅ Bus agent {i} started successfully")
         except Exception as e:
             control_logger.error(f"❌ Failed to start bus agent {i}: {e}")
-            # Continue with other buses even if one fails
-    
+            
+   
     simulation_state['running'] = True
     control_logger.info(f"Simulation started with {num_buses} buses and {len(all_stations)} stations")
     
-    try:
-        # Run simulation
+
+    try: # Run simulation        
         while simulation_state['running']:
             await asyncio.sleep(10)
             
-            # Print periodic status
             active_buses = len([b for b in bus_agents if b.is_initialized])
             active_incidents = len(simulation_state['active_incidents'])
             lines_count = len(bus_lines_manager.get_all_lines())
             
-            control_logger.info(f"Status: {active_buses} active buses, {active_incidents} active incidents, {lines_count} bus lines")
-    
+            control_logger.info(f"Status: {active_buses} active buses, {active_incidents} active incidents, {lines_count} bus lines")    
     except KeyboardInterrupt:
         control_logger.info("Simulation interrupted by user")
     
-    finally:
-        # Cleanup
+
+    finally: # Cleanup
         simulation_state['running'] = False        
-        # Stop all agents
         for agent in [control_agent] + station_agents + bus_agents:
-            await agent.stop()
-        
+            await agent.stop()        
         control_logger.info("Simulation ended")
 
 
@@ -1478,8 +1478,6 @@ async def run_simulation(num_buses: int = 15, num_stations: int = 10):
 def main():
     """Main execution function"""
     
-    setup_logging("dashboard")
-    
     main_logger = get_logger('MAIN')
     main_logger.info("🚌 Enhanced Traffic Routing System with A* and Line-Based Routing")
     main_logger.info("=" * 70)
@@ -1490,23 +1488,20 @@ def main():
     
     if not lines:
         main_logger.warning("⚠️  No bus lines found. Please create bus lines using the dashboard first.")
-        main_logger.warning("   Run the dashboard to create lines before starting simulation.")
         return
-    
-    main_logger.info(f"✅ Found {len(lines)} bus lines")
-    main_logger.info(f"✅ Found {len(stations)} stations")
-    
-    # Display line information
+    main_logger.info(f"✅ Found {len(lines)} bus lines with {len(stations)} stations")
+
     for line_id, line in lines.items():
         main_logger.info(f"   📍 Line {line_id}: {line.name} ({len(line.stations)} stations)")
     
-    try: # Calculate total buses needed 
+    try: 
         total_buses = (CONFIG['buses']['initial_buses_per_line'] + CONFIG['buses']['reserve_buses_per_line']) *len(lines)
         asyncio.run(run_simulation(num_buses=total_buses, num_stations=len(stations)))
+
     except KeyboardInterrupt:
         logging.info("\n🛑 Simulation stopped by user")
     except Exception as e:
-        logging.error(f"❌ Simulation error: {e}", exc_info=True)
+        raise e
 
 
 if __name__ == "__main__":
