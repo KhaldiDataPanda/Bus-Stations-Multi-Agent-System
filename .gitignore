@@ -1,8 +1,10 @@
 # Ignore specific notebook
 data/Archive
+.ipynb
 
-# Common Python ignores
+
 __pycache__/
+.streamlit/
 .logs/
 *.py[cod]
 *$py.class

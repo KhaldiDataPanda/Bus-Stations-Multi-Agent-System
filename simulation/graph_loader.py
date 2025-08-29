@@ -109,44 +109,16 @@ class GraphLoader:
                     'lon_min': min(lons),
                     'lon_max': max(lons),
                     'center_lat': sum(lats) / len(lats),
-                    'center_lon': sum(lons) / len(lons)
-                }
+                    'center_lon': sum(lons) / len(lons)}
             
             logger.info(f"Loaded graph with {len(self.nodes)} nodes and {len(self.edges)} edges")
             
         except Exception as e:
             logger.error(f"Error loading GraphML file: {e}")
-            # Fallback to default Blida coordinates if file loading fails
-            self.coordinate_bounds = {
-                'lat_min': 36.4,
-                'lat_max': 36.5,
-                'lon_min': 2.72,
-                'lon_max': 2.88,
-                'center_lat': 36.47,
-                'center_lon': 2.83
-            }
+            self.coordinate_bounds = None
             logger.warning("Using default Blida coordinates as fallback")
     
-    def get_random_coordinates(self, count: int = 1) -> List[Tuple[float, float]]:
-        """Get random coordinates within the map bounds"""
-        import random
-        
-        if not self.coordinate_bounds:
-            return [(36.47, 2.83)] * count  # Default Blida center
-        
-        coordinates = []
-        for _ in range(count):
-            lat = random.uniform(
-                self.coordinate_bounds['lat_min'],
-                self.coordinate_bounds['lat_max']
-            )
-            lon = random.uniform(
-                self.coordinate_bounds['lon_min'],
-                self.coordinate_bounds['lon_max']
-            )
-            coordinates.append((lat, lon))
-        
-        return coordinates
+
     
     def get_map_center(self) -> Tuple[float, float]:
         """Get the center coordinates of the map"""
@@ -184,12 +156,18 @@ class GraphLoader:
         distances.sort(key=lambda x: x[0])
         return [node_id for _, node_id in distances[:count]]
     
+
+    
     def get_node_coordinates(self, node_id: str) -> Tuple[float, float]:
         """Get coordinates for a specific node"""
         if node_id in self.nodes:
             node = self.nodes[node_id]
             return (node['lat'], node['lon'])
         return None
+
+
+
+
 
 
 import osmnx as ox

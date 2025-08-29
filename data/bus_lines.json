@@ -2,138 +2,129 @@
   "lines": {
     "0": {
       "id": 0,
-      "name": "Line1",
+      "name": "Line_A.D",
       "stations": [
         0,
         1,
         2,
         3,
         4,
-        5,
-        6
+        5
       ],
-      "reserve_buses": 5
+      "reserve_buses": 2
     },
     "1": {
       "id": 1,
-      "name": "Line2",
+      "name": "Line_I.C",
       "stations": [
+        6,
         7,
         8,
         9,
         10,
-        11,
-        12
+        11
       ],
-      "reserve_buses": 5
+      "reserve_buses": 2
     }
   },
   "stations": {
     "0": {
       "id": 0,
-      "name": "Line1_Station_1",
-      "lat": 36.49750513536502,
-      "lon": 2.8578380784641046,
+      "name": "Line_A.D_Station_0",
+      "lat": 36.4866722,
+      "lon": 2.8600647,
       "line_id": 0,
       "is_terminal": true
     },
     "1": {
       "id": 1,
-      "name": "Line1_Station_2",
-      "lat": 36.488955003351705,
-      "lon": 2.8502083561918568,
+      "name": "Line_A.D_Station_1",
+      "lat": 36.4891608,
+      "lon": 2.8507321,
       "line_id": 0,
       "is_terminal": false
     },
     "2": {
       "id": 2,
-      "name": "Line1_Station_3",
-      "lat": 36.48664564636874,
-      "lon": 2.847705141301829,
+      "name": "Line_A.D_Station_2",
+      "lat": 36.4843525,
+      "lon": 2.8445864,
       "line_id": 0,
       "is_terminal": false
     },
     "3": {
       "id": 3,
-      "name": "Line1_Station_4",
-      "lat": 36.48417868668005,
-      "lon": 2.8430430982127364,
+      "name": "Line_A.D_Station_3",
+      "lat": 36.4780451,
+      "lon": 2.8368947,
       "line_id": 0,
       "is_terminal": false
     },
     "4": {
       "id": 4,
-      "name": "Line1_Station_5",
-      "lat": 36.483810552018134,
-      "lon": 2.837774247471941,
+      "name": "Line_A.D_Station_4",
+      "lat": 36.475614,
+      "lon": 2.8315436,
       "line_id": 0,
       "is_terminal": false
     },
     "5": {
       "id": 5,
-      "name": "Line1_Station_6",
-      "lat": 36.4781567267178,
-      "lon": 2.8161254782438454,
+      "name": "Line_A.D_Station_5",
+      "lat": 36.4747246,
+      "lon": 2.8269868,
       "line_id": 0,
-      "is_terminal": false
+      "is_terminal": true
     },
     "6": {
       "id": 6,
-      "name": "Line1_Station_7",
-      "lat": 36.47488374468145,
-      "lon": 2.826895309369385,
-      "line_id": 0,
+      "name": "Line_I.C_Station_0",
+      "lat": 36.4751193,
+      "lon": 2.8267374,
+      "line_id": 1,
       "is_terminal": true
     },
     "7": {
       "id": 7,
-      "name": "Line2_Station_1",
-      "lat": 36.49108362949292,
-      "lon": 2.806576690771879,
+      "name": "Line_I.C_Station_1",
+      "lat": 36.4758522,
+      "lon": 2.823364,
       "line_id": 1,
-      "is_terminal": true
+      "is_terminal": false
     },
     "8": {
       "id": 8,
-      "name": "Line2_Station_2",
-      "lat": 36.48769860158398,
-      "lon": 2.8074953249367685,
+      "name": "Line_I.C_Station_2",
+      "lat": 36.4794384,
+      "lon": 2.8199794,
       "line_id": 1,
       "is_terminal": false
     },
     "9": {
       "id": 9,
-      "name": "Line2_Station_3",
-      "lat": 36.48658052789461,
-      "lon": 2.8046871948373022,
+      "name": "Line_I.C_Station_3",
+      "lat": 36.4767039,
+      "lon": 2.8179213,
       "line_id": 1,
       "is_terminal": false
     },
     "10": {
       "id": 10,
-      "name": "Line2_Station_4",
-      "lat": 36.48073021377397,
-      "lon": 2.8026553684971,
+      "name": "Line_I.C_Station_4",
+      "lat": 36.4725186,
+      "lon": 2.8179946,
       "line_id": 1,
       "is_terminal": false
     },
     "11": {
       "id": 11,
-      "name": "Line2_Station_5",
-      "lat": 36.47293790436821,
-      "lon": 2.7939145186435894,
-      "line_id": 1,
-      "is_terminal": false
-    },
-    "12": {
-      "id": 12,
-      "name": "Line2_Station_6",
-      "lat": 36.46626319959401,
-      "lon": 2.7859031251253707,
+      "name": "Line_I.C_Station_5",
+      "lat": 36.4691161,
+      "lon": 2.8231652,
       "line_id": 1,
       "is_terminal": true
     }
   },
   "next_line_id": 2,
-  "next_station_id": 13
+  "next_station_id": 12
 }

@@ -20,7 +20,6 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 from simulation.bus_lines_manager import BusLinesManager, Station, BusLine
 from simulation.graph_loader import GraphLoader
-import logging
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
@@ -118,16 +117,27 @@ def stop_simulation():
 
 
 
-def create_base_map():
+def create_base_map(show_nodes=False):
     """Create base map for line creation"""
-    # Use actual Blida coordinates from the graph
+
     center_lat, center_lon = graph_loader.get_map_center()
     
     m = folium.Map(
         location=[center_lat, center_lon],
         zoom_start=15,
-        tiles='cartodbpositron'
-    )
+        tiles='cartodbpositron')
+
+
+    if show_nodes:    # Add graph nodes to map
+        for node, data in graph_loader.nodes.items():
+            folium.CircleMarker(
+                location=(data['lat'], data['lon']),  
+                radius=0.05,
+                color='blue',
+                fill=False,
+            ).add_to(m)
+
+
     
     # Add existing stations to map
     for station in st.session_state.bus_lines_manager.get_all_stations().values():
@@ -167,22 +177,28 @@ def create_base_map():
     
     return m
 
+
+
+
+
+
+
+
 def create_simulation_map():
     """Create map showing real-time simulation"""
     # Get bus positions from API
     bus_data = get_api_data("buses")
     incident_data = get_api_data("incidents")
 
-    print("Bus Data:", bus_data)  # Debug print to check bus data format
-    print("Incident Data:", incident_data)  # Debug print to check incident data format
+
+
     
     # Use actual Blida coordinates from the graph
     center_lat, center_lon = graph_loader.get_map_center()
     m = folium.Map(
         location=[center_lat, center_lon],
         zoom_start=15,
-        tiles='cartodbpositron'
-    )
+        tiles='cartodbpositron')
     
     # Add stations only (no static lines)
     for station in st.session_state.bus_lines_manager.get_all_stations().values():
@@ -286,6 +302,14 @@ def create_simulation_map():
     
     return m
 
+
+############################################################################################################
+############################################################################################################
+#-----------------------------           Bus Creation Page         -----------------------------------------
+############################################################################################################
+############################################################################################################
+
+
 def line_creation_page():
     """Page for creating bus lines"""
     st.title("🗺️ Bus Line Creation")
@@ -303,8 +327,7 @@ def line_creation_page():
         creation_method = st.radio(
             "Creation Method:",
             ["Map Clicking", "Coordinate Input"],
-            help="Choose how to create your line: click on map or enter coordinates manually"
-        )
+            help="Choose how to create your line: click on map or enter coordinates manually")
         
         if creation_method == "Map Clicking":
             # Instructions for map clicking
@@ -535,11 +558,24 @@ def line_creation_page():
             st.write("3. Click 'Create Line' to save")
             st.write("4. Go to Simulation Control to start the simulation")
     
+
+
+
+
+
+    #########################################################################################
     with col1:
         st.subheader("Map")
+
+        st.radio('Show Graph Nodes:', ['Yes','No'], index=1, key='show_nodes')
+
+        if st.session_state.show_nodes == 'Yes':
+            show_nodes = True
+        else:
+            show_nodes = False
         
         # Create map
-        m = create_base_map()
+        m = create_base_map(show_nodes=show_nodes)
         
         # Display map and capture clicks
         map_data = st_folium(
@@ -560,6 +596,16 @@ def line_creation_page():
                 if new_point not in st.session_state.selected_points:
                     st.session_state.selected_points.append(new_point)
                     st.rerun()
+
+
+
+############################################################################################################
+############################################################################################################
+#-----------------------------  Traffic Routing Simulation Page    -----------------------------------------
+############################################################################################################
+############################################################################################################
+
+
 
 def simulation_control_page():
     """Main simulation control page"""
@@ -663,6 +709,17 @@ def simulation_control_page():
     else:
         simulation_map = create_simulation_map()
         st_folium(simulation_map, width=1000, height=600, returned_objects=[])
+
+
+
+
+############################################################################################################
+############################################################################################################
+#-----------------------------                Other Pages          -----------------------------------------
+############################################################################################################
+############################################################################################################
+
+
 
 def system_metrics_page():
     """System performance metrics with 20s refresh"""
@@ -809,10 +866,11 @@ def traffic_metrics_page():
     
     # Derive simple traffic indicators from current buses if available
     derived_avg_speed = None
-    derived_network_util = None
+
     if isinstance(buses, list) and len(buses) > 0:
-        # Placeholder derivations; real logic can use distances and timestamps
+        
         active_buses = len(buses)
+        # Placeholder derivations; real logic can use distances and timestamps
         derived_network_util = min(100.0, active_buses * 5.0)
     
     if traffic_data or incident_data or buses:
@@ -873,6 +931,15 @@ def traffic_metrics_page():
     # Auto refresh after 20 seconds
     time.sleep(20)
     st.rerun()
+
+
+
+############################################################################################################
+############################################################################################################
+#---------------------------------              Main Page          -----------------------------------------
+############################################################################################################
+############################################################################################################
+
 
 def main():
     """Main dashboard application"""

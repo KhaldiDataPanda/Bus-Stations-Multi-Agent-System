@@ -1,7 +1,3 @@
-"""
-API Server for A*-based Traffic Routing Dashboard
-Provides endpoints for simulation control, bus tracking, and metrics
-"""
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -26,6 +22,8 @@ from simulation.bus_lines_manager import BusLinesManager
 
 
 
+
+
 # Global instances
 system_time = SystemTime()
 state_manager = SystemState()
@@ -46,6 +44,8 @@ simulation_state = {
         "passenger_flow_history": []}}
 
 
+
+
 # Request/Response models
 class BusLineCreate(BaseModel):
     name: str
@@ -62,9 +62,7 @@ class SimulationControl(BaseModel):
     parameters: Optional[Dict[str, Any]] = {}
 
 
-
-
-
+# Background thread to periodically refresh in-memory state from DB
 class DataRefreshThread(threading.Thread):
     def __init__(self, state_manager, db_manager):
         super().__init__(daemon=True)
@@ -74,18 +72,18 @@ class DataRefreshThread(threading.Thread):
     
     def run(self):
         while self.running:
-            try:
-                # Refresh in-memory state from database every 5 seconds
+            try: # Refresh in-memory state from database every 5 seconds                
                 latest_buses = self.db_manager.get_latest_bus_states_map()
                 for bus_state in latest_buses:
                     self.state_manager.update_bus_state(
                         bus_state['bus_id'], 
-                        bus_state
-                    )
+                        bus_state)
                 time.sleep(5)
+
             except Exception as e:
                 print(f"Data refresh error: {e}")
                 time.sleep(10)
+
 
 
 
@@ -96,23 +94,21 @@ async def lifespan(app: FastAPI):
     print("🚀 Enhanced Traffic Routing API Server starting...")
     refresh_thread = DataRefreshThread(state_manager, db_manager)
     refresh_thread.start()    
-    print("✅ API Server ready")
-    
+    print("✅ API Server ready")    
+
     yield
 
-    # Cleanup on shutdown
-    if hasattr(refresh_thread, 'running'):
+    if hasattr(refresh_thread, 'running'): # Cleanup on shutdown
         refresh_thread.running = False
     print("🛑 API Server shutting down...")
 
 
 
 
+
 app = FastAPI(title="Enhanced Traffic Routing Dashboard API", lifespan=lifespan)
 
-
-
-app.add_middleware(     # Enable CORS for dashboard
+app.add_middleware(    
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
@@ -121,6 +117,11 @@ app.add_middleware(     # Enable CORS for dashboard
 
 
 
+
+
+############################################################################################################
+#-----------------------------------------  Simulation Init    -----------------------------------------
+############################################################################################################
 
 
 @app.get("/")
@@ -133,6 +134,156 @@ async def root():
         "version": "2.0.0"
     }
 
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "simulation_running": simulation_state["running"],
+        "api_version": "2.0.0"
+    }
+
+
+
+# Simulation Control Endpoints
+@app.post("/start_simulation")
+async def start_simulation():
+    """Start the main simulation"""
+    try:
+        if simulation_state["running"]:
+            return {"message": "Simulation is already running"}
+        
+        # Check if bus lines exist
+        lines = bus_lines_manager.get_all_lines()
+        if not lines:
+            raise HTTPException(status_code=400, detail="No bus lines available. Create bus lines first.")
+        
+        # Start the simulation as a subprocess
+        simulation_process = subprocess.Popen([
+            sys.executable, "main.py"], cwd=os.getcwd()
+            )
+        
+        simulation_state["running"] = True
+        simulation_state["process"] = simulation_process
+        simulation_state["start_time"] = time.time()
+        
+        return {
+            "message": "Simulation started successfully",
+            "process_id": simulation_process.pid,
+            "lines_count": len(lines)}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error starting simulation: {str(e)}")
+
+
+
+@app.post("/stop_simulation")
+async def stop_simulation():
+    """Stop the simulation"""
+    try:
+        if not simulation_state["running"]:
+            return {"message": "Simulation is not running"}
+        
+        # Stop the simulation process
+        if simulation_state["process"]:
+            simulation_state["process"].terminate()
+            simulation_state["process"].wait(timeout=10)
+        
+        simulation_state["running"] = False
+        simulation_state["process"] = None
+        
+        return {"message": "Simulation stopped successfully"}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error stopping simulation: {str(e)}")
+
+
+
+@app.get("/simulation_status")
+async def get_simulation_status():
+    """Get current simulation status"""
+    status = {
+        "running": simulation_state["running"],
+        "start_time": simulation_state["start_time"],
+        "uptime": time.time() - simulation_state["start_time"] if simulation_state["start_time"] else 0,
+        "process_id": simulation_state["process"].pid if simulation_state["process"] else None
+    }
+    
+    # Check if process is actually running
+    if simulation_state["process"]:
+        poll_result = simulation_state["process"].poll()
+        if poll_result is not None:
+            simulation_state["running"] = False
+            simulation_state["process"] = None
+    
+    return status
+
+
+
+
+
+
+
+
+
+
+############################################################################################################
+#-----------------------------------------  Buses    -----------------------------------------
+############################################################################################################
+
+
+# Real-time Data Endpoints
+@app.get("/buses")
+async def get_buses():
+    """Get current bus positions and status"""
+    try:
+        # Prefer in-memory state; if empty, fallback to latest states from DB (simulation runs in separate process)
+        bus_states = state_manager.get_all_bus_states()
+        if not bus_states:
+            latest_rows = db_manager.get_latest_bus_states_map()
+            buses: List[Dict[str, Any]] = []
+            for row in latest_rows:
+                buses.append({
+                    "id": row.get("bus_id"),
+                    "lat": float(row.get("lat") or 0.0),
+                    "lon": float(row.get("lon") or 0.0),
+                    "passenger_count": row.get("passenger_count", 0),
+                    "destination": row.get("destination", "Unknown"),
+                    "status": row.get("status", "Unknown"),
+                    "current_location": row.get("current_location", "Unknown"),
+                    "using_astar": True,
+                    "path": row.get("path", []),
+                    "steps_taken": row.get("steps_taken", 0),
+                    "current_station_id": row.get("current_station_id"),
+                    "target_station_id": row.get("target_station_id"),
+                })
+            return buses
+        
+        buses = []
+        for bus_id, state in bus_states.items():
+            bus_data = {
+                "id": bus_id,
+                "lat": float(state.get("lat") or 0),
+                "lon": float(state.get("lon") or 0),
+                "passenger_count": state.get("passenger_count", 0),
+                "destination": state.get("destination", "Unknown"),
+                "status": state.get("status", "Unknown"),
+                "current_location": state.get("current_location", "Unknown"),
+                "using_astar": True,
+                "path": json.loads(state.get("path", "[]")) if isinstance(state.get("path"), str) else state.get("path", []),
+                "steps_taken": state.get("steps_taken", 0),
+                "current_station_id": state.get("current_station_id"),
+                "target_station_id": state.get("target_station_id"),
+            }
+            buses.append(bus_data)
+        
+        return buses
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting bus data: {str(e)}")
 
 
 
@@ -224,129 +375,12 @@ async def delete_bus_line(line_id: int):
 
 
 
-# Simulation Control Endpoints
-@app.post("/start_simulation")
-async def start_simulation():
-    """Start the main simulation"""
-    try:
-        if simulation_state["running"]:
-            return {"message": "Simulation is already running"}
-        
-        # Check if bus lines exist
-        lines = bus_lines_manager.get_all_lines()
-        if not lines:
-            raise HTTPException(status_code=400, detail="No bus lines available. Create bus lines first.")
-        
-        # Start the simulation as a subprocess
-        simulation_process = subprocess.Popen([
-            sys.executable, "main.py"
-        ], cwd=os.getcwd())
-        
-        simulation_state["running"] = True
-        simulation_state["process"] = simulation_process
-        simulation_state["start_time"] = time.time()
-        
-        return {
-            "message": "Simulation started successfully",
-            "process_id": simulation_process.pid,
-            "lines_count": len(lines)
-        }
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error starting simulation: {str(e)}")
 
 
+############################################################################################################
+#-----------------------------------------  Others    -----------------------------------------
+############################################################################################################
 
-@app.post("/stop_simulation")
-async def stop_simulation():
-    """Stop the simulation"""
-    try:
-        if not simulation_state["running"]:
-            return {"message": "Simulation is not running"}
-        
-        # Stop the simulation process
-        if simulation_state["process"]:
-            simulation_state["process"].terminate()
-            simulation_state["process"].wait(timeout=10)
-        
-        simulation_state["running"] = False
-        simulation_state["process"] = None
-        
-        return {"message": "Simulation stopped successfully"}
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error stopping simulation: {str(e)}")
-
-@app.get("/simulation_status")
-async def get_simulation_status():
-    """Get current simulation status"""
-    status = {
-        "running": simulation_state["running"],
-        "start_time": simulation_state["start_time"],
-        "uptime": time.time() - simulation_state["start_time"] if simulation_state["start_time"] else 0,
-        "process_id": simulation_state["process"].pid if simulation_state["process"] else None
-    }
-    
-    # Check if process is actually running
-    if simulation_state["process"]:
-        poll_result = simulation_state["process"].poll()
-        if poll_result is not None:
-            simulation_state["running"] = False
-            simulation_state["process"] = None
-    
-    return status
-
-
-
-# Real-time Data Endpoints
-@app.get("/buses")
-async def get_buses():
-    """Get current bus positions and status"""
-    try:
-        # Prefer in-memory state; if empty, fallback to latest states from DB (simulation runs in separate process)
-        bus_states = state_manager.get_all_bus_states()
-        if not bus_states:
-            latest_rows = db_manager.get_latest_bus_states_map()
-            buses: List[Dict[str, Any]] = []
-            for row in latest_rows:
-                buses.append({
-                    "id": row.get("bus_id"),
-                    "lat": float(row.get("lat") or 0.0),
-                    "lon": float(row.get("lon") or 0.0),
-                    "passenger_count": row.get("passenger_count", 0),
-                    "destination": row.get("destination", "Unknown"),
-                    "status": row.get("status", "Unknown"),
-                    "current_location": row.get("current_location", "Unknown"),
-                    "using_astar": True,
-                    "path": row.get("path", []),
-                    "steps_taken": row.get("steps_taken", 0),
-                    "current_station_id": row.get("current_station_id"),
-                    "target_station_id": row.get("target_station_id"),
-                })
-            return buses
-        
-        buses = []
-        for bus_id, state in bus_states.items():
-            bus_data = {
-                "id": bus_id,
-                "lat": float(state.get("lat") or 0),
-                "lon": float(state.get("lon") or 0),
-                "passenger_count": state.get("passenger_count", 0),
-                "destination": state.get("destination", "Unknown"),
-                "status": state.get("status", "Unknown"),
-                "current_location": state.get("current_location", "Unknown"),
-                "using_astar": True,
-                "path": json.loads(state.get("path", "[]")) if isinstance(state.get("path"), str) else state.get("path", []),
-                "steps_taken": state.get("steps_taken", 0),
-                "current_station_id": state.get("current_station_id"),
-                "target_station_id": state.get("target_station_id"),
-            }
-            buses.append(bus_data)
-        
-        return buses
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error getting bus data: {str(e)}")
 
 
 
@@ -432,16 +466,12 @@ async def get_traffic_metrics():
 
 
 
-# Health Check
-@app.get("/health")
-async def health_check():
-    """Health check endpoint"""
-    return {
-        "status": "healthy",
-        "timestamp": time.time(),
-        "simulation_running": simulation_state["running"],
-        "api_version": "2.0.0"
-    }
+
+
+
+############################################################################################################
+#-----------------------------------------  Main    -----------------------------------------
+############################################################################################################
 
 
 
