@@ -22,6 +22,9 @@ import socket
 import threading
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from enum import Enum
+
+
 
 
 from simulation.utils import log_message, a_star, SystemTime, SystemState , setup_logging, get_logger
@@ -501,12 +504,12 @@ class BusAgent(Agent):
 
 
         async def move_to_node(self, next_node: str):
-            """Execute movement to next graph node"""
+           
             if not self.agent.current_graph_node or not next_node:
                 astar_logger.error(f"Bus {self.bus_id + 1} movement failed - invalid nodes: current={self.agent.current_graph_node}, next={next_node}")
                 return
             
-            # Prevent moving to the same node
+            # Prevent Cycle
             if self.agent.current_graph_node == next_node:
                 astar_logger.warning(f"Bus {self.bus_id + 1} attempted to move to same node: {next_node}")
                 return
@@ -514,18 +517,19 @@ class BusAgent(Agent):
             # Track node visits for current trip
             self.agent.current_trip_visited_nodes[next_node] = self.agent.current_trip_visited_nodes.get(next_node, 0) + 1
             
-            # Get edge weight and calculate travel time
+                        
             edge_weight = full_graph_manager.get_edge_weight(self.agent.current_graph_node, next_node)
             base_speed = 60  # km/h
-            
-            # Calculate effective travel time
-            passenger_slowdown = min(0.3, self.agent.passenger_count / 200.0)
-            env_effect = 1.0
+            env_effect = 1.0  # Environmental effect on speed (default no effect)
+
+            from RAG.MyLLM import LLM_speed_reduction_estimation
+
+            slowdown = min( LLM_speed_reduction_estimation(self.agent.passenger_count,Think=False) , 50) / 100.0 
+
             
             # Handle incidents
             edge_id = full_graph_manager.get_edge_id(self.agent.current_graph_node, next_node)
-            incident_type = None
-            
+            incident_type = None            
             if edge_id in simulation_state['active_incidents']:
                 incident = simulation_state['active_incidents'][edge_id]
                 incident_type = incident['type']
@@ -535,46 +539,49 @@ class BusAgent(Agent):
                     env_effect = 0.5
                 elif incident_type == 'closed_road':
                     env_effect = 0.1
+            if incident_type:
+                astar_logger.warning(f"[INCIDENT] Bus {self.bus_id + 1} affected by {incident_type} on Edge {edge_id}")
+
             
-            effective_speed = base_speed * (1 - passenger_slowdown) * env_effect
+            effective_speed = base_speed * (1 - slowdown)  * env_effect
             travel_time_hours = (edge_weight / 1000.0) / effective_speed if effective_speed > 0 else (edge_weight / 1000.0) / 10
             travel_time_real_seconds = travel_time_hours * 3600 / system_time.time_multiplier
             
-            if incident_type:
-                astar_logger.warning(f"[INCIDENT] Bus {self.bus_id + 1} affected by {incident_type} on Edge {edge_id}")
+
             
             # Check if node is being revisited
             visit_count = self.agent.current_trip_visited_nodes.get(next_node, 0)
             revisit_indicator = f" (Revisit #{visit_count})" if visit_count > 1 else ""
             
-            astar_logger.info(f"[MOVEMENT] Bus {self.bus_id + 1} traveling Edge {edge_id} "
-                             f"Nodes ({self.agent.current_graph_node} -> {next_node}). "
+            astar_logger.info(f"[MOVEMENT] Bus {self.bus_id + 1} traveling Edge {edge_id} "f"Nodes ({self.agent.current_graph_node} -> {next_node}). "
                              f"Distance: {edge_weight:.1f}m, ETA: {travel_time_hours:.2f}h{revisit_indicator}")
             
+
             # Update path tracking
             self.agent.current_path_nodes.append(self.agent.current_graph_node)
             self.agent.current_path_edges.append(edge_id)
             self.agent.route_steps += 1  # Increment route steps
             
-            # Execute the actual movement
-            await asyncio.sleep(max(0.1, travel_time_real_seconds))
             
-            # Update position
+            await asyncio.sleep(max(0.1, travel_time_real_seconds))   # Move Delay 
+
+
+            # Updates 
             old_node = self.agent.current_graph_node
-            self.agent.current_graph_node = next_node
+            self.agent.current_graph_node = next_node            
             
-            # Enhanced logging with A* path progress
+            nearest_station = full_graph_manager.get_nearest_station_to_node(self.agent.current_graph_node)
+            if nearest_station is not None:
+                self.agent.current_station_id = nearest_station
+
+
             if self.agent.astar_path_calculated and self.agent.astar_path:
                 path_progress = f"{self.agent.astar_path_index}/{len(self.agent.astar_path)}"
                 astar_logger.info(f"[POSITION-UPDATE] Bus {self.bus_id + 1} moved from Node {old_node} to Node {next_node} | A* Progress: {path_progress}")
             else:
                 astar_logger.info(f"[POSITION-UPDATE] Bus {self.bus_id + 1} moved from Node {old_node} to Node {next_node}")
             
-            # Update nearest station based on new position
-            nearest_station = full_graph_manager.get_nearest_station_to_node(self.agent.current_graph_node)
-            if nearest_station is not None:
-                self.agent.current_station_id = nearest_station
-
+            
 
 
 
@@ -602,15 +609,12 @@ class BusAgent(Agent):
                 self.agent.route_steps = 0
                 self.agent.astar_path_calculated = False
                 
-                # Request next target
-                await self.request_next_target()
                 
-                # Handle passenger unloading/loading at station
-                await self.handle_passengers_at_station()
+                await self.request_next_target()            # Request next target                
+                await self.handle_passengers_at_station()   # Handle passenger unloading/loading                                
+                await self.request_next_target()            # Request new target
                 
-                # Request new target
-                await self.request_next_target()
-                
+
                 # Update metrics
                 trip_duration = system_time.get_current_time() - self.agent.trip_start_time
                 simulation_state['bus_performance_metrics']['trip_durations'].append(trip_duration)
@@ -623,6 +627,7 @@ class BusAgent(Agent):
                 self.agent.current_trip_start_station = self.agent.current_station_id
                 self.agent.steps_taken = 0
                 self.agent.route_steps = 0  # Reset route steps counter
+
 
         async def handle_passengers_at_station(self):
             """Handle passenger loading/unloading at current station"""
@@ -639,6 +644,7 @@ class BusAgent(Agent):
                 if unloading > 0 or loading > 0:
                     bus_logger.info(f"[PASSENGERS] Bus {self.bus_id + 1} at {current_station.name}: "
                                   f"unloaded {unloading}, loaded {loading} passengers (total: {self.agent.passenger_count})")
+
 
         async def request_next_target(self):
             """Request next target station from control agent"""

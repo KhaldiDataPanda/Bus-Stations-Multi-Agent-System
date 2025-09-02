@@ -1,57 +1,65 @@
 # Traffic Routing System with Multi-Agent Simulation
 
-A comprehensive traffic routing system that simulates realistic bus transportation using multi-agent architecture, real-world geographic data, and advanced pathfinding algorithms.
+A traffic routing system that simulates bus transportation using multi-agent architecture, OpenStreetMap data, A* pathfinding, and LLM-based speed adjustment based on weather conditions and passenger load.
 
 ## System Overview
 
-This system provides a complete solution for modeling and visualizing urban transportation networks with realistic bus routing simulation. It combines multi-agent systems for distributed decision-making, geographic information systems for real-world accuracy, and web-based interfaces for real-time monitoring and control.
+This system models urban bus transportation using SPADE agents, OpenStreetMap data from Blida, Algeria, and integrates weather data scraping with LLM-based speed calculations for bus movement simulation.
 
 ## Core Features
 
 ### Multi-Agent System Architecture
-- **SPADE Framework Integration**: Implemented using SPADE (Smart Python Agent Development Environment) library for robust agent communication
-- **XMPP Server Communication**: Utilizes OpenFire XMPP server for real-time message passing between agents
+- **SPADE Framework**: Uses SPADE library for agent communication via XMPP
+- **OpenFire XMPP Server**: Message passing between agents
 - **Agent Types**:
-  - **Bus Agents**: Individual buses with autonomous routing capabilities
-  - **Station Agents**: Bus stops that manage passenger queues and arrival predictions
-  - **Control Agent**: Central coordinator managing system state and agent registration
-- **Dynamic JID Management**: Automatic agent registration with hostname-based JID creation
-- **Auto-Registration**: Seamless agent startup with automatic XMPP server registration
+  - **Bus Agents**: Handle individual bus movement and routing
+  - **Station Agents**: Manage passenger queues and arrival times
+  - **Control Agent**: Coordinates system state and agent registration
+- **JID Management**: Hostname-based XMPP JID creation and registration
 
-### Realistic Geographic Simulation
-- **OpenStreetMap Integration**: Uses real-world geographic data from Blida, Algeria via GraphML format
-- **Interactive Visualization**: Real-time map display using Folium for interactive geographic visualization
-- **Coordinate-Based Routing**: Precise positioning using latitude/longitude coordinates
-- **Real-World Constraints**: Accounts for actual road networks and geographic limitations
+### Geographic Data Processing
+- **OpenStreetMap Data**: GraphML format data for Blida, Algeria road network
+- **Folium Visualization**: Map rendering with real-time bus positions
+- **Coordinate System**: WGS84 latitude/longitude positioning
+- **Graph Structure**: NetworkX graph representation of road network
 
 ![Bus Simulation Dashboard](/.figs/BusSim1.png)
 
-### Advanced Pathfinding Algorithm
-- **Custom A* Implementation**: Optimized A* algorithm for efficient route calculation
-- **Matrix-Based Distance Calculation**: Uses adjacency matrices for rapid pathfinding
-- **Multi-Criteria Optimization**: Considers distance, travel time, and route efficiency
-- **Dynamic Route Recalculation**: Real-time path updates based on current conditions
+### Pathfinding Algorithm
+- **A* Implementation**: Standard A* algorithm for shortest path calculation
+- **Adjacency Matrix**: Distance calculations using graph adjacency matrix
+- **Heuristic Function**: Euclidean distance for A* heuristic
+- **Path Recalculation**: Route updates when incidents occur
 
-### Data Persistence and Management
-- **SQLite Database**: Lightweight database for storing simulation states and historical data
-- **Real-Time State Tracking**: Continuous monitoring of bus positions, passenger loads, and system metrics
-- **Data Tables**:
-  - Bus states (position, status, route, passengers)
-  - Station states (waiting passengers, arrival predictions)
-  - System metrics and performance data
+### Data Storage
+- **SQLite Database**: Stores bus states, station states, and metrics
+- **State Tracking**: Bus positions, passenger counts, timestamps
+- **Database Tables**:
+  - Bus states: ID, position, route, passengers, status
+  - Station states: waiting passengers, predictions
+  - Metrics: performance data
 
-### Web Platform and API
-- **FastAPI Backend**: RESTful API server providing real-time data endpoints
-- **Real-Time Data Sharing**: Live updates of bus positions, passenger counts, and system status
-- **Health Monitoring**: API endpoints for system health checks and status monitoring
-- **CORS Support**: Cross-origin resource sharing for web dashboard integration
+### Web Platform
+- **FastAPI Backend**: REST API for data access
+- **Endpoints**: Bus data, station data, health checks
+- **CORS Support**: Cross-origin requests enabled
 
-### Interactive Dashboard
-- **Streamlit Interface**: Modern web-based dashboard for system control and monitoring
-- **Real-Time Visualization**: Live updates of bus movements and system metrics
-- **Custom Bus Line Creation**: Two methods for creating bus routes:
-  1. **Coordinate Input**: Direct latitude/longitude coordinate specification
-  2. **Interactive Map Selection**: Point-and-click route creation on the map interface
+### Dashboard
+- **Streamlit Interface**: Web dashboard for monitoring and control
+- **Map Interface**: Interactive bus line creation via point selection
+- **Coordinate Input**: Manual station coordinate entry
+
+### Weather Integration and Speed Adjustment
+- **Web Scraping**: BeautifulSoup scraping of timeanddate.com for Blida weather data
+- **Data Extraction**: Temperature, humidity, wind, weather conditions
+- **LLM Integration**: Ollama-hosted language models (Gemma 3 1B, Qwen 3 1.7B)
+- **Speed Calculation**: LangChain prompt engineering for speed reduction percentage
+- **Implementation**: Called during bus movement in main.py agent behavior
+- **Speed Reduction Logic**:
+  - Input: passenger count, weather data
+  - Output: speed reduction percentage (0-50%)
+  - Base speed: 60 km/h
+  - Factors: passenger load categories, weather severity, temperature/humidity
 
 ![Interactive Map Interface](/.figs/BusSim2.png)
 
@@ -75,28 +83,29 @@ This system provides a complete solution for modeling and visualizing urban tran
 │   ├── graph_loader.py   # GraphML data processing
 │   ├── bus_lines_manager.py # Bus line and station management
 │   └── full_graph_manager.py # Complete graph operations
+├── RAG/
+│   ├── MyLLM.py          # LLM-powered speed reduction estimation
+│   └── scraper.py        # Weather data web scraping module
 └── web_platform/
     ├── api_server.py     # FastAPI server implementation
     └── dashboard.py      # Streamlit dashboard interface
 ```
 
-### Agent Communication Protocol
-- **Message Types**: Structured communication using SPADE message templates
-- **Performatives**: Standard message performatives for different interaction types
-- **Timeout Handling**: Robust message timeout and retry mechanisms
-- **State Synchronization**: Distributed state management across all agents
+### Agent Communication
+- **Message Types**: SPADE message templates with performatives
+- **Timeout Handling**: Message timeout and retry mechanisms
+- **State Sync**: Distributed state management across agents
 
-### Configuration Management
-- **Simulation Parameters**: Configurable time multipliers and bus deployment settings
-- **Bus Fleet Management**: Adjustable initial and reserve bus counts per line
-- **Launch Intervals**: Customizable bus deployment timing
+### Configuration
+- **config.json**: Simulation parameters, bus counts, time multipliers
+- **Bus Fleet**: Initial/reserve bus counts per line, launch intervals
 
 ## Installation and Setup
 
 ### Prerequisites
 - Python 3.8+
-- OpenFire XMPP Server (for agent communication)
-- Required Python packages (see requirements below)
+- OpenFire XMPP Server
+- Ollama for LLM models
 
 ### Dependencies
 ```bash
@@ -110,83 +119,114 @@ pip install pandas
 pip install numpy
 pip install plotly
 pip install requests
+pip install beautifulsoup4
+pip install langchain-core
+pip install langchain-ollama
 ```
 
+### AI Model Setup
+1. **Install Ollama**: Download from ollama.ai
+2. **Download Models**:
+   ```bash
+   ollama pull gemma3:1b
+   ollama pull qwen3:1.7b
+   ```
+
 ### XMPP Server Setup
-1. Install and configure OpenFire XMPP server
-2. Create agent accounts with password authentication
-3. Ensure server is accessible on the local network
+1. Install OpenFire XMPP server
+2. Create agent accounts
+3. Configure server access
 
 ## Usage
 
 ### System Startup
-1. **Launch Complete System**:
-   ```bash
-   python launcher.py
-   ```
-   This starts both the API server and Streamlit dashboard automatically.
+```bash
+python launcher.py  # Starts API server and Streamlit dashboard
+```
 
-2. **Manual Component Startup**:
-   ```bash
-   # Start API server
-   python web_platform/api_server.py
-   
-   # Start dashboard (in separate terminal)
-   streamlit run web_platform/dashboard.py --server.port 8501
-   ```
+### Manual Startup
+```bash
+python web_platform/api_server.py
+streamlit run web_platform/dashboard.py --server.port 8501
+```
 
-### Creating Bus Lines
-1. **Via Dashboard Interface**:
-   - Access the dashboard at `http://localhost:8501`
-   - Use the "Bus Line Creation" section
-   - Select points on the interactive map or input coordinates directly
-
-2. **Via Coordinate Input**:
-   - Enter station coordinates in the coordinate input form
-   - Specify line name and station details
-   - Save the line configuration
-
-### Running Simulation
-1. Ensure bus lines are created
-2. Start the simulation from the dashboard interface
-3. Monitor real-time bus movements and system metrics
-4. Access API endpoints at `http://localhost:8000` for data integration
+### Bus Line Creation
+1. Access dashboard at `http://localhost:8501`
+2. Use map interface to select stations or input coordinates
+3. Save line configuration
+4. Start simulation
 
 ## API Endpoints
 
-### Core Endpoints
-- `GET /health` - System health check
-- `POST /start_simulation` - Start the simulation
-- `GET /bus_data` - Current bus positions and status
-- `GET /station_data` - Station states and passenger information
-- `GET /metrics` - System performance metrics
+- `GET /health` - System status
+- `POST /start_simulation` - Start simulation
+- `GET /bus_data` - Bus positions and status
+- `GET /station_data` - Station information
+- `GET /metrics` - Performance metrics
 
-### Data Formats
-- **Bus Data**: Position, route, passenger count, status
-- **Station Data**: Waiting passengers, arrival predictions
-- **Metrics**: System utilization, performance indicators
+## Weather Integration Technical Details
 
-## System Configuration
+### Web Scraping Implementation
+- **Target**: timeanddate.com for Blida weather
+- **Parser**: BeautifulSoup HTML parsing
+- **Data Fields**: temperature, weather_type, wind, humidity
+- **Update**: Real-time during simulation
 
-The system uses `config.json` for parameter configuration:
-- **Time Speed Multiplier**: Simulation time acceleration factor
-- **Bus Fleet Settings**: Initial and reserve bus counts per line
-- **Launch Intervals**: Time between bus deployments
+### LLM Speed Calculation
+- **Models**: Gemma 3 1B (fast), Qwen 3 1.7B (detailed)
+- **Framework**: LangChain with structured prompts
+- **Input**: passenger_count, weather_data
+- **Output**: speed_reduction_percentage (integer 0-50)
+- **Integration**: Called in main.py bus agent movement logic
+
+### Speed Reduction Rules
+```
+Low load (<20 passengers):
+  - Normal weather: 0% reduction
+  - Adverse weather: 5-15% reduction
+
+Medium load (25-40 passengers):
+  - Normal weather: 1-4% reduction
+  - High temp/humidity: +1.5-2% additional
+  - Adverse weather: 7-20% reduction
+
+High load (45-75 passengers):
+  - Normal weather: 7-15% reduction
+  - High temp/humidity: +1.5-2% additional
+  - Severe weather: up to 30% reduction
+```
+
+## Configuration
+
+### config.json Parameters
+- `time_speed_multiplier`: Simulation time acceleration
+- `initial_buses_per_line`: Bus count per route
+- `reserve_buses_per_line`: Backup bus count
+- `launch_interval_hours`: Time between bus deployments
+
+### Weather System
+- Default LLM models: Gemma 3 1B, Qwen 3 1.7B
+- Max speed reduction: 50%
+- Geographic target: Blida, Algeria
+- Weather source: timeanddate.com
 
 ## Database Schema
 
-### Bus States Table
-- Bus ID, position, route, passenger count, status, timestamp
+- **Bus States**: ID, position, route, passengers, status, timestamp
+- **Station States**: ID, waiting passengers, predictions
+- **Metrics**: Performance data, utilization stats
 
-### Station States Table
-- Station ID, waiting passengers, arrival predictions, status
+## Implementation Notes
 
-### System Metrics
-- Performance data, utilization statistics, historical trends
+### Weather Integration
+- Weather scraping: `RAG/scraper.py` - BeautifulSoup parsing
+- LLM processing: `RAG/MyLLM.py` - LangChain + Ollama integration
+- Speed calculation: Called in `main.py` line 527 during bus movement
+- Capped at 50% reduction for simulation stability
 
-## Performance Characteristics
+### Performance
+- Gemma 3 1B: ~100-500ms inference
+- Qwen 3 1.7B: ~500-1500ms inference
+- Weather data cached to reduce API calls
+- SQLite for local data persistence
 
-- **Real-Time Processing**: Sub-second response times for route calculations
-- **Scalable Architecture**: Supports multiple bus lines and large fleets
-- **Efficient Pathfinding**: Optimized A* implementation for rapid route computation
-- **Concurrent Operations**: Multi-threaded processing for simultaneous agent operations
