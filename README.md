@@ -179,22 +179,7 @@ streamlit run web_platform/dashboard.py --server.port 8501
 - **Output**: speed_reduction_percentage (integer 0-50)
 - **Integration**: Called in main.py bus agent movement logic
 
-### Speed Reduction Rules
-```
-Low load (<20 passengers):
-  - Normal weather: 0% reduction
-  - Adverse weather: 5-15% reduction
 
-Medium load (25-40 passengers):
-  - Normal weather: 1-4% reduction
-  - High temp/humidity: +1.5-2% additional
-  - Adverse weather: 7-20% reduction
-
-High load (45-75 passengers):
-  - Normal weather: 7-15% reduction
-  - High temp/humidity: +1.5-2% additional
-  - Severe weather: up to 30% reduction
-```
 
 ## Configuration
 
@@ -210,11 +195,6 @@ High load (45-75 passengers):
 - Geographic target: Blida, Algeria
 - Weather source: timeanddate.com
 
-## Database Schema
-
-- **Bus States**: ID, position, route, passengers, status, timestamp
-- **Station States**: ID, waiting passengers, predictions
-- **Metrics**: Performance data, utilization stats
 
 ## Implementation Notes
 
@@ -225,8 +205,8 @@ High load (45-75 passengers):
 - Capped at 50% reduction for simulation stability
 
 ### Performance
-- Gemma 3 1B: ~100-500ms inference
-- Qwen 3 1.7B: ~500-1500ms inference
+- Gemma 3 1B: ~1s inference
+- Qwen 3 1.7B: ~5-15s inference
 - Weather data cached to reduce API calls
 - SQLite for local data persistence
 
